@@ -1,12 +1,20 @@
-export default function Logo() {
+interface LogoProps {
+  variant?: 'light' | 'dark';
+}
+
+export default function Logo({ variant = 'light' }: LogoProps) {
   return (
-    <div className="flex items-start gap-2">
-      <div className="flex flex-col items-start">
-        <div className="flex items-center gap-2">
-         <img src="/logo.png" alt="Logo" className="w-24 sm:w-30 h-6 sm:h-8 bg-transparent" /> 
-        </div>
-        <span className="text-white font-semibold text-sm sm:text-lg -mt-1">Youths Kenya</span>
-      </div>
+    <div className="flex flex-col items-center">
+      <img 
+        src="/final.png" 
+        alt="Bunifu Logo" 
+        className="h-10 sm:h-12 w-auto object-contain" 
+      />
+      <span className={`font-bold text-xs sm:text-sm -mt-0.5 ${
+        variant === 'light' ? 'text-white' : 'text-brand-dark'
+      }`}>
+        Youths Kenya
+      </span>
     </div>
   );
 }

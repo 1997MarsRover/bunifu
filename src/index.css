@@ -2,30 +2,103 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 1s ease-out forwards;
-  }
-  
-  .font-caveat {
-    font-family: "Caveat Brush", cursive;
-    font-weight: 400;
-    font-style: normal;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Smooth scrolling for the entire page */
+/* Base styles */
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Hero heading style matching GT Walsheim spec */
+.hero-heading {
+  font-family: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
+  font-size: clamp(32px, 8vw, 54px);
+  font-weight: 700;
+  line-height: 1.11;
+  color: rgb(26, 26, 26);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+/* Card hover effects */
+.activity-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.activity-card:hover {
+  transform: translateY(-8px);
+}
+
+/* Floating CTA button animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.floating-cta {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, rgb(36, 99, 44) 0%, rgb(0, 137, 211) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* African Pattern Background */
+.african-pattern {
+  background-image: url('/pattern.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.african-pattern-tile {
+  background-image: url('/pattern.jpg');
+  background-size: 400px;
+  background-repeat: repeat;
+}
+
+/* Pattern overlay for readability */
+.pattern-overlay {
+  position: relative;
+}
+
+.pattern-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/pattern.jpg');
+  background-size: 500px;
+  background-repeat: repeat;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* Decorative pattern strip */
+.pattern-strip {
+  height: 8px;
+  background-image: url('/pattern.jpg');
+  background-size: 200px;
+  background-repeat: repeat-x;
+  background-position: center;
+}
+
+/* Activity card icon wrapper */
+.icon-wrapper {
+  background: linear-gradient(135deg, rgba(0, 137, 211, 0.1) 0%, rgba(36, 99, 44, 0.1) 100%);
 }
