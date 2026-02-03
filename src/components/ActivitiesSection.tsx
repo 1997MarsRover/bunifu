@@ -9,7 +9,7 @@ const activities = [
     description: 'Learn to create interactive animations and build your own video games using creative coding tools.',
     icon: Gamepad2,
     color: 'brand-blue',
-    image: 'https://images.pexels.com/photos/4709285/pexels-photo-4709285.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/activity_animations_gaming.png',
   },
   {
     id: 2,
@@ -17,7 +17,7 @@ const activities = [
     description: 'Build websites and explore artificial intelligence concepts through hands-on projects.',
     icon: Code,
     color: 'brand-green',
-    image: 'https://images.pexels.com/photos/4144923/pexels-photo-4144923.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/gallery_hands_on_coding.jpg',
   },
   {
     id: 3,
@@ -25,7 +25,7 @@ const activities = [
     description: 'Design, build, and program robots while learning engineering and problem-solving skills.',
     icon: Bot,
     color: 'brand-red',
-    image: 'https://images.pexels.com/photos/8566473/pexels-photo-8566473.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/activity_robotics.png',
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ const activities = [
     description: 'Professional development programs for teachers to integrate STEM into their classrooms.',
     icon: GraduationCap,
     color: 'brand-blue',
-    image: 'https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/activity_educators_training.png',
   },
   {
     id: 5,
@@ -41,7 +41,7 @@ const activities = [
     description: 'Transform ideas into reality using CAD software and 3D printing technology.',
     icon: Printer,
     color: 'brand-green',
-    image: 'https://images.pexels.com/photos/8566526/pexels-photo-8566526.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/activity_3d_printing.png',
   },
   {
     id: 6,
@@ -49,7 +49,7 @@ const activities = [
     description: 'Participate in local and international STEM competitions to showcase your skills and win prizes.',
     icon: Trophy,
     color: 'brand-red',
-    image: 'https://images.pexels.com/photos/8199562/pexels-photo-8199562.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/activity_competitions.png',
   },
 ];
 

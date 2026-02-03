@@ -4,34 +4,34 @@ import { X, ZoomIn } from 'lucide-react';
 
 const images = [
   {
-    url: "https://images.pexels.com/photos/8471939/pexels-photo-8471939.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Kids learning robotics",
+    url: "/gallery_robotics_workshop.jpg",
+    alt: "Kids building robotics with LEGO kits",
     category: "Robotics"
   },
   {
-    url: "https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "STEM workshop session",
+    url: "/gallery_hands_on_coding.jpg",
+    alt: "Students programming robots together",
     category: "Workshop"
   },
   {
-    url: "https://images.pexels.com/photos/8612990/pexels-photo-8612990.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Coding class",
+    url: "/gallery_robot_building.jpg",
+    alt: "Student building robot vehicle",
     category: "Coding"
   },
   {
-    url: "https://images.pexels.com/photos/8923312/pexels-photo-8923312.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Kids with tech gadgets",
-    category: "Technology"
+    url: "/gallery_mentor_coding.jpg",
+    alt: "Mentor guiding students in coding session",
+    category: "Mentorship"
   },
   {
-    url: "https://images.pexels.com/photos/8471944/pexels-photo-8471944.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Science experiment",
-    category: "Science"
+    url: "/activity_animations_gaming.png",
+    alt: "Kids learning Scratch programming",
+    category: "Gaming"
   },
   {
-    url: "https://images.pexels.com/photos/8923181/pexels-photo-8923181.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Group learning activity",
-    category: "Learning"
+    url: "/gallery_stem_illustration.png",
+    alt: "African kids exploring science",
+    category: "STEM"
   }
 ];
 

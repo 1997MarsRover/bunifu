@@ -121,7 +121,7 @@ export default function HeroSection() {
       {/* Parallax Background Image - Same for all slides */}
       <motion.div className="absolute inset-0" style={{ y, scale }}>
         <img
-          src="/hero.png"
+          src="/activity_robotics.png"
           alt="Children learning STEM"
           className="w-full h-full object-cover"
         />
