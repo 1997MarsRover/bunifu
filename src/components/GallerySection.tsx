@@ -4,33 +4,28 @@ import { X, ZoomIn } from 'lucide-react';
 
 const images = [
   {
-    url: "/gallery_robotics_workshop.jpg",
-    alt: "Kids building robotics with LEGO kits",
+    url: "/IMG-20260211-WA0001.jpg",
+    alt: "Students proudly showcasing their robot project outdoors",
     category: "Robotics"
   },
   {
-    url: "/gallery_hands_on_coding.jpg",
-    alt: "Students programming robots together",
+    url: "/IMG-20260211-WA0002.jpg",
+    alt: "Mentor engaging students in an interactive classroom session",
     category: "Workshop"
   },
   {
-    url: "/gallery_robot_building.jpg",
-    alt: "Student building robot vehicle",
-    category: "Coding"
+    url: "/IMG-20260211-WA0003.jpg",
+    alt: "Mentor demonstrating a robot to attentive students",
+    category: "Robotics"
   },
   {
-    url: "/gallery_mentor_coding.jpg",
-    alt: "Mentor guiding students in coding session",
+    url: "/IMG-20260211-WA0004.jpg",
+    alt: "Mentor explaining robotics concepts while holding a robot build",
     category: "Mentorship"
   },
   {
-    url: "/activity_animations_gaming.png",
-    alt: "Kids learning Scratch programming",
-    category: "Gaming"
-  },
-  {
-    url: "/gallery_stem_illustration.png",
-    alt: "African kids exploring science",
+    url: "/IMG-20260211-WA0005.jpg",
+    alt: "Mentor showcasing a robot to excited students in class",
     category: "STEM"
   }
 ];

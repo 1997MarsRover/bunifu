@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { MapPin, ExternalLink, Play, Phone, Clock, Navigation } from 'lucide-react';
+import { MapPin, ExternalLink, Phone, Clock, Navigation } from 'lucide-react';
 import { useRef } from 'react';
 
 export default function CentersSection() {
@@ -82,11 +82,11 @@ export default function CentersSection() {
             }}
           />
 
-          <div className="grid md:grid-cols-2 gap-8 p-8 md:p-12">
+          <div className="p-8 md:p-12">
             {/* Info Side */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 0.5 }}
             >
               <motion.div 
@@ -186,69 +186,6 @@ export default function CentersSection() {
                   Schedule Visit
                 </motion.a>
               </div>
-            </motion.div>
-
-            {/* Video Side */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="relative"
-            >
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                className="relative aspect-video bg-black/30 rounded-2xl overflow-hidden group cursor-pointer"
-              >
-                <img
-                  src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=800"
-                  alt="Bunifu Center"
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div 
-                    whileHover={{ scale: 1.2 }}
-                    whileTap={{ scale: 0.9 }}
-                    animate={{ scale: [1, 1.1, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center border border-white/30"
-                  >
-                    <Play className="w-10 h-10 text-white fill-white ml-1" />
-                  </motion.div>
-                </div>
-
-                {/* Pattern Frame */}
-                <motion.div 
-                  initial={{ scaleX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : {}}
-                  transition={{ delay: 0.8, duration: 0.6 }}
-                  className="absolute top-0 left-0 right-0 h-1 origin-left"
-                  style={{
-                    backgroundImage: 'url(/pattern.jpg)',
-                    backgroundSize: '100px',
-                    backgroundRepeat: 'repeat-x',
-                  }}
-                />
-                <motion.div 
-                  initial={{ scaleX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : {}}
-                  transition={{ delay: 0.9, duration: 0.6 }}
-                  className="absolute bottom-0 left-0 right-0 h-1 origin-right"
-                  style={{
-                    backgroundImage: 'url(/pattern.jpg)',
-                    backgroundSize: '100px',
-                    backgroundRepeat: 'repeat-x',
-                  }}
-                />
-              </motion.div>
-
-              <motion.p
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 1 }}
-                className="text-white/60 text-sm text-center mt-4"
-              >
-                Watch our center tour video
-              </motion.p>
             </motion.div>
           </div>
         </motion.div>
