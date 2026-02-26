@@ -119,12 +119,7 @@ export default function Header() {
                 transition={{ delay: 0.5 }}
                 className={`flex items-center gap-2 text-sm ${isScrolled ? 'text-brand-dark' : 'text-white'}`}
               >
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  <MapPin className="w-4 h-4 text-brand-red" />
-                </motion.div>
+                <MapPin className="w-4 h-4 text-brand-red" />
                 <span className="font-medium">Afralti Waiyaki Way</span>
               </motion.div>
               
@@ -140,12 +135,7 @@ export default function Header() {
                 className="flex items-center gap-2 bg-brand-green text-white font-bold text-sm px-5 py-2.5 rounded-full"
               >
                 Get Involved
-                <motion.span
-                  animate={{ x: [0, 3, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                >
-                  <ArrowRight className="w-4 h-4" />
-                </motion.span>
+                <ArrowRight className="w-4 h-4" />
               </motion.a>
             </div>
 

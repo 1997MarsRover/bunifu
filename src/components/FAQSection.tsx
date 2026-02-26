@@ -40,17 +40,8 @@ export default function FAQSection() {
 
   return (
     <section id="faq" ref={ref} className="relative py-24 md:py-32 bg-brand-light overflow-hidden">
-      {/* Animated Background Pattern */}
-      <motion.div 
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{ 
-          duration: 60, 
-          repeat: Infinity, 
-          repeatType: "reverse",
-          ease: "linear" 
-        }}
+      {/* Background Pattern */}
+      <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: 'url(/pattern.jpg)',
@@ -73,17 +64,9 @@ export default function FAQSection() {
         }}
       />
 
-      {/* Floating Decorative Elements */}
-      <motion.div
-        animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 right-20 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-20 left-20 w-80 h-80 bg-brand-green/5 rounded-full blur-3xl"
-      />
+      {/* Decorative Elements */}
+      <div className="absolute top-20 right-20 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-20 w-80 h-80 bg-brand-green/5 rounded-full blur-3xl" />
 
       <div className="relative max-w-4xl mx-auto px-6 md:px-12">
         {/* Section Header */}

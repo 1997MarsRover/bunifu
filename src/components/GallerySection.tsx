@@ -61,17 +61,8 @@ export default function GallerySection() {
 
   return (
     <section id="gallery" ref={ref} className="relative py-24 md:py-32 bg-brand-light overflow-hidden">
-      {/* Animated Background Pattern */}
-      <motion.div 
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{ 
-          duration: 60, 
-          repeat: Infinity, 
-          repeatType: "reverse",
-          ease: "linear" 
-        }}
+      {/* Background Pattern */}
+      <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: 'url(/pattern.jpg)',
@@ -147,12 +138,10 @@ export default function GallerySection() {
               }`}
             >
               <div className={`${index === 0 ? 'aspect-[4/3]' : 'aspect-square'}`}>
-                <motion.img
+                <img
                   src={image.url}
                   alt={image.alt}
-                  className="w-full h-full object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
               
@@ -215,12 +204,7 @@ export default function GallerySection() {
             className="inline-flex items-center gap-3 bg-white text-brand-dark font-bold text-lg px-8 py-4 rounded-full shadow-card hover:shadow-card-hover border border-gray-100 transition-shadow"
           >
             View More on Instagram
-            <motion.span
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
-              →
-            </motion.span>
+            <span>→</span>
           </motion.a>
         </motion.div>
       </div>

@@ -163,13 +163,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-white px-4 py-2 rounded-full mb-8 border border-white/20"
               >
-                <motion.span 
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-lg"
-                >
-                  🇰🇪
-                </motion.span>
+                <span className="text-lg">🇰🇪</span>
                 <span className="text-sm font-medium">{currentSlideData.badge}</span>
               </motion.div>
 
@@ -232,12 +226,7 @@ export default function HeroSection() {
                       {IconComponent && <IconComponent className="w-5 h-5" />}
                       {button.label}
                       {button.variant === "primary" && (
-                        <motion.span
-                          animate={{ x: [0, 5, 0] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                        >
-                          <ArrowRight className="w-5 h-5" />
-                        </motion.span>
+                        <ArrowRight className="w-5 h-5" />
                       )}
                     </motion.a>
                   );
@@ -260,10 +249,9 @@ export default function HeroSection() {
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.4 + index * 0.15, type: "spring", stiffness: 100 }}
-                whileHover={{ scale: 1.1, y: -5 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.4 + index * 0.15, duration: 0.5 }}
                 className="text-white cursor-default"
               >
                 <div className={`text-3xl md:text-4xl font-extrabold ${stat.color}`}>{stat.value}</div>
@@ -319,20 +307,12 @@ export default function HeroSection() {
         transition={{ delay: 2 }}
         className="absolute bottom-8 left-8 hidden md:block"
       >
-        <motion.div 
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="flex flex-col items-center gap-2 text-white/60 cursor-pointer"
-        >
+        <div className="flex flex-col items-center gap-2 text-white/60 cursor-pointer">
           <span className="text-xs font-medium tracking-wider uppercase">Scroll</span>
           <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-2">
-            <motion.div
-              animate={{ y: [0, 12, 0], opacity: [1, 0.3, 1] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1.5 h-3 bg-white/60 rounded-full"
-            />
+            <div className="w-1.5 h-3 bg-white/60 rounded-full animate-bounce" />
           </div>
-        </motion.div>
+        </div>
       </motion.div>
 
       {/* Bottom Pattern Strip */}

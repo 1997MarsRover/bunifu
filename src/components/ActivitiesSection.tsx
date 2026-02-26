@@ -72,12 +72,10 @@ export default function ActivitiesSection() {
     hidden: { 
       opacity: 0, 
       y: 60,
-      rotateX: -15,
     },
     visible: {
       opacity: 1,
       y: 0,
-      rotateX: 0,
       transition: {
         duration: 0.8,
         ease: [0.22, 1, 0.36, 1],
@@ -99,17 +97,8 @@ export default function ActivitiesSection() {
 
   return (
     <section id="activities" className="relative py-24 md:py-32 bg-brand-light overflow-hidden">
-      {/* Animated Background Pattern */}
-      <motion.div 
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{ 
-          duration: 60, 
-          repeat: Infinity, 
-          repeatType: "reverse",
-          ease: "linear" 
-        }}
+      {/* Background Pattern */}
+      <div 
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: 'url(/pattern.jpg)',
@@ -158,7 +147,6 @@ export default function ActivitiesSection() {
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-          style={{ perspective: '1000px' }}
         >
           {activities.map((activity, index) => {
             const IconComponent = activity.icon;
@@ -167,24 +155,17 @@ export default function ActivitiesSection() {
                 key={activity.id}
                 variants={cardVariants}
                 whileHover={{ 
-                  y: -12, 
-                  scale: 1.02,
-                  rotateY: 5,
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
+                  y: -8, 
                   transition: { duration: 0.3 }
                 }}
-                whileTap={{ scale: 0.98 }}
-                className="group bg-white rounded-3xl overflow-hidden shadow-card border border-gray-100 cursor-pointer"
-                style={{ transformStyle: 'preserve-3d' }}
+                className="group bg-white rounded-3xl overflow-hidden shadow-card border border-gray-100 cursor-pointer hover:shadow-xl transition-shadow"
               >
                 {/* Card Image */}
                 <div className="relative h-48 overflow-hidden">
-                  <motion.img
+                  <img
                     src={activity.image}
                     alt={activity.title}
-                    className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.15 }}
-                    transition={{ duration: 0.6 }}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   
@@ -203,10 +184,9 @@ export default function ActivitiesSection() {
                   
                   {/* Icon Badge */}
                   <motion.div 
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={isInView ? { scale: 1, rotate: 0 } : {}}
+                    initial={{ scale: 0 }}
+                    animate={isInView ? { scale: 1 } : {}}
                     transition={{ delay: 0.6 + index * 0.1, type: "spring", stiffness: 200 }}
-                    whileHover={{ rotate: 360, scale: 1.1 }}
                     className="absolute top-4 right-4 w-12 h-12 rounded-2xl bg-white shadow-lg flex items-center justify-center"
                   >
                     <IconComponent className={`w-6 h-6 text-${activity.color}`} />
@@ -223,23 +203,15 @@ export default function ActivitiesSection() {
                   <p className="text-gray-600 leading-relaxed mb-4">
                     {activity.description}
                   </p>
-                  <motion.a
+                  <a
                     href="#membership"
-                    whileHover={{ x: 5 }}
-                    className={`inline-flex items-center gap-2 text-${activity.color} font-semibold text-sm`}
+                    className={`inline-flex items-center gap-2 text-${activity.color} font-semibold text-sm hover:gap-3 transition-all`}
                   >
                     Learn More
-                    <motion.svg 
-                      className="w-4 h-4" 
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </motion.svg>
-                  </motion.a>
+                    </svg>
+                  </a>
                 </div>
               </motion.div>
             );
@@ -260,16 +232,9 @@ export default function ActivitiesSection() {
             className="inline-flex items-center gap-3 bg-brand-dark text-white font-bold text-lg px-8 py-4 rounded-full"
           >
             View All Programs
-            <motion.svg 
-              className="w-5 h-5" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-              animate={{ x: [0, 5, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </motion.svg>
+            </svg>
           </motion.a>
         </motion.div>
       </div>

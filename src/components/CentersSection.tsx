@@ -8,17 +8,8 @@ export default function CentersSection() {
 
   return (
     <section id="centers" ref={ref} className="relative py-24 md:py-32 bg-white overflow-hidden">
-      {/* Animated Background Pattern */}
-      <motion.div 
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{ 
-          duration: 80, 
-          repeat: Infinity, 
-          repeatType: "reverse",
-          ease: "linear" 
-        }}
+      {/* Background Pattern */}
+      <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: 'url(/pattern.jpg)',
@@ -93,12 +84,7 @@ export default function CentersSection() {
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center gap-2 bg-brand-green/20 text-brand-green font-bold text-sm px-4 py-2 rounded-full mb-6"
               >
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  🇰🇪
-                </motion.div>
+                <span>🇰🇪</span>
                 Nairobi, Kenya
               </motion.div>
 
@@ -111,13 +97,9 @@ export default function CentersSection() {
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-3 text-white/80"
                 >
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center flex-shrink-0"
-                  >
+                  <div className="w-10 h-10 rounded-xl bg-brand-blue/20 flex items-center justify-center flex-shrink-0">
                     <MapPin className="w-5 h-5 text-brand-blue" />
-                  </motion.div>
+                  </div>
                   <div>
                     <p className="text-white font-semibold mb-1">Address</p>
                     <p className="text-white/70">Afralti Waiyaki Way, Nairobi</p>
@@ -128,13 +110,9 @@ export default function CentersSection() {
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-3 text-white/80"
                 >
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center flex-shrink-0"
-                  >
+                  <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center flex-shrink-0">
                     <Phone className="w-5 h-5 text-brand-green" />
-                  </motion.div>
+                  </div>
                   <div>
                     <p className="text-white font-semibold mb-1">Phone</p>
                     <a href="tel:+254712015793" className="text-white/70 hover:text-brand-blue transition-colors">
@@ -147,13 +125,9 @@ export default function CentersSection() {
                   whileHover={{ x: 5 }}
                   className="flex items-start gap-3 text-white/80"
                 >
-                  <motion.div
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-10 h-10 rounded-xl bg-brand-red/20 flex items-center justify-center flex-shrink-0"
-                  >
+                  <div className="w-10 h-10 rounded-xl bg-brand-red/20 flex items-center justify-center flex-shrink-0">
                     <Clock className="w-5 h-5 text-brand-red" />
-                  </motion.div>
+                  </div>
                   <div>
                     <p className="text-white font-semibold mb-1">Hours</p>
                     <p className="text-white/70">Mon - Sat: 9:00 AM - 6:00 PM</p>

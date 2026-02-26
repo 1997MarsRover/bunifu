@@ -114,23 +114,9 @@ export default function MembershipSection() {
         }}
       />
 
-      {/* Floating Decorative Elements */}
-      <motion.div
-        animate={{ 
-          y: [0, -30, 0],
-          rotate: [0, 5, 0],
-        }}
-        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-20 right-10 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{ 
-          y: [0, 20, 0],
-          rotate: [0, -5, 0],
-        }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-20 left-10 w-80 h-80 bg-brand-blue/5 rounded-full blur-3xl"
-      />
+      {/* Decorative Elements */}
+      <div className="absolute top-20 right-10 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-10 w-80 h-80 bg-brand-blue/5 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
@@ -179,13 +165,9 @@ export default function MembershipSection() {
             className="inline-flex items-center gap-3 bg-brand-light border border-gray-200 px-6 py-3 rounded-full"
           >
             <span className="text-gray-600 font-medium">Showing packages for</span>
-            <motion.span 
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="bg-brand-green text-white font-bold px-4 py-1 rounded-full text-sm"
-            >
+            <span className="bg-brand-green text-white font-bold px-4 py-1 rounded-full text-sm">
               🇰🇪 Kenya
-            </motion.span>
+            </span>
           </motion.div>
         </motion.div>
 
@@ -219,23 +201,15 @@ export default function MembershipSection() {
                     transition={{ delay: 0.6, type: "spring" }}
                     className="absolute -top-3 left-1/2 -translate-x-1/2"
                   >
-                    <motion.span 
-                      animate={{ scale: [1, 1.05, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                      className="bg-brand-green text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg"
-                    >
+                    <span className="bg-brand-green text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
                       ⭐ POPULAR
-                    </motion.span>
+                    </span>
                   </motion.div>
                 )}
 
-                <motion.div 
-                  whileHover={{ rotate: 360, scale: 1.1 }}
-                  transition={{ duration: 0.6 }}
-                  className={`w-14 h-14 rounded-2xl bg-${plan.color}/10 flex items-center justify-center mb-6`}
-                >
+                <div className={`w-14 h-14 rounded-2xl bg-${plan.color}/10 flex items-center justify-center mb-6`}>
                   <IconComponent className={`w-7 h-7 text-${plan.color}`} />
-                </motion.div>
+                </div>
 
                 <h3 className="text-xl font-bold text-brand-dark mb-1">{plan.name}</h3>
                 <p className="text-gray-500 text-sm mb-6">({plan.subtitle})</p>
@@ -299,13 +273,9 @@ export default function MembershipSection() {
                   }}
                   className="relative p-6 rounded-2xl bg-white border border-gray-200 hover:border-brand-blue/30 transition-colors"
                 >
-                  <motion.div 
-                    whileHover={{ rotate: 360, scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                    className={`w-12 h-12 rounded-xl bg-${plan.color}/10 flex items-center justify-center mb-4`}
-                  >
+                  <div className={`w-12 h-12 rounded-xl bg-${plan.color}/10 flex items-center justify-center mb-4`}>
                     <IconComponent className={`w-6 h-6 text-${plan.color}`} />
-                  </motion.div>
+                  </div>
 
                   <h4 className="text-lg font-bold text-brand-dark mb-1">{plan.name}</h4>
                   <p className="text-gray-500 text-sm mb-2">{plan.subtitle}</p>
@@ -349,17 +319,8 @@ export default function MembershipSection() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="relative bg-gradient-to-br from-brand-dark to-gray-900 rounded-3xl p-8 md:p-12 overflow-hidden"
         >
-          {/* Animated pattern background */}
-          <motion.div 
-            animate={{ 
-              backgroundPosition: ['0% 0%', '100% 100%'],
-            }}
-            transition={{ 
-              duration: 30, 
-              repeat: Infinity, 
-              repeatType: "reverse",
-              ease: "linear" 
-            }}
+          {/* Pattern background */}
+          <div 
             className="absolute inset-0 opacity-[0.05]"
             style={{
               backgroundImage: 'url(/pattern.jpg)',
@@ -394,13 +355,9 @@ export default function MembershipSection() {
                   }}
                   className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 cursor-default"
                 >
-                  <motion.div 
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center flex-shrink-0"
-                  >
+                  <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center flex-shrink-0">
                     <IconComponent className="w-5 h-5 text-brand-green" />
-                  </motion.div>
+                  </div>
                   <p className="text-white/90 text-sm leading-relaxed">{benefit.text}</p>
                 </motion.div>
               );
@@ -427,12 +384,7 @@ export default function MembershipSection() {
                   whileHover={{ x: 5 }}
                   className="flex items-center gap-3 text-white/80"
                 >
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity, delay: index * 0.5 }}
-                  >
-                    <Check className="w-5 h-5 text-brand-green" />
-                  </motion.div>
+                  <Check className="w-5 h-5 text-brand-green" />
                   <span>{text}</span>
                 </motion.div>
               ))}

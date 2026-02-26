@@ -60,17 +60,8 @@ export default function Footer() {
 
   return (
     <footer ref={ref} className="relative bg-brand-dark text-white overflow-hidden">
-      {/* Animated Pattern Background */}
-      <motion.div 
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{ 
-          duration: 60, 
-          repeat: Infinity, 
-          repeatType: "reverse",
-          ease: "linear" 
-        }}
+      {/* Pattern Background */}
+      <div 
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: 'url(/pattern.jpg)',
@@ -181,13 +172,9 @@ export default function Footer() {
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-3"
               >
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                  className="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center flex-shrink-0"
-                >
+                <div className="w-8 h-8 rounded-lg bg-brand-blue/20 flex items-center justify-center flex-shrink-0">
                   <MapPin className="w-4 h-4 text-brand-blue" />
-                </motion.div>
+                </div>
                 <div>
                   <p className="text-white font-medium text-sm">Location</p>
                   <a 
@@ -204,13 +191,9 @@ export default function Footer() {
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-3"
               >
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                  className="w-8 h-8 rounded-lg bg-brand-green/20 flex items-center justify-center flex-shrink-0"
-                >
+                <div className="w-8 h-8 rounded-lg bg-brand-green/20 flex items-center justify-center flex-shrink-0">
                   <Phone className="w-4 h-4 text-brand-green" />
-                </motion.div>
+                </div>
                 <div>
                   <p className="text-white font-medium text-sm">Phone</p>
                   <a 
@@ -225,13 +208,9 @@ export default function Footer() {
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-3"
               >
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                  className="w-8 h-8 rounded-lg bg-brand-red/20 flex items-center justify-center flex-shrink-0"
-                >
+                <div className="w-8 h-8 rounded-lg bg-brand-red/20 flex items-center justify-center flex-shrink-0">
                   <Mail className="w-4 h-4 text-brand-red" />
-                </motion.div>
+                </div>
                 <div>
                   <p className="text-white font-medium text-sm">Email</p>
                   <a 
@@ -273,12 +252,7 @@ export default function Footer() {
         >
           <p className="text-gray-500 text-sm flex items-center gap-2">
             © {currentYear} Bunifu Youths Kenya. Made with 
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              <Heart className="w-4 h-4 text-brand-red fill-brand-red" />
-            </motion.span>
+            <Heart className="w-4 h-4 text-brand-red fill-brand-red" />
             in Kenya
           </p>
           <div className="flex items-center gap-4 text-gray-500 text-sm">

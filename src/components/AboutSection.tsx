@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Lightbulb, Users, Award, ArrowRight } from 'lucide-react';
 import { useRef } from 'react';
 
@@ -26,15 +26,6 @@ const features = [
 export default function AboutSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [50, -50]);
-  const imageRotate = useTransform(scrollYProgress, [0, 1], [5, -5]);
 
   const textVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -66,20 +57,10 @@ export default function AboutSection() {
   return (
     <section 
       id="about" 
-      ref={containerRef}
       className="relative py-24 md:py-32 bg-white overflow-hidden"
     >
-      {/* Animated Background Pattern */}
-      <motion.div 
-        animate={{ 
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{ 
-          duration: 80, 
-          repeat: Infinity, 
-          repeatType: "reverse",
-          ease: "linear" 
-        }}
+      {/* Background Pattern */}
+      <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
           backgroundImage: 'url(/pattern.jpg)',
@@ -90,23 +71,16 @@ export default function AboutSection() {
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12" ref={ref}>
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          {/* Image Side with Parallax */}
+          {/* Image Side */}
           <motion.div
             initial={{ opacity: 0, x: -80 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="relative"
           >
-            <motion.div
-              style={{ y: imageY, rotate: imageRotate }}
-              className="relative"
-            >
+            <div className="relative">
               {/* Main Image */}
-              <motion.div 
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-                className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl"
-              >
+              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                 <img
                   src="/afro_american-school_boy.jpg"
                   alt="Young innovator at Bunifu"
@@ -139,23 +113,18 @@ export default function AboutSection() {
                     backgroundRepeat: 'repeat-x',
                   }}
                 />
-              </motion.div>
+              </div>
 
               {/* Floating Kenya Logo */}
               <motion.div
                 initial={{ opacity: 0, y: 30, scale: 0.8 }}
                 animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
                 transition={{ delay: 0.8, duration: 0.6, type: "spring" }}
-                whileHover={{ scale: 1.1, y: -5, rotate: 5 }}
                 className="absolute -bottom-6 -right-4 md:right-8"
               >
-                <motion.div 
-                  animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                  className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-gradient-to-br from-yellow-400 to-orange-500"
-                >
+                <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-gradient-to-br from-yellow-400 to-orange-500">
                   <img src="/Kenya.png" alt="Kenya" className="w-full h-full object-contain p-2" />
-                </motion.div>
+                </div>
               </motion.div>
 
               {/* Decorative Pattern Element */}
@@ -176,19 +145,12 @@ export default function AboutSection() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 1.2, duration: 0.6 }}
-                whileHover={{ scale: 1.05 }}
                 className="absolute top-8 -left-4 bg-brand-green text-white px-4 py-3 rounded-2xl shadow-xl"
               >
-                <motion.p 
-                  animate={{ scale: [1, 1.1, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="text-2xl font-extrabold"
-                >
-                  500+
-                </motion.p>
+                <p className="text-2xl font-extrabold">500+</p>
                 <p className="text-xs font-medium opacity-90">Kids Empowered</p>
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
 
           {/* Text Side */}
@@ -200,13 +162,7 @@ export default function AboutSection() {
               animate={isInView ? "visible" : "hidden"}
               className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue font-semibold text-sm px-4 py-2 rounded-full mb-6"
             >
-              <motion.span
-                animate={{ rotate: [0, 360] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-              >
-                ✦
-              </motion.span>
-              About Us
+              ✦ About Us
             </motion.span>
 
             <motion.h2 
@@ -216,11 +172,7 @@ export default function AboutSection() {
               animate={isInView ? "visible" : "hidden"}
               className="hero-heading text-brand-dark mb-6"
             >
-              About <motion.span 
-                className="text-brand-green inline-block"
-                animate={{ rotateY: [0, 10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >Bunifu</motion.span>
+              About <span className="text-brand-green">Bunifu</span>
             </motion.h2>
 
             <motion.p 
@@ -261,13 +213,9 @@ export default function AboutSection() {
                     whileHover={{ x: 10, backgroundColor: 'rgba(0,0,0,0.02)' }}
                     className="flex items-start gap-4 p-4 rounded-2xl cursor-default transition-colors"
                   >
-                    <motion.div 
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                      className={`w-12 h-12 rounded-xl bg-${feature.color}/10 flex items-center justify-center flex-shrink-0`}
-                    >
-                      <IconComponent className={`w-6 h-6 text-${feature.color}`} />
-                    </motion.div>
+                  <div className={`w-12 h-12 rounded-xl bg-${feature.color}/10 flex items-center justify-center flex-shrink-0`}>
+                    <IconComponent className={`w-6 h-6 text-${feature.color}`} />
+                  </div>
                     <div>
                       <h3 className="font-bold text-brand-dark mb-1">{feature.title}</h3>
                       <p className="text-gray-600 text-sm">{feature.description}</p>
@@ -291,12 +239,7 @@ export default function AboutSection() {
               className="inline-flex items-center gap-3 bg-brand-green text-white font-bold px-8 py-4 rounded-full"
             >
               Join Our Mission
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ArrowRight className="w-5 h-5" />
-              </motion.span>
+              <ArrowRight className="w-5 h-5" />
             </motion.a>
           </div>
         </div>
