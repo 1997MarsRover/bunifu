@@ -1,77 +1,98 @@
-import { motion, useInView } from 'framer-motion';
-import { Check, Star, Users, User, Gift, Trophy, Gamepad2, Calendar, Sparkles, Home, Building, School } from 'lucide-react';
-import { useRef } from 'react';
+import { motion, useInView, AnimatePresence, Variants } from 'framer-motion';
+import { 
+  Calendar, MapPin, Users, Code, Globe, Cpu, Box, 
+  Sparkles, Target, Clock, BookOpen, MessageCircle,
+  Phone, Mail, ChevronRight,  Send, XCircle
+} from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { useForm, ValidationError } from '@formspree/react';
 
-const membershipPlans = [
+const festInfo = {
+  title: "The Nairobi Academy STEAM Festival 2026",
+  date: "6th June 2026",
+  venue: "Nairobi Academy, Karen Campus",
+  price: "KES 2,000",
+  registrationDeadline: "12th May 2026",
+};
+
+const categories = [
   {
-    id: 'individual',
-    name: 'Individual Membership',
-    subtitle: '1 kid',
-    price: 'KES 1,500',
-    period: '/year',
-    icon: User,
+    id: 'creative-coding',
+    name: 'Creative Coding',
+    icon: Code,
     color: 'brand-blue',
-    popular: false,
+    ageGroups: 'Elementary, Junior, Senior',
+    description: 'Create interactive animations, games, and simulations using block-based programming.',
+    challenge: 'Clean Water and Sanitation (SDG 6)',
+    tools: 'Scratch, ScratchJr, Octostudio',
   },
   {
-    id: 'family',
-    name: 'Family Membership',
-    subtitle: '3 to 4 kids',
-    price: 'KES 4,500',
-    period: '/year',
-    icon: Users,
+    id: 'web-mobile',
+    name: 'Web & Mobile App Development',
+    icon: Globe,
     color: 'brand-green',
-    popular: true,
+    ageGroups: 'Junior, Senior',
+    description: 'Build AI-powered apps for web and mobile devices.',
+    challenge: 'Good Health and Well-being (SDG 3)',
+    tools: 'MIT App Inventor, Thunkable, Flutter, Python, JavaScript',
   },
-];
-
-const programPlans = [
   {
-    id: 'homeschooling',
-    name: 'Home Schooling',
-    subtitle: 'Personalized learning',
-    price: 'KES 15,000',
-    period: '/term',
-    icon: Home,
+    id: 'robotics',
+    name: 'Robotics & IoT',
+    icon: Cpu,
     color: 'brand-red',
-    description: 'One-on-one STEM education at home',
+    ageGroups: 'Elementary, Junior, Senior',
+    description: 'Design and build autonomous robots to solve real-world challenges.',
+    challenge: 'Innovation (SDG 9) - Green Nairobi',
+    tools: 'Zm Robo, LEGO Spike Prime, EV3, Arduino/Micro:bit, Whalesbot module',
   },
   {
-    id: 'bunifuhub',
-    name: 'Bunifu Hub',
-    subtitle: 'At our center',
-    price: 'KES 10,000',
-    period: '/term',
-    icon: Building,
-    color: 'brand-blue',
-    description: 'Learn at our innovation hub',
-  },
-  {
-    id: 'schoolclubs',
-    name: 'School Clubs',
-    subtitle: '10 sessions',
-    price: 'KES 8,000',
-    period: '/term',
-    icon: School,
-    color: 'brand-green',
-    description: 'STEM clubs for your school',
+    id: '3d-design',
+    name: '3D Design Challenge',
+    icon: Box,
+    color: 'brand-purple',
+    ageGroups: 'Elementary, Junior, Senior',
+    description: 'Create three-dimensional digital models for real-world solutions.',
+    challenge: 'Innovation (SDG 9)',
+    tools: 'TinkerCAD, Fusion 360, Blender',
   },
 ];
 
-const benefits = [
-  { icon: Gift, text: '10% discount on monthly plans & packages' },
-  { icon: Star, text: 'Automatic enrolment in Bunifu Rewards Program' },
-  { icon: Gamepad2, text: 'Early access to test new games before release' },
-  { icon: Trophy, text: 'Access to internal challenges and competitions' },
-  { icon: Calendar, text: 'Quarterly exhibitions to showcase projects' },
-  { icon: Users, text: 'Birthday programs with VR content & free friend sessions' },
+const ageCategories = [
+  { name: 'Elementary', ages: '8-10 years' },
+  { name: 'Junior', ages: '11-15 years' },
+  { name: 'Senior', ages: '16-18 years' },
+];
+
+const importantDates = [
+  { event: 'Registration of Interest', date: '20th March 2026' },
+  { event: 'Registration Deadline', date: '12th May 2026' },
+  { event: 'Challenge Release', date: '15th March 2026' },
+  { event: 'Project Submission', date: '1st June 2026' },
+  { event: 'STEAM Fest Day', date: '6th June 2026', highlight: true },
 ];
 
 export default function MembershipSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Formspree integration
+  const [state, handleSubmit] = useForm("xeerooyp");
+  
+  const [formData, setFormData] = useState({
+    teamName: '',
+    school: '',
+    advisorName: '',
+    advisorEmail: '',
+    advisorPhone: '',
+    category: '',
+    ageCategory: '',
+    students: ['', '', '', ''],
+    agreeToTerms: false,
+  });
 
-  const cardVariants = {
+  const cardVariants: Variants = {
     hidden: { opacity: 0, y: 60, scale: 0.9 },
     visible: (i: number) => ({
       opacity: 1,
@@ -80,188 +101,332 @@ export default function MembershipSection() {
       transition: {
         delay: i * 0.15,
         duration: 0.8,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.25, 0.46, 0.45, 0.94],
       },
     }),
   };
 
-  const benefitVariants = {
-    hidden: { opacity: 0, x: -20 },
+  const staggerVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
     visible: (i: number) => ({
       opacity: 1,
-      x: 0,
+      y: 0,
       transition: {
-        delay: 0.5 + i * 0.1,
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
+        delay: 0.3 + i * 0.1,
+        duration: 0.6,
       },
     }),
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    if (type === 'checkbox') {
+      const checkbox = e.target as HTMLInputElement;
+      setFormData(prev => ({ ...prev, [name]: checkbox.checked }));
+    } else if (name.startsWith('student-')) {
+      const index = parseInt(name.split('-')[1]);
+      setFormData(prev => ({
+        ...prev,
+        students: prev.students.map((s, i) => i === index ? value : s)
+      }));
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }));
+    }
+  };
+
+  // Auto-close modal after successful submission
+  useEffect(() => {
+    if (state.succeeded) {
+      const timer = setTimeout(() => {
+        setIsModalOpen(false);
+        // Reset form after closing
+        setFormData({
+          teamName: '',
+          school: '',
+          advisorName: '',
+          advisorEmail: '',
+          advisorPhone: '',
+          category: '',
+          ageCategory: '',
+          students: ['', '', '', ''],
+          agreeToTerms: false,
+        });
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [state.succeeded]);
+
   return (
-    <section id="membership" className="relative py-24 md:py-32 bg-white overflow-hidden" ref={ref}>
+    <section id="steam-fest" className="relative py-24 overflow-hidden bg-white md:py-32" ref={ref}>
       {/* Animated Pattern Accent */}
       <motion.div 
         initial={{ scaleX: 0 }}
         animate={isInView ? { scaleX: 1 } : {}}
         transition={{ duration: 1 }}
-        className="absolute top-0 left-0 right-0 h-2 origin-left"
-        style={{
-          backgroundImage: 'url(/pattern.jpg)',
-          backgroundSize: '300px',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'center',
-        }}
+        className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-green via-brand-blue to-brand-red"
       />
 
       {/* Decorative Elements */}
-      <div className="absolute top-20 right-10 w-64 h-64 bg-brand-green/5 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 left-10 w-80 h-80 bg-brand-blue/5 rounded-full blur-3xl" />
+      <div className="absolute w-64 h-64 rounded-full top-20 right-10 bg-brand-green/5 blur-3xl" />
+      <div className="absolute rounded-full bottom-20 left-10 w-80 h-80 bg-brand-blue/5 blur-3xl" />
+      <div className="absolute -translate-x-1/2 -translate-y-1/2 rounded-full top-1/2 left-1/2 w-96 h-96 bg-brand-red/5 blur-3xl" />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
+      <div className="relative px-6 mx-auto max-w-7xl md:px-12">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-16 text-center"
         >
           <motion.span 
             initial={{ opacity: 0, scale: 0.5 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, type: "spring" }}
-            className="inline-flex items-center gap-2 bg-brand-green/10 text-brand-green font-semibold text-sm px-4 py-2 rounded-full mb-4"
+            className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-semibold rounded-full bg-brand-green/10 text-brand-green"
           >
             <Sparkles className="w-4 h-4" />
-            Join Us
+            Join the Innovation
           </motion.span>
+          
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="hero-heading text-brand-dark mb-6"
+            className="mb-6 hero-heading text-brand-dark"
           >
-            Become a Member
+            STEAM Fest Kenya 2026
           </motion.h2>
+          
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
+            className="max-w-3xl mx-auto text-lg leading-relaxed text-gray-600 md:text-xl"
           >
-            Choose a membership plan to get access to all amazing activities available and other great benefits.
+            A celebration of student innovation, creativity, and hard work. Where students' ideas are valued, 
+            projects shine, and potential is recognized.
           </motion.p>
         </motion.div>
 
-        {/* Location Badge */}
+        {/* First Card: Register for STEAM Fest */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 0.5, delay: 0.4, type: "spring" }}
-          className="flex justify-center mb-12"
+          variants={cardVariants}
+          custom={0}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="max-w-3xl mx-auto mb-8"
         >
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center gap-3 bg-brand-light border border-gray-200 px-6 py-3 rounded-full"
-          >
-            <span className="text-gray-600 font-medium">Showing packages for</span>
-            <span className="bg-brand-green text-white font-bold px-4 py-1 rounded-full text-sm">
-              🇰🇪 Kenya
-            </span>
-          </motion.div>
+          <div className="relative p-8 overflow-hidden bg-gradient-to-br from-brand-dark to-gray-900 rounded-3xl md:p-10">
+            {/* Pattern background */}
+            <div 
+              className="absolute inset-0 opacity-[0.05] bg-pattern"
+            />
+
+            <div className="relative">
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div>
+                  <h3 className="mb-3 text-2xl font-bold text-white md:text-3xl">
+                    Register for STEAM Fest 2026
+                  </h3>
+                  <p className="max-w-xl mb-4 text-white/80">
+                    Form a team of 3-4 students + 1 advisor and showcase your innovation
+                  </p>
+                  
+                  <div className="mb-6 space-y-3">
+                    <div className="flex items-center gap-3 text-white/90">
+                      <Calendar className="w-5 h-5 text-brand-green" />
+                      <span className="font-medium">{festInfo.date}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/90">
+                      <MapPin className="w-5 h-5 text-brand-green" />
+                      <span className="font-medium">{festInfo.venue}</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/90">
+                      <Users className="w-5 h-5 text-brand-green" />
+                      <span className="font-medium">Teams: 3-4 students (Ages 8-18)</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/90">
+                      <Target className="w-5 h-5 text-brand-green" />
+                      <span className="font-medium">Registration Fee: {festInfo.price} per student</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-white/90">
+                      <Clock className="w-5 h-5 text-brand-red" />
+                      <span className="font-medium">Deadline: {festInfo.registrationDeadline}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap gap-4">
+                    <motion.button
+                      onClick={() => setIsModalOpen(true)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="inline-flex items-center gap-2 px-8 py-4 font-bold text-white transition-all rounded-full bg-brand-green hover:shadow-lg hover:shadow-brand-green/30"
+                      aria-label="Register your team for STEAM Fest 2026"
+                    >
+                      Register Your Team
+                      <ChevronRight className="w-5 h-5" />
+                    </motion.button>
+                    
+                  </div>
+                </div>
+
+                <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm min-w-[200px]">
+                  <div className="text-center">
+                    <div className="mb-2 text-4xl font-bold text-white">KES 2,000</div>
+                    <div className="mb-4 text-sm text-white/70">per student</div>
+                    <div className="text-sm font-semibold text-brand-green">Includes:</div>
+                    <ul className="mt-2 space-y-1 text-xs text-white/80">
+                      <li>✓ Challenge materials</li>
+                      <li>✓ Judge evaluation</li>
+                      <li>✓ Certificate</li>
+                      <li>✓ Award ceremony</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
-        {/* Membership Cards */}
-        <div className="grid md:grid-cols-2 gap-6 md:gap-8 max-w-3xl mx-auto mb-16">
-          {membershipPlans.map((plan, index) => {
-            const IconComponent = plan.icon;
-            return (
-              <motion.div
-                key={plan.id}
-                custom={index}
-                variants={cardVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                whileHover={{ 
-                  y: -10, 
-                  scale: 1.02,
-                  boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.15)",
-                }}
-                whileTap={{ scale: 0.98 }}
-                className={`relative p-8 rounded-3xl border-2 transition-colors cursor-pointer ${
-                  plan.popular 
-                    ? 'border-brand-green bg-gradient-to-br from-brand-green/5 to-transparent' 
-                    : 'border-gray-200 bg-white hover:border-brand-blue/30'
-                }`}
-              >
-                {plan.popular && (
-                  <motion.div 
-                    initial={{ y: -20, opacity: 0 }}
-                    animate={isInView ? { y: 0, opacity: 1 } : {}}
-                    transition={{ delay: 0.6, type: "spring" }}
-                    className="absolute -top-3 left-1/2 -translate-x-1/2"
-                  >
-                    <span className="bg-brand-green text-white text-xs font-bold px-4 py-1 rounded-full shadow-lg">
-                      ⭐ POPULAR
-                    </span>
-                  </motion.div>
-                )}
-
-                <div className={`w-14 h-14 rounded-2xl bg-${plan.color}/10 flex items-center justify-center mb-6`}>
-                  <IconComponent className={`w-7 h-7 text-${plan.color}`} />
+        {/* Second Card: Inquiry Form */}
+        <motion.div
+          variants={cardVariants}
+          custom={1}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          className="max-w-3xl mx-auto mb-16"
+        >
+          <div className="p-8 transition-colors bg-white border-2 border-gray-200 rounded-3xl md:p-10 hover:border-brand-blue/30">
+            <div className="flex flex-col items-start gap-8 md:flex-row">
+              <div className="flex-1">
+                <h3 className="mb-3 text-2xl font-bold text-brand-dark">
+                  Have Questions?
+                </h3>
+                <p className="mb-6 text-gray-600">
+                  Reach out to our team for any inquiries about registration, categories, or event details.
+                </p>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-green/10">
+                      <Phone className="w-5 h-5 text-brand-green" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-brand-dark">Call Us</p>
+                      <p className="text-gray-600">0712015793 or +254 704 657802</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-blue/10">
+                      <Mail className="w-5 h-5 text-brand-blue" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-brand-dark">Email</p>
+                      <p className="text-gray-600">bunifuyouthskenya@gmail.com</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-brand-red/10">
+                      <MessageCircle className="w-5 h-5 text-brand-red" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-brand-dark">WhatsApp</p>
+                      <p className="text-gray-600">+254 712 015 793</p>
+                    </div>
+                  </div>
                 </div>
+              </div>
 
-                <h3 className="text-xl font-bold text-brand-dark mb-1">{plan.name}</h3>
-                <p className="text-gray-500 text-sm mb-6">({plan.subtitle})</p>
-
-                <div className="flex items-baseline gap-1 mb-8">
-                  <motion.span 
-                    initial={{ opacity: 0, scale: 0.5 }}
-                    animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                    transition={{ delay: 0.5 + index * 0.2, type: "spring" }}
-                    className="text-4xl font-extrabold text-brand-dark"
-                  >
-                    {plan.price}
-                  </motion.span>
-                  <span className="text-gray-500 font-medium">{plan.period}</span>
+              <div className="w-full p-6 md:w-72 bg-brand-light rounded-2xl">
+                <h4 className="mb-4 font-bold text-brand-dark">Quick Info</h4>
+                <div className="space-y-3 text-sm">
+                  <div>
+                    <span className="text-gray-500">Age Groups:</span>
+                    <div className="mt-1 space-y-1">
+                      {ageCategories.map((cat, i) => (
+                        <div key={i} className="flex justify-between">
+                          <span className="font-medium">{cat.name}</span>
+                          <span className="text-gray-600">{cat.ages}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="pt-3 border-t border-gray-200">
+                    <span className="text-gray-500">Team Size:</span>
+                    <p className="font-medium">3-4 students + 1 advisor</p>
+                  </div>
+                  <div>
+                    <span className="text-gray-500">Response Time:</span>
+                    <p className="font-medium text-brand-green">24 hours</p>
+                  </div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
 
-                <motion.a
-                  href="https://forms.gle/67rKco3d66WhrQzi8"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`block w-full text-center font-bold py-4 rounded-full transition-all ${
-                    plan.popular
-                      ? 'bg-brand-green text-white hover:shadow-lg hover:shadow-brand-green/30'
-                      : 'bg-brand-dark text-white hover:bg-brand-dark/90'
-                  }`}
-                >
-                  Get Membership
-                </motion.a>
-              </motion.div>
-            );
-          })}
-        </div>
-
-        {/* Program Plans Section */}
+        {/* Important Dates Timeline */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-16"
+          className="mb-20"
         >
-          <h3 className="text-2xl md:text-3xl font-bold text-brand-dark text-center mb-10">
-            Program Packages
+          <h3 className="mb-12 text-2xl font-bold text-center md:text-3xl text-brand-dark">
+            Important Dates
           </h3>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            {programPlans.map((plan, index) => {
-              const IconComponent = plan.icon;
+          <div className="grid max-w-4xl grid-cols-2 gap-3 mx-auto md:grid-cols-5">
+            {importantDates.map((item, index) => (
+              <motion.div
+                key={index}
+                custom={index}
+                variants={staggerVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                className={`text-center p-4 rounded-xl ${
+                  item.highlight 
+                    ? 'bg-brand-green text-white' 
+                    : 'bg-brand-light text-brand-dark'
+                }`}
+              >
+                <div className="mb-2 text-sm font-medium">{item.event}</div>
+                <div className={`text-base font-bold ${
+                  item.highlight ? 'text-white' : 'text-brand-green'
+                }`}>
+                  {item.date}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Categories Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, delay: 0.6 }}
+        >
+          <h3 className="mb-4 text-2xl font-bold text-center md:text-3xl text-brand-dark">
+            Competition Categories
+          </h3>
+          <p className="max-w-2xl mx-auto mb-12 text-center text-gray-600">
+            Choose your skill area and tackle real-world challenges inspired by UN Sustainable Development Goals
+          </p>
+          
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {categories.map((category, index) => {
+              const IconComponent = category.icon;
+              const bgColorClass = `bg-${category.color}/10`;
+              const iconBgClass = `bg-${category.color}/20`;
+              const iconColorClass = `text-${category.color}`;
+              
               return (
                 <motion.div
-                  key={plan.id}
+                  key={category.id}
                   custom={index + 2}
                   variants={cardVariants}
                   initial="hidden"
@@ -271,127 +436,387 @@ export default function MembershipSection() {
                     scale: 1.02,
                     boxShadow: "0 20px 40px -12px rgba(0, 0, 0, 0.12)",
                   }}
-                  className="relative p-6 rounded-2xl bg-white border border-gray-200 hover:border-brand-blue/30 transition-colors"
+                  className="overflow-hidden transition-all bg-white border border-gray-200 rounded-2xl hover:border-brand-blue/30"
                 >
-                  <div className={`w-12 h-12 rounded-xl bg-${plan.color}/10 flex items-center justify-center mb-4`}>
-                    <IconComponent className={`w-6 h-6 text-${plan.color}`} />
+                  <div className={`p-6 border-b border-gray-200 ${bgColorClass}`}>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${iconBgClass}`}>
+                        <IconComponent className={`w-5 h-5 ${iconColorClass}`} />
+                      </div>
+                      <h4 className="font-bold text-brand-dark">{category.name}</h4>
+                    </div>
+                    <p className="mb-2 text-xs text-gray-500">{category.ageGroups}</p>
+                    <p className="text-sm text-gray-600">{category.description}</p>
                   </div>
-
-                  <h4 className="text-lg font-bold text-brand-dark mb-1">{plan.name}</h4>
-                  <p className="text-gray-500 text-sm mb-2">{plan.subtitle}</p>
-                  <p className="text-gray-600 text-sm mb-4">{plan.description}</p>
-
-                  <div className="flex items-baseline gap-1 mb-6">
-                    <span className="text-2xl font-extrabold text-brand-dark">{plan.price}</span>
-                    <span className="text-gray-500 text-sm">{plan.period}</span>
+                  
+                  <div className="p-6 space-y-4">
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <Target className="w-4 h-4 text-brand-green" />
+                        <span className="text-xs font-semibold tracking-wider uppercase text-brand-dark">Challenge</span>
+                      </div>
+                      <p className="text-sm text-gray-600">{category.challenge}</p>
+                    </div>
+                    
+                    <div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <BookOpen className="w-4 h-4 text-brand-blue" />
+                        <span className="text-xs font-semibold tracking-wider uppercase text-brand-dark">Tools</span>
+                      </div>
+                      <p className="text-sm text-gray-600">{category.tools}</p>
+                    </div>
+                    
+                    <motion.button
+                      onClick={() => {
+                        setFormData(prev => ({ ...prev, category: category.name }));
+                        setIsModalOpen(true);
+                      }}
+                      className={`inline-flex items-center gap-1 text-sm font-semibold transition-all hover:gap-2 ${iconColorClass}`}
+                      aria-label={`Register for ${category.name} category`}
+                    >
+                      Register for this category
+                      <ChevronRight className="w-4 h-4" />
+                    </motion.button>
                   </div>
-
-                  <motion.a
-                    href="https://forms.gle/67rKco3d66WhrQzi8"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`block w-full text-center font-bold py-3 rounded-full bg-${plan.color} text-white hover:opacity-90 transition-opacity`}
-                  >
-                    Enroll Now
-                  </motion.a>
                 </motion.div>
               );
             })}
           </div>
         </motion.div>
 
-        {/* Note */}
-        <motion.p
+        {/* Partners */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
-          className="text-center text-gray-500 text-sm mb-16"
+          transition={{ delay: 1 }}
+          className="mt-20 text-center"
         >
-          * Membership does not include program activities. Programs are charged separately.
-        </motion.p>
-
-        {/* Benefits Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="relative bg-gradient-to-br from-brand-dark to-gray-900 rounded-3xl p-8 md:p-12 overflow-hidden"
-        >
-          {/* Pattern background */}
-          <div 
-            className="absolute inset-0 opacity-[0.05]"
-            style={{
-              backgroundImage: 'url(/pattern.jpg)',
-              backgroundSize: '400px',
-              backgroundRepeat: 'repeat',
-            }}
-          />
-
-          <motion.h3 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.8 }}
-            className="relative text-2xl md:text-3xl font-bold text-white text-center mb-10"
-          >
-            ✨ Membership Benefits
-          </motion.h3>
-          
-          <div className="relative grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {benefits.map((benefit, index) => {
-              const IconComponent = benefit.icon;
-              return (
-                <motion.div
-                  key={index}
-                  custom={index}
-                  variants={benefitVariants}
-                  initial="hidden"
-                  animate={isInView ? "visible" : "hidden"}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    backgroundColor: "rgba(255,255,255,0.15)",
-                    transition: { duration: 0.2 }
-                  }}
-                  className="flex items-start gap-4 p-4 rounded-2xl bg-white/5 cursor-default"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-brand-green/20 flex items-center justify-center flex-shrink-0">
-                    <IconComponent className="w-5 h-5 text-brand-green" />
-                  </div>
-                  <p className="text-white/90 text-sm leading-relaxed">{benefit.text}</p>
-                </motion.div>
-              );
-            })}
+          <p className="mb-4 text-gray-500">Presented by</p>
+          <div className="flex items-center justify-center gap-8">
+            <span className="text-xl font-bold text-brand-dark">Nairobi Academy</span>
+            <span className="text-gray-300">+</span>
+            <span className="text-xl font-bold text-brand-green">Bunifu Youths Kenya</span>
           </div>
-
-          {/* Additional Benefits */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 1.2 }}
-            className="relative mt-10 pt-8 border-t border-white/10"
-          >
-            <div className="grid sm:grid-cols-2 gap-4 text-sm">
-              {[
-                'Access to international STEM competitions info',
-                'Discounted Bunifu merchandise'
-              ].map((text, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 1.4 + index * 0.1 }}
-                  whileHover={{ x: 5 }}
-                  className="flex items-center gap-3 text-white/80"
-                >
-                  <Check className="w-5 h-5 text-brand-green" />
-                  <span>{text}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </motion.div>
       </div>
+
+      {/* Registration Modal - With Formspree Integration */}
+      <AnimatePresence>
+        {isModalOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-8 bg-black/60 backdrop-blur-sm"
+            onClick={() => setIsModalOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, y: 50, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.8, y: 50, opacity: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {/* Decorative Top Strip */}
+              <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-green via-brand-blue to-brand-red rounded-t-3xl" />
+              
+              {/* Close Button */}
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute z-10 p-2 text-gray-400 transition-colors bg-white rounded-full top-6 right-6 hover:text-brand-red hover:bg-red-50"
+                aria-label="Close registration form"
+              >
+                <XCircle className="w-6 h-6" />
+              </button>
+
+              {state.succeeded ? (
+                // Success Message
+                <div className="p-8 text-center pt-14">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", damping: 15 }}
+                    className="flex justify-center mb-6"
+                  >
+                    <div className="flex items-center justify-center w-20 h-20 text-4xl rounded-full bg-gradient-to-br from-green-50 to-emerald-50">
+                      ✅
+                    </div>
+                  </motion.div>
+                  
+                  <h3 className="mb-2 text-2xl font-bold text-brand-dark">Registration Submitted!</h3>
+                  <p className="text-gray-600">
+                    Thank you for registering for STEAM Fest 2026. We'll send a confirmation email with payment instructions shortly.
+                  </p>
+                  
+                  {/* Decorative Dots */}
+                  <div className="flex justify-center gap-1 mt-6">
+                    <span className="w-2 h-2 rounded-full bg-brand-green" />
+                    <span className="w-2 h-2 bg-white border border-gray-300 rounded-full" />
+                    <span className="w-2 h-2 rounded-full bg-brand-red" />
+                  </div>
+                </div>
+              ) : (
+                // Registration Form
+                <div className="p-8 pt-10">
+                  {/* Header with Icon */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="flex items-center justify-center w-16 h-16 text-4xl bg-gradient-to-br from-brand-green/10 to-brand-blue/10 rounded-2xl">
+                      <span>🎪</span>
+                    </div>
+                    <div>
+                      <h3 className="text-2xl font-bold text-brand-dark">STEAM Fest 2026</h3>
+                      <p className="mt-1 text-sm text-gray-600">
+                        Register your team for the ultimate innovation challenge
+                      </p>
+                    </div>
+                  </div>
+
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Team Information */}
+                    <div>
+                      <label htmlFor="teamName" className="block mb-1 text-sm font-medium text-gray-700">
+                        Team Name <span className="text-brand-red">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="teamName"
+                        name="teamName"
+                        value={formData.teamName}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green"
+                        placeholder="e.g., Tech Innovators"
+                      />
+                      <ValidationError 
+                        prefix="Team Name" 
+                        field="teamName"
+                        errors={state.errors}
+                        className="mt-1 text-sm text-red-600"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="school" className="block mb-1 text-sm font-medium text-gray-700">
+                        School/Institution <span className="text-brand-red">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="school"
+                        name="school"
+                        value={formData.school}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green"
+                        placeholder="School name"
+                      />
+                      <ValidationError 
+                        prefix="School" 
+                        field="school"
+                        errors={state.errors}
+                        className="mt-1 text-sm text-red-600"
+                      />
+                    </div>
+
+                    {/* Advisor Information */}
+                    <div className="p-4 border border-brand-blue/20 rounded-xl bg-brand-blue/5">
+                      <h4 className="mb-3 font-semibold text-brand-dark">Advisor Information</h4>
+                      <div className="space-y-4">
+                        <div>
+                          <label htmlFor="advisorName" className="block mb-1 text-sm font-medium text-gray-700">
+                            Full Name <span className="text-brand-red">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            id="advisorName"
+                            name="advisorName"
+                            value={formData.advisorName}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
+                            placeholder="Advisor's name"
+                          />
+                          <ValidationError 
+                            prefix="Advisor Name" 
+                            field="advisorName"
+                            errors={state.errors}
+                            className="mt-1 text-sm text-red-600"
+                          />
+                        </div>
+
+                        <div>
+                          <label htmlFor="advisorEmail" className="block mb-1 text-sm font-medium text-gray-700">
+                            Email <span className="text-brand-red">*</span>
+                          </label>
+                          <input
+                            type="email"
+                            id="advisorEmail"
+                            name="advisorEmail"
+                            value={formData.advisorEmail}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
+                            placeholder="advisor@email.com"
+                          />
+                          <ValidationError 
+                            prefix="Email" 
+                            field="advisorEmail"
+                            errors={state.errors}
+                            className="mt-1 text-sm text-red-600"
+                          />
+                        </div>
+
+                        <div>
+                          <label htmlFor="advisorPhone" className="block mb-1 text-sm font-medium text-gray-700">
+                            Phone Number <span className="text-brand-red">*</span>
+                          </label>
+                          <input
+                            type="tel"
+                            id="advisorPhone"
+                            name="advisorPhone"
+                            value={formData.advisorPhone}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
+                            placeholder="0712 345 678"
+                          />
+                          <ValidationError 
+                            prefix="Phone" 
+                            field="advisorPhone"
+                            errors={state.errors}
+                            className="mt-1 text-sm text-red-600"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Competition Category */}
+                    <div>
+                      <label htmlFor="category" className="block mb-1 text-sm font-medium text-gray-700">
+                        Category <span className="text-brand-red">*</span>
+                      </label>
+                      <select
+                        id="category"
+                        name="category"
+                        value={formData.category}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red"
+                      >
+                        <option value="">Select a category</option>
+                        {categories.map(cat => (
+                          <option key={cat.id} value={cat.name}>{cat.name}</option>
+                        ))}
+                      </select>
+                      <ValidationError 
+                        prefix="Category" 
+                        field="category"
+                        errors={state.errors}
+                        className="mt-1 text-sm text-red-600"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="ageCategory" className="block mb-1 text-sm font-medium text-gray-700">
+                        Age Category <span className="text-brand-red">*</span>
+                      </label>
+                      <select
+                        id="ageCategory"
+                        name="ageCategory"
+                        value={formData.ageCategory}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-red/20 focus:border-brand-red"
+                      >
+                        <option value="">Select age group</option>
+                        {ageCategories.map(cat => (
+                          <option key={cat.name} value={cat.name}>{cat.name} ({cat.ages})</option>
+                        ))}
+                      </select>
+                      <ValidationError 
+                        prefix="Age Category" 
+                        field="ageCategory"
+                        errors={state.errors}
+                        className="mt-1 text-sm text-red-600"
+                      />
+                    </div>
+
+                    {/* Student Names */}
+                    <div className="p-4 border border-brand-green/20 rounded-xl bg-brand-green/5">
+                      <h4 className="mb-3 font-semibold text-brand-dark">Team Members (3-4 students)</h4>
+                      <div className="space-y-3">
+                        {[0, 1, 2, 3].map((index) => (
+                          <input
+                            key={index}
+                            type="text"
+                            name={`student-${index}`}  
+                            value={formData.students[index]}
+                            onChange={handleInputChange}
+                            required={index < 3}
+                            className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-green/20 focus:border-brand-green"
+                            placeholder={`Student ${index + 1} full name${index === 3 ? ' (optional)' : ''}`}
+                          />
+                        ))}
+                      </div>
+                      <p className="mt-2 text-xs text-gray-500">Minimum 3 students required</p>
+                    </div>
+
+                    {/* Terms */}
+                    <div className="flex items-start gap-3">
+                      <input
+                        type="checkbox"
+                        id="agreeToTerms"
+                        name="agreeToTerms"
+                        checked={formData.agreeToTerms}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-1 rounded text-brand-green focus:ring-brand-green"
+                      />
+                      <label htmlFor="agreeToTerms" className="text-sm text-gray-600">
+                        I confirm that all information is accurate and agree to the 
+                        <a href="#" className="mx-1 font-semibold text-brand-green hover:underline">terms and conditions</a>.
+                      </label>
+                    </div>
+
+                    {/* Hidden field to identify form type */}
+                    <input type="hidden" name="form_type" value="steam_fest_registration" />
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={state.submitting}
+                      className="flex items-center justify-center w-full gap-2 px-8 py-4 text-lg font-bold text-white transition-all bg-gradient-to-r from-brand-green via-brand-blue to-brand-red rounded-xl hover:shadow-lg hover:shadow-brand-green/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {state.submitting ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white rounded-full border-t-transparent animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Submit Registration
+                          <Send className="w-5 h-5" />
+                        </>
+                      )}
+                    </button>
+
+                    <p className="text-xs text-center text-gray-400">
+                      Registration fee: KES 2,000 per student. Payment instructions will be sent to your email.
+                    </p>
+
+                    {/* Footer Dots */}
+                    <div className="flex justify-center gap-1 pt-2">
+                      <span className="w-2 h-2 rounded-full bg-brand-green" />
+                      <span className="w-2 h-2 bg-white border border-gray-300 rounded-full" />
+                      <span className="w-2 h-2 rounded-full bg-brand-red" />
+                    </div>
+                  </form>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
