@@ -1,6 +1,13 @@
 import { motion, useInView } from 'framer-motion';
 import { Gamepad2, Code, Bot, GraduationCap, Printer, Trophy } from 'lucide-react';
 import { useRef } from 'react';
+import { PATTERN_URL } from '../lib/assets';
+
+const activityColorClasses = {
+  'brand-blue': { icon: 'text-brand-blue', link: 'text-brand-blue' },
+  'brand-green': { icon: 'text-brand-green', link: 'text-brand-green' },
+  'brand-red': { icon: 'text-brand-red', link: 'text-brand-red' },
+} as const;
 
 const activities = [
   {
@@ -8,48 +15,48 @@ const activities = [
     title: 'Animations and Games',
     description: 'Learn to create interactive animations and build your own video games using creative coding tools.',
     icon: Gamepad2,
-    color: 'brand-blue',
-    image: '/activity_animations_gaming.png',
+    color: 'brand-blue' as const,
+    image: '/activity_animations_gaming.webp',
   },
   {
     id: 2,
     title: 'Web & AI Development',
     description: 'Build websites and explore artificial intelligence concepts through hands-on projects.',
     icon: Code,
-    color: 'brand-green',
-    image: '/gallery_hands_on_coding.jpg',
+    color: 'brand-green' as const,
+    image: '/gallery_hands_on_coding.webp',
   },
   {
     id: 3,
     title: 'Hands-on Robotics',
     description: 'Design, build, and program robots while learning engineering and problem-solving skills.',
     icon: Bot,
-    color: 'brand-red',
-    image: '/activity_robotics.png',
+    color: 'brand-red' as const,
+    image: '/activity_robotics.webp',
   },
   {
     id: 4,
     title: 'Educators Training',
     description: 'Professional development programs for teachers to integrate STEM into their classrooms.',
     icon: GraduationCap,
-    color: 'brand-blue',
-    image: '/activity_educators_training.png',
+    color: 'brand-blue' as const,
+    image: '/activity_educators_training.webp',
   },
   {
     id: 5,
     title: '3D Printing & Designing',
     description: 'Transform ideas into reality using CAD software and 3D printing technology.',
     icon: Printer,
-    color: 'brand-green',
-    image: '/activity_3d_printing.png',
+    color: 'brand-green' as const,
+    image: '/activity_3d_printing.webp',
   },
   {
     id: 6,
     title: 'Competitions',
     description: 'Participate in local and international STEM competitions to showcase your skills and win prizes.',
     icon: Trophy,
-    color: 'brand-red',
-    image: '/activity_competitions.png',
+    color: 'brand-red' as const,
+    image: '/activity_competitions.webp',
   },
 ];
 
@@ -101,7 +108,7 @@ export default function ActivitiesSection() {
       <div 
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '800px',
           backgroundRepeat: 'repeat',
         }}
@@ -150,6 +157,7 @@ export default function ActivitiesSection() {
         >
           {activities.map((activity, index) => {
             const IconComponent = activity.icon;
+            const colors = activityColorClasses[activity.color];
             return (
               <motion.div
                 key={activity.id}
@@ -165,6 +173,10 @@ export default function ActivitiesSection() {
                   <img
                     src={activity.image}
                     alt={activity.title}
+                    loading="lazy"
+                    decoding="async"
+                    width={640}
+                    height={384}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
@@ -176,7 +188,7 @@ export default function ActivitiesSection() {
                     transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
                     className="absolute top-0 left-0 right-0 h-1 origin-left"
                     style={{
-                      backgroundImage: 'url(/pattern.jpg)',
+                      backgroundImage: `url(${PATTERN_URL})`,
                       backgroundSize: '150px',
                       backgroundRepeat: 'repeat-x',
                     }}
@@ -189,7 +201,7 @@ export default function ActivitiesSection() {
                     transition={{ delay: 0.6 + index * 0.1, type: "spring", stiffness: 200 }}
                     className="absolute top-4 right-4 w-12 h-12 rounded-2xl bg-white shadow-lg flex items-center justify-center"
                   >
-                    <IconComponent className={`w-6 h-6 text-${activity.color}`} />
+                    <IconComponent className={`w-6 h-6 ${colors.icon}`} />
                   </motion.div>
                 </div>
 
@@ -205,7 +217,7 @@ export default function ActivitiesSection() {
                   </p>
                   <a
                     href="#membership"
-                    className={`inline-flex items-center gap-2 text-${activity.color} font-semibold text-sm hover:gap-3 transition-all`}
+                    className={`inline-flex items-center gap-2 ${colors.link} font-semibold text-sm hover:gap-3 transition-all`}
                   >
                     Learn More
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -246,7 +258,7 @@ export default function ActivitiesSection() {
         transition={{ duration: 1, delay: 0.8 }}
         className="absolute bottom-0 left-0 right-0 h-3 origin-center"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '300px',
           backgroundRepeat: 'repeat-x',
           backgroundPosition: 'center',

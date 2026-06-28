@@ -1,371 +1,8 @@
-import { ArrowRight, Users, Package, ChevronLeft, ChevronRight, Trophy, GraduationCap, Rocket, Send, XCircle } from 'lucide-react';
+import { ArrowRight, Users, Package, ChevronLeft, ChevronRight, Trophy, GraduationCap, Rocket } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
-import { useForm, ValidationError } from '@formspree/react';
-
-// Form Modal Component for Hero Section CTAs
-function FormModal({ isOpen, onClose, formType }: { isOpen: boolean; onClose: () => void; formType: string }) {
-  // Map each form type to its Formspree endpoint
-  const FORM_IDS: Record<string, string> = {
-    journey: 'mlgpdekv',      // Start Your Journey / Start Learning
-    mentor: 'xbdzljvk',       // Get a Mentor
-    weekend: 'mpqywzgw',      // Weekend Sessions
-    competition: 'xkoqgnao',  // Join Competitions
-    enroll: 'mnjgnqkb',       // Enroll Your Child
-    // For secondary buttons that don't need forms
-    activities: 'activities',
-    programs: 'programs',
-  };
-
-  // Only initialize form if it's a real form type
-  const [state, handleSubmit] = FORM_IDS[formType]?.length > 8 
-    ? useForm(FORM_IDS[formType])
-    : [ { submitting: false, succeeded: false, errors: null }, () => {} ];
-
-  // Auto-close modal after successful submission
-  useEffect(() => {
-    if (state.succeeded) {
-      const timer = setTimeout(() => {
-        onClose();
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [state.succeeded, onClose]);
-
-  const getFormTitle = () => {
-    switch(formType) {
-      case 'journey': return 'Start Your STEM Journey';
-      case 'mentor': return 'Get a Mentor';
-      case 'weekend': return 'Join Weekend Sessions';
-      case 'competition': return 'Join Competition';
-      case 'enroll': return 'Enroll Your Child';
-      case 'activities': return 'Explore Activities';
-      case 'programs': return 'View Programs';
-      default: return 'Contact Bunifu Youths';
-    }
-  };
-
-  const getFormIcon = () => {
-    switch(formType) {
-      case 'journey': return '🚀';
-      case 'mentor': return '👨‍🏫';
-      case 'weekend': return '📅';
-      case 'competition': return '🏆';
-      case 'enroll': return '📚';
-      case 'activities': return '🎯';
-      case 'programs': return '📋';
-      default: return '✉️';
-    }
-  };
-
-  const getFormDescription = () => {
-    switch(formType) {
-      case 'journey': return 'Ready to start your STEM journey? Fill out the form below and we\'ll help you get started.';
-      case 'mentor': return 'Get personalized guidance from industry professionals. Share your interests and we\'ll match you with a mentor.';
-      case 'weekend': return 'Join our exciting weekend sessions! Fill in your details to reserve a spot.';
-      case 'competition': return 'Register your interest in our upcoming STEAM competitions.';
-      case 'enroll': return 'Provide your details to enroll your child in our programs.';
-      case 'activities': return 'Let us know which activities interest you and we\'ll provide more information.';
-      case 'programs': return 'Tell us which programs you\'re interested in learning more about.';
-      default: return 'We\'d love to hear from you. Send us a message and we\'ll respond as soon as possible.';
-    }
-  };
-
-  // For secondary buttons that don't need forms (like "Explore Activities")
-  if (formType === 'activities' || formType === 'programs') {
-    return (
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-8 bg-black/60 backdrop-blur-sm"
-            onClick={onClose}
-          >
-            <motion.div
-              initial={{ scale: 0.8, y: 50, opacity: 0 }}
-              animate={{ scale: 1, y: 0, opacity: 1 }}
-              exit={{ scale: 0.8, y: 50, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-md bg-white shadow-2xl rounded-3xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="p-8 text-center">
-                <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 text-5xl rounded-full bg-gradient-to-br from-brand-blue/10 to-brand-red/10">
-                  {formType === 'activities' ? '🎯' : '📋'}
-                </div>
-                <h3 className="mb-2 text-2xl font-bold text-brand-dark">Coming Soon!</h3>
-                <p className="mb-6 text-gray-600">
-                  We're preparing more information about our {formType === 'activities' ? 'activities' : 'programs'}. 
-                  Please check back later or contact us directly.
-                </p>
-                <button
-                  onClick={onClose}
-                  className="px-6 py-3 font-bold text-white transition-all bg-gradient-to-r from-brand-blue to-brand-red rounded-xl hover:shadow-lg"
-                >
-                  Got it
-                </button>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    );
-  }
-
-  if (!isOpen) return null;
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center px-4 py-8 bg-black/60 backdrop-blur-sm"
-          onClick={onClose}
-        >
-          <motion.div
-            initial={{ scale: 0.8, y: 50, opacity: 0 }}
-            animate={{ scale: 1, y: 0, opacity: 1 }}
-            exit={{ scale: 0.8, y: 50, opacity: 0 }}
-            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-3xl shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Decorative Top Strip */}
-            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-blue via-white to-brand-red rounded-t-3xl" />
-            
-            {/* Close Button */}
-            <button
-              type="button"
-              onClick={onClose}
-              title="Close form"
-              className="absolute z-10 p-2 text-gray-400 transition-colors bg-white rounded-full top-6 right-6 hover:text-brand-red hover:bg-red-50"
-            >
-              <XCircle className="w-6 h-6" />
-            </button>
-
-            <div className="p-8 pt-10">
-              {/* Header with Icon */}
-              <div className="flex items-center gap-4 mb-6">
-                <div className="flex items-center justify-center w-16 h-16 text-4xl bg-gradient-to-br from-brand-blue/10 to-brand-red/10 rounded-2xl">
-                  <span>{getFormIcon()}</span>
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold text-brand-dark">{getFormTitle()}</h3>
-                  <p className="mt-1 text-sm text-gray-600">
-                    {getFormDescription()}
-                  </p>
-                </div>
-              </div>
-
-              {/* Success Message */}
-              {state.succeeded && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-6 mb-6 text-center bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl"
-                >
-                  <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 text-4xl bg-green-100 rounded-full">
-                    ✅
-                  </div>
-                  <h4 className="text-xl font-bold text-green-700">Thank You!</h4>
-                  <p className="text-green-600">We'll get back to you soon.</p>
-                </motion.div>
-              )}
-
-              {/* Form */}
-              {!state.succeeded && (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {/* Name */}
-                  <div>
-                    <label htmlFor="name" className="block mb-1 text-sm font-medium text-gray-700">
-                      Full Name <span className="text-brand-red">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
-                      placeholder="John Doe"
-                    />
-                    <ValidationError 
-                      prefix="Name" 
-                      field="name"
-                      errors={state.errors}
-                      className="mt-1 text-sm text-red-600"
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <label htmlFor="email" className="block mb-1 text-sm font-medium text-gray-700">
-                      Email Address <span className="text-brand-red">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      required
-                      className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
-                      placeholder="john@example.com"
-                    />
-                    <ValidationError 
-                      prefix="Email" 
-                      field="email"
-                      errors={state.errors}
-                      className="mt-1 text-sm text-red-600"
-                    />
-                  </div>
-
-                  {/* Phone */}
-                  <div>
-                    <label htmlFor="phone" className="block mb-1 text-sm font-medium text-gray-700">
-                      Phone Number <span className="text-brand-red">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
-                      className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
-                      placeholder="+254 XXX XXX XXX"
-                    />
-                  </div>
-
-                  {/* Conditional Fields based on form type */}
-                  {(formType === 'mentor' || formType === 'weekend') && (
-                    <div>
-                      <label htmlFor="interest" className="block mb-1 text-sm font-medium text-gray-700">
-                        Area of Interest <span className="text-brand-red">*</span>
-                      </label>
-                      <select
-                        id="interest"
-                        name="interest"
-                        required
-                        className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
-                      >
-                        <option value="">Select an area</option>
-                        <option value="coding">Coding</option>
-                        <option value="robotics">Robotics</option>
-                        <option value="3d-design">3D Design</option>
-                        <option value="all">All of the above</option>
-                      </select>
-                    </div>
-                  )}
-
-                  {formType === 'enroll' && (
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="child_name" className="block mb-1 text-sm font-medium text-gray-700">
-                          Child's Name <span className="text-brand-red">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          id="child_name"
-                          name="child_name"
-                          required
-                          className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
-                          placeholder="Child's name"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="child_age" className="block mb-1 text-sm font-medium text-gray-700">
-                          Child's Age <span className="text-brand-red">*</span>
-                        </label>
-                        <input
-                          type="number"
-                          id="child_age"
-                          name="child_age"
-                          required
-                          min="5"
-                          max="18"
-                          className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
-                          placeholder="Age"
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {formType === 'competition' && (
-                    <div>
-                      <label htmlFor="competition_type" className="block mb-1 text-sm font-medium text-gray-700">
-                        Competition Interest <span className="text-brand-red">*</span>
-                      </label>
-                      <select
-                        id="competition_type"
-                        name="competition_type"
-                        required
-                        className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
-                      >
-                        <option value="">Select competition</option>
-                        <option value="coding">Coding Challenge</option>
-                        <option value="robotics">Robotics Battle</option>
-                        <option value="3d-design">3D Design Showcase</option>
-                        <option value="innovation">Innovation Hackathon</option>
-                      </select>
-                    </div>
-                  )}
-
-                  {/* Message */}
-                  <div>
-                    <label htmlFor="message" className="block mb-1 text-sm font-medium text-gray-700">
-                      Message / Questions
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={3}
-                      className="w-full px-4 py-3 transition-all border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-blue/20 focus:border-brand-blue"
-                      placeholder="Tell us more about your interest..."
-                    />
-                  </div>
-
-                  {/* Hidden field to identify form type */}
-                  <input type="hidden" name="form_type" value={formType} />
-
-                  {/* Submit Button */}
-                  <button
-                    type="submit"
-                    disabled={state.submitting}
-                    className="flex items-center justify-center w-full gap-2 px-8 py-4 text-lg font-bold transition-all bg-gradient-to-r from-brand-blue via-white to-brand-red text-brand-dark rounded-xl hover:shadow-lg hover:shadow-brand-blue/30 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {state.submitting ? (
-                      <>
-                        <div className="w-5 h-5 border-2 rounded-full border-brand-dark border-t-transparent animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <Send className="w-5 h-5" />
-                      </>
-                    )}
-                  </button>
-
-                  {/* Footer */}
-                  <div className="flex items-center justify-between pt-2">
-                    <p className="text-xs text-gray-500">
-                      We'll never share your information.
-                    </p>
-                    <div className="flex gap-1">
-                      <span className="w-2 h-2 rounded-full bg-brand-blue" />
-                      <span className="w-2 h-2 bg-white border border-gray-300 rounded-full" />
-                      <span className="w-2 h-2 rounded-full bg-brand-red" />
-                    </div>
-                  </div>
-                </form>
-              )}
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
+import { useRef, useState, useEffect, useCallback } from 'react';
+import HeroFormModal from './HeroFormModal';
+import { PATTERN_URL } from '../lib/assets';
 
 const slides = [
   {
@@ -382,7 +19,7 @@ const slides = [
       { label: "Start Your Journey", formType: "journey", variant: "primary", icon: Rocket },
       { label: "Explore Activities", formType: "activities", variant: "secondary", icon: null },
     ],
-    backgroundImage: "/activity_robotics.png",
+    backgroundImage: '/activity_robotics.webp',
   },
   {
     id: 2,
@@ -398,7 +35,7 @@ const slides = [
       { label: "Get a Mentor", formType: "mentor", variant: "blue", icon: Users },
       { label: "Join Weekend Sessions", formType: "weekend", variant: "red", icon: Package },
     ],
-    backgroundImage: "/gallery_robotics_workshop.jpg",
+    backgroundImage: '/gallery_robotics_workshop.webp',
   },
   {
     id: 3,
@@ -414,7 +51,7 @@ const slides = [
       { label: "Join Competitions", formType: "competition", variant: "primary", icon: Trophy },
       { label: "Learn More", formType: "activities", variant: "secondary", icon: null },
     ],
-    backgroundImage: "/activity_competition.jpeg",
+    backgroundImage: '/activity_competition.webp',
   },
   {
     id: 4,
@@ -430,7 +67,7 @@ const slides = [
       { label: "Enroll Your Child", formType: "enroll", variant: "blue", icon: GraduationCap },
       { label: "School Programs", formType: "programs", variant: "secondary", icon: null },
     ],
-    backgroundImage: "/activity_classroom.jpeg",
+    backgroundImage: '/activity_classroom.webp',
   },
   {
     id: 5,
@@ -446,7 +83,7 @@ const slides = [
       { label: "Start Learning", formType: "journey", variant: "primary", icon: Rocket },
       { label: "View Programs", formType: "programs", variant: "secondary", icon: null },
     ],
-    backgroundImage: "/activity_3ddesign.jpg",
+    backgroundImage: '/activity_3ddesign.webp',
   },
 ];
 
@@ -467,17 +104,15 @@ export default function HeroSection() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   // Auto-advance slides
-  useEffect(() => {
-    const timer = setInterval(() => {
-      handleNext();
-    }, 8000);
-    return () => clearInterval(timer);
-  }, [currentSlide]);
-
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setSlideDirection([1]);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
+  }, []);
+
+  useEffect(() => {
+    const timer = setInterval(handleNext, 8000);
+    return () => clearInterval(timer);
+  }, [handleNext]);
 
   const handlePrev = () => {
     setSlideDirection([-1]);
@@ -534,7 +169,9 @@ export default function HeroSection() {
           >
             <img
               src={currentSlideData.backgroundImage}
-              alt=""
+              alt="Bunifu Youths Kenya STEM programs"
+              fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
+              decoding="async"
               className="object-cover w-full h-full"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/70 to-brand-dark/50" />
@@ -548,7 +185,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.5 }}
           className="absolute top-0 bottom-0 left-0 w-4 md:w-6"
           style={{
-            backgroundImage: 'url(/pattern.jpg)',
+            backgroundImage: `url(${PATTERN_URL})`,
             backgroundSize: '200px',
             backgroundRepeat: 'repeat-y',
           }}
@@ -739,7 +376,7 @@ export default function HeroSection() {
           transition={{ duration: 1, delay: 0.5 }}
           className="absolute bottom-0 left-0 right-0 h-2 origin-left"
           style={{
-            backgroundImage: 'url(/pattern.jpg)',
+            backgroundImage: `url(${PATTERN_URL})`,
             backgroundSize: '300px',
             backgroundRepeat: 'repeat-x',
             backgroundPosition: 'center',
@@ -748,7 +385,7 @@ export default function HeroSection() {
       </section>
 
       {/* Form Modal */}
-      <FormModal 
+      <HeroFormModal
         isOpen={isFormOpen}
         onClose={() => setIsFormOpen(false)}
         formType={currentFormType}
