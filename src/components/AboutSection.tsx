@@ -1,6 +1,13 @@
 import { motion, useInView, Variants } from 'framer-motion';
 import { Lightbulb, Users, Award } from 'lucide-react';
 import { useRef } from 'react';
+import { PATTERN_URL } from '../lib/assets';
+
+const featureColorClasses = {
+  'brand-blue': { bg: 'bg-brand-blue/10', icon: 'text-brand-blue' },
+  'brand-green': { bg: 'bg-brand-green/10', icon: 'text-brand-green' },
+  'brand-red': { bg: 'bg-brand-red/10', icon: 'text-brand-red' },
+} as const;
 
 const features = [
   {
@@ -65,7 +72,7 @@ export default function AboutSection() {
       <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '600px',
           backgroundRepeat: 'repeat',
         }}
@@ -84,8 +91,12 @@ export default function AboutSection() {
               {/* Main Image */}
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
                 <img
-                  src="/gallery_robot_building.jpg"
+                  src="/gallery_robot_building.webp"
                   alt="Young innovator at Bunifu"
+                  loading="lazy"
+                  decoding="async"
+                  width={626}
+                  height={783}
                   className="object-cover w-full h-full"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/50 via-transparent to-transparent" />
@@ -97,7 +108,7 @@ export default function AboutSection() {
                   transition={{ delay: 0.5, duration: 0.8 }}
                   className="absolute top-0 left-0 right-0 h-2 origin-left"
                   style={{
-                    backgroundImage: 'url(/pattern.jpg)',
+                    backgroundImage: `url(${PATTERN_URL})`,
                     backgroundSize: '150px',
                     backgroundRepeat: 'repeat-x',
                   }}
@@ -110,7 +121,7 @@ export default function AboutSection() {
                   transition={{ delay: 0.6, duration: 0.8 }}
                   className="absolute bottom-0 left-0 right-0 h-2 origin-right"
                   style={{
-                    backgroundImage: 'url(/pattern.jpg)',
+                    backgroundImage: `url(${PATTERN_URL})`,
                     backgroundSize: '150px',
                     backgroundRepeat: 'repeat-x',
                   }}
@@ -125,7 +136,7 @@ export default function AboutSection() {
                 className="absolute -bottom-6 -right-4 md:right-8"
               >
                 <div className="w-24 h-24 overflow-hidden border-4 border-white shadow-2xl md:w-32 md:h-32 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500">
-                  <img src="/Kenya.png" alt="Kenya" className="object-contain w-full h-full p-2" />
+                  <img src="/Kenya.webp" alt="Kenya" loading="lazy" decoding="async" width={256} height={256} className="object-contain w-full h-full p-2" />
                 </div>
               </motion.div>
 
@@ -136,7 +147,7 @@ export default function AboutSection() {
                 transition={{ delay: 0.4, duration: 0.6, type: "spring" }}
                 className="absolute w-24 h-24 overflow-hidden shadow-xl -top-6 -left-6 rounded-2xl"
                 style={{
-                  backgroundImage: 'url(/pattern.jpg)',
+                  backgroundImage: `url(${PATTERN_URL})`,
                   backgroundSize: '100px',
                   backgroundPosition: 'center',
                 }}
@@ -205,8 +216,7 @@ export default function AboutSection() {
             <div className="grid gap-4 mb-10">
               {features.map((feature, index) => {
                 const IconComponent = feature.icon;
-                const colorClass = `bg-${feature.color}/10`;
-                const iconColorClass = `text-${feature.color}`;
+                const colors = featureColorClasses[feature.color as keyof typeof featureColorClasses];
                 
                 return (
                   <motion.div
@@ -218,8 +228,8 @@ export default function AboutSection() {
                     whileHover={{ x: 10, backgroundColor: 'rgba(0,0,0,0.02)' }}
                     className="flex items-start gap-4 p-4 transition-colors cursor-default rounded-2xl"
                   >
-                    <div className={`w-12 h-12 rounded-xl ${colorClass} flex items-center justify-center flex-shrink-0`}>
-                      <IconComponent className={`w-6 h-6 ${iconColorClass}`} />
+                    <div className={`w-12 h-12 rounded-xl ${colors.bg} flex items-center justify-center flex-shrink-0`}>
+                      <IconComponent className={`w-6 h-6 ${colors.icon}`} />
                     </div>
                     <div>
                       <h3 className="mb-1 font-bold text-brand-dark">{feature.title}</h3>
@@ -241,7 +251,7 @@ export default function AboutSection() {
         transition={{ duration: 1, delay: 0.5 }}
         className="absolute bottom-0 left-0 right-0 h-2 origin-center"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '300px',
           backgroundRepeat: 'repeat-x',
           backgroundPosition: 'center',

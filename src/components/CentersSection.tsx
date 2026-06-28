@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { MapPin, ExternalLink, Phone, Clock, Navigation } from 'lucide-react';
 import { useRef } from 'react';
+import { PATTERN_URL } from '../lib/assets';
 
 export default function CentersSection() {
   const ref = useRef(null);
@@ -12,7 +13,7 @@ export default function CentersSection() {
       <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '600px',
           backgroundRepeat: 'repeat',
         }}
@@ -67,7 +68,7 @@ export default function CentersSection() {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="h-2 origin-left"
             style={{
-              backgroundImage: 'url(/pattern.jpg)',
+              backgroundImage: `url(${PATTERN_URL})`,
               backgroundSize: '200px',
               backgroundRepeat: 'repeat-x',
             }}
@@ -172,7 +173,7 @@ export default function CentersSection() {
         transition={{ duration: 1, delay: 0.5 }}
         className="absolute bottom-0 left-0 right-0 h-2 origin-center"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '300px',
           backgroundRepeat: 'repeat-x',
           backgroundPosition: 'center',

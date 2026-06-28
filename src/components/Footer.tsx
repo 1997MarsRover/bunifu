@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { Instagram, Twitter, Facebook, Mail, Phone, MapPin, Heart, ArrowUp } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
+import { PATTERN_URL } from '../lib/assets';
 
 const socialLinks = [
   { icon: Instagram, href: 'https://instagram.com/Bunifu_youths_Kenya', label: 'Instagram', gradient: 'from-purple-500 via-pink-500 to-orange-400' },
@@ -27,7 +28,7 @@ export default function Footer() {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 500);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -64,7 +65,7 @@ export default function Footer() {
       <div 
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '600px',
           backgroundRepeat: 'repeat',
         }}
@@ -77,7 +78,7 @@ export default function Footer() {
         transition={{ duration: 1 }}
         className="absolute top-0 left-0 right-0 h-2 origin-center"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '300px',
           backgroundRepeat: 'repeat-x',
           backgroundPosition: 'center',
@@ -97,7 +98,7 @@ export default function Footer() {
               whileHover={{ scale: 1.05 }}
               className="inline-block mb-4"
             >
-              <img src="/final.png" alt="Bunifu Logo" className="h-12" />
+              <img src="/final.webp" alt="Bunifu Logo" width={886} height={283} loading="lazy" decoding="async" className="h-12" />
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}

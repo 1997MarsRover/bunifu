@@ -1,6 +1,7 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, MessageCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { PATTERN_URL } from '../lib/assets';
 
 const faqs = [
   {
@@ -44,7 +45,7 @@ export default function FAQSection() {
       <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '600px',
           backgroundRepeat: 'repeat',
         }}
@@ -57,7 +58,7 @@ export default function FAQSection() {
         transition={{ duration: 1 }}
         className="absolute top-0 left-0 right-0 h-2 origin-center"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '300px',
           backgroundRepeat: 'repeat-x',
           backgroundPosition: 'center',

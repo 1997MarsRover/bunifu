@@ -22,8 +22,14 @@ body {
   color: rgb(26, 26, 26);
 }
 
-/* Smooth transitions */
-* {
+/* Smooth transitions — scoped to interactive elements only */
+a,
+button,
+input,
+select,
+textarea,
+.activity-card,
+[class*='group'] img {
   transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
@@ -62,13 +68,13 @@ body {
 
 /* African Pattern Background */
 .african-pattern {
-  background-image: url('/pattern.jpg');
+  background-image: url('/pattern.webp');
   background-size: cover;
   background-position: center;
 }
 
 .african-pattern-tile {
-  background-image: url('/pattern.jpg');
+  background-image: url('/pattern.webp');
   background-size: 400px;
   background-repeat: repeat;
 }
@@ -82,7 +88,7 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/pattern.jpg');
+  background-image: url('/pattern.webp');
   background-size: 500px;
   background-repeat: repeat;
   opacity: 0.08;
@@ -92,7 +98,7 @@ body {
 /* Decorative pattern strip */
 .pattern-strip {
   height: 8px;
-  background-image: url('/pattern.jpg');
+  background-image: url('/pattern.webp');
   background-size: 200px;
   background-repeat: repeat-x;
   background-position: center;

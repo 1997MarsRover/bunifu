@@ -1,33 +1,78 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { X, ZoomIn } from 'lucide-react';
+import { PATTERN_URL } from '../lib/assets';
+
+function galleryImage(filename: string) {
+  return encodeURI(`/${filename}`);
+}
 
 const images = [
   {
-    url: "/IMG-20260211-WA0001.jpg",
+    url: '/IMG-20260211-WA0001.webp',
     alt: "Students proudly showcasing their robot project outdoors",
     category: "Robotics"
   },
   {
-    url: "/IMG-20260211-WA0002.jpg",
+    url: '/IMG-20260211-WA0002.webp',
     alt: "Mentor engaging students in an interactive classroom session",
     category: "Workshop"
   },
   {
-    url: "/IMG-20260211-WA0003.jpg",
+    url: '/IMG-20260211-WA0003.webp',
     alt: "Mentor demonstrating a robot to attentive students",
     category: "Robotics"
   },
   {
-    url: "/IMG-20260211-WA0004.jpg",
+    url: '/IMG-20260211-WA0004.webp',
     alt: "Mentor explaining robotics concepts while holding a robot build",
     category: "Mentorship"
   },
   {
-    url: "/IMG-20260211-WA0005.jpg",
+    url: '/IMG-20260211-WA0005.webp',
     alt: "Mentor showcasing a robot to excited students in class",
     category: "STEM"
-  }
+  },
+  {
+    url: galleryImage('STARUP AFRICA KABARAK-114.webp'),
+    alt: 'Young innovators at the Startup Africa Event in Kabarak',
+    category: 'Startup Africa',
+  },
+  {
+    url: galleryImage('STARUP AFRICA KABARAK-164.webp'),
+    alt: 'Students engaging in hands-on STEM activities at Startup Africa Kabarak',
+    category: 'Startup Africa',
+  },
+  {
+    url: galleryImage('STARUP AFRICA KABARAK-179.webp'),
+    alt: 'Bunifu Youths participants at the Startup Africa Event',
+    category: 'Startup Africa',
+  },
+  {
+    url: galleryImage('STARUP AFRICA KABARAK-301.webp'),
+    alt: 'Learning and innovation in action at Startup Africa Kabarak',
+    category: 'Startup Africa',
+  },
+  {
+    url: galleryImage('STARUP AFRICA KABARAK-333.webp'),
+    alt: 'Youth collaboration at the Startup Africa Event in Kabarak',
+    category: 'Startup Africa',
+  },
+  {
+    url: galleryImage('STARUP AFRICA KABARAK-349.webp'),
+    alt: 'STEM showcase moments from Startup Africa Kabarak',
+    category: 'Startup Africa',
+  },
+  {
+    url: galleryImage('STARUP AFRICA KABARAK-358.webp'),
+    alt: 'Mentors and students at the Startup Africa Event',
+    category: 'Startup Africa',
+  },
+  {
+    url: galleryImage('STARUP AFRICA KABARAK-359.webp'),
+    alt: 'Celebrating innovation at Startup Africa Kabarak',
+    category: 'Startup Africa',
+  },
 ];
 
 export default function GallerySection() {
@@ -65,7 +110,7 @@ export default function GallerySection() {
       <div 
         className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '600px',
           backgroundRepeat: 'repeat',
         }}
@@ -78,7 +123,7 @@ export default function GallerySection() {
         transition={{ duration: 1 }}
         className="absolute top-0 left-0 right-0 h-2 origin-center"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '300px',
           backgroundRepeat: 'repeat-x',
           backgroundPosition: 'center',
@@ -128,7 +173,7 @@ export default function GallerySection() {
         >
           {images.map((image, index) => (
             <motion.div
-              key={index}
+              key={image.url}
               variants={imageVariants}
               whileHover={{ scale: 1.03, zIndex: 10 }}
               whileTap={{ scale: 0.98 }}
@@ -141,6 +186,8 @@ export default function GallerySection() {
                 <img
                   src={image.url}
                   alt={image.alt}
+                  loading={index === 0 ? 'eager' : 'lazy'}
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </div>
@@ -179,7 +226,7 @@ export default function GallerySection() {
                 transition={{ delay: 0.5 + index * 0.1, duration: 0.6 }}
                 className="absolute bottom-0 left-0 right-0 h-1 origin-left"
                 style={{
-                  backgroundImage: 'url(/pattern.jpg)',
+                  backgroundImage: `url(${PATTERN_URL})`,
                   backgroundSize: '100px',
                   backgroundRepeat: 'repeat-x',
                 }}
@@ -263,7 +310,7 @@ export default function GallerySection() {
         transition={{ duration: 1, delay: 0.5 }}
         className="absolute bottom-0 left-0 right-0 h-2 origin-center"
         style={{
-          backgroundImage: 'url(/pattern.jpg)',
+          backgroundImage: `url(${PATTERN_URL})`,
           backgroundSize: '300px',
           backgroundRepeat: 'repeat-x',
           backgroundPosition: 'center',

@@ -10,6 +10,7 @@ export default {
         'brand-blue': 'rgb(0, 137, 211)',
         'brand-dark': 'rgb(26, 26, 26)',
         'brand-light': 'rgb(250, 250, 250)',
+        'brand-purple': 'rgb(124, 58, 237)',
       },
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'Helvetica', 'Arial', 'sans-serif'],
