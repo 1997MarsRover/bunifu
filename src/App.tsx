@@ -5,7 +5,6 @@ import LazyMount from './components/LazyMount';
 
 const AboutSection = lazy(() => import('./components/AboutSection'));
 const ActivitiesSection = lazy(() => import('./components/ActivitiesSection'));
-const MembershipSection = lazy(() => import('./components/MembershipSection'));
 const CentersSection = lazy(() => import('./components/CentersSection'));
 const GallerySection = lazy(() => import('./components/GallerySection'));
 const FAQSection = lazy(() => import('./components/FAQSection'));
@@ -26,12 +25,6 @@ function App() {
       <LazyMount minHeight="720px">
         <Suspense fallback={null}>
           <ActivitiesSection />
-        </Suspense>
-      </LazyMount>
-
-      <LazyMount minHeight="800px">
-        <Suspense fallback={null}>
-          <MembershipSection />
         </Suspense>
       </LazyMount>
 
