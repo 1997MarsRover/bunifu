@@ -104,6 +104,17 @@ textarea,
   background-position: center;
 }
 
+/* Brand CTA gradient: blue → green → white → red */
+.btn-brand-gradient {
+  background: linear-gradient(
+    to right,
+    rgb(0, 137, 211) 0%,
+    rgb(36, 99, 44) 33%,
+    rgb(255, 255, 255) 66%,
+    rgb(188, 24, 35) 100%
+  );
+}
+
 /* Activity card icon wrapper */
 .icon-wrapper {
   background: linear-gradient(135deg, rgba(0, 137, 211, 0.1) 0%, rgba(36, 99, 44, 0.1) 100%);

@@ -7,7 +7,6 @@ import GetInvolvedFormModal from './GetInvolvedFormModal';
 const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Activities', href: '#activities' },
-  { label: 'STEAM FEST', href: '#membership' },
   { label: 'Gallery', href: '#gallery' },
 ];
 
@@ -122,7 +121,7 @@ export default function Header() {
                 transition={{ delay: 0.6, type: 'spring' }}
                 whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(41, 112, 198, 0.4)' }}
                 whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 bg-gradient-to-r from-brand-blue via-white to-brand-red text-brand-dark font-bold text-sm px-5 py-2.5 rounded-full hover:shadow-lg"
+                className="flex items-center gap-2 btn-brand-gradient text-brand-dark font-bold text-sm px-5 py-2.5 rounded-full hover:shadow-lg"
               >
                 Get Involved
                 <ArrowRight className="w-4 h-4" />
@@ -194,7 +193,7 @@ export default function Header() {
                   <motion.button
                     onClick={handleOpenForm}
                     whileTap={{ scale: 0.95 }}
-                    className="block w-full py-3 font-bold text-center text-white bg-gradient-to-r from-brand-blue to-brand-red rounded-xl"
+                    className="block w-full py-3 font-bold text-center text-brand-dark btn-brand-gradient rounded-xl"
                   >
                     Get Involved
                   </motion.button>
@@ -215,7 +214,7 @@ export default function Header() {
         }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="fixed z-40 flex items-center gap-2 px-6 py-3 font-bold text-white -translate-x-1/2 rounded-full shadow-lg bottom-6 left-1/2 md:hidden bg-gradient-to-r from-brand-blue to-brand-red"
+        className="fixed z-40 flex items-center gap-2 px-6 py-3 font-bold text-brand-dark -translate-x-1/2 rounded-full shadow-lg bottom-6 left-1/2 md:hidden btn-brand-gradient"
       >
         Get Involved
         <ArrowRight className="w-4 h-4" />

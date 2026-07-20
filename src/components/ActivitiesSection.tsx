@@ -216,7 +216,7 @@ export default function ActivitiesSection() {
                     {activity.description}
                   </p>
                   <a
-                    href="#membership"
+                    href="#faq"
                     className={`inline-flex items-center gap-2 ${colors.link} font-semibold text-sm hover:gap-3 transition-all`}
                   >
                     Learn More
@@ -238,7 +238,7 @@ export default function ActivitiesSection() {
           className="text-center mt-16"
         >
           <motion.a
-            href="#membership"
+            href="#faq"
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(26, 26, 26, 0.2)" }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-3 bg-brand-dark text-white font-bold text-lg px-8 py-4 rounded-full"
