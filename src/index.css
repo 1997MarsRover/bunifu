@@ -104,13 +104,12 @@ textarea,
   background-position: center;
 }
 
-/* Brand CTA gradient: blue → green → white → red */
+/* Brand CTA gradient: blue → green → red */
 .btn-brand-gradient {
   background: linear-gradient(
     to right,
     rgb(0, 137, 211) 0%,
-    rgb(36, 99, 44) 33%,
-    rgb(255, 255, 255) 66%,
+    rgb(36, 99, 44) 50%,
     rgb(188, 24, 35) 100%
   );
 }
