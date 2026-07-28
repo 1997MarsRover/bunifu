@@ -136,7 +136,7 @@ export default function AboutSection() {
                 className="absolute -bottom-6 -right-4 md:right-8"
               >
                 <div className="w-24 h-24 overflow-hidden border-4 border-white shadow-2xl md:w-32 md:h-32 rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500">
-                  <img src="/Kenya.webp" alt="Kenya" loading="lazy" decoding="async" width={256} height={256} className="object-contain w-full h-full p-2" />
+                  <img src="/Kenya.webp" alt="Map of Kenya highlighting Bunifu Youths location" loading="lazy" decoding="async" width={256} height={256} className="object-contain w-full h-full p-2" />
                 </div>
               </motion.div>
 

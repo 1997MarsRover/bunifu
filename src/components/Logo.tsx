@@ -7,7 +7,7 @@ export default function Logo({ variant = 'light' }: LogoProps) {
     <div className="flex flex-col items-center">
       <img
         src="/final.webp"
-        alt="Bunifu Logo"
+        alt="Bunifu Youths Kenya logo"
         width={886}
         height={283}
         className="h-10 sm:h-12 w-auto object-contain"
