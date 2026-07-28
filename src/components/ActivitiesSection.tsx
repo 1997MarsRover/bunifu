@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { Gamepad2, Code, Bot, GraduationCap, Printer, Trophy } from 'lucide-react';
+import { Gamepad2, Code, Bot, GraduationCap, Printer, Trophy, CalendarDays, Users } from 'lucide-react';
 import { useRef } from 'react';
 import { PATTERN_URL } from '../lib/assets';
 
@@ -57,6 +57,22 @@ const activities = [
     icon: Trophy,
     color: 'brand-red' as const,
     image: '/activity_competitions.webp',
+  },
+  {
+    id: 7,
+    title: 'Bootcamps',
+    description: 'Join focused STEM bootcamps where learners build practical skills in coding, robotics, and design.',
+    icon: CalendarDays,
+    color: 'brand-blue' as const,
+    image: '/activity_classroom.webp',
+  },
+  {
+    id: 8,
+    title: 'Community Outreach',
+    description: 'We visit schools and communities to introduce learners to STEM through fun, hands-on sessions.',
+    icon: Users,
+    color: 'brand-green' as const,
+    image: '/activity_outreach.jpeg',
   },
 ];
 
