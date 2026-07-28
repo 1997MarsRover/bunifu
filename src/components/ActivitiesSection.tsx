@@ -72,7 +72,7 @@ const activities = [
     description: 'We visit schools and communities to introduce learners to STEM through fun, hands-on sessions.',
     icon: Users,
     color: 'brand-green' as const,
-    image: '/activity_outreach.jpeg',
+    image: '/activity_community_outreach.jpeg',
   },
 ];
 
