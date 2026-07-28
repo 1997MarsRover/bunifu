@@ -1,8 +1,10 @@
-import { Menu, X, MapPin, ArrowRight } from 'lucide-react';
+import { Menu, X, MapPin, ArrowRight, LogIn } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Logo from './Logo';
 import GetInvolvedFormModal from './GetInvolvedFormModal';
+
+const CMS_SIGN_IN_URL = 'https://cms.bunifuyouths.org';
 
 const navLinks = [
   { label: 'About', href: '#about' },
@@ -114,6 +116,21 @@ export default function Header() {
                 <span className="font-medium">Afralti Waiyaki Way</span>
               </motion.div>
 
+              <motion.a
+                href={CMS_SIGN_IN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.55, type: 'spring' }}
+                whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(41, 112, 198, 0.4)' }}
+                whileTap={{ scale: 0.95 }}
+                className="flex items-center gap-2 btn-brand-gradient text-white font-bold text-sm px-5 py-2.5 rounded-full hover:shadow-lg"
+              >
+                Sign In
+                <LogIn className="w-4 h-4" />
+              </motion.a>
+
               <motion.button
                 onClick={handleOpenForm}
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -189,6 +206,18 @@ export default function Header() {
                     <MapPin className="w-4 h-4 text-brand-red" />
                     <span className="font-medium">Afralti Waiyaki Way</span>
                   </div>
+
+                  <motion.a
+                    href={CMS_SIGN_IN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMenuOpen(false)}
+                    whileTap={{ scale: 0.95 }}
+                    className="flex items-center justify-center gap-2 w-full py-3 font-bold text-center text-white btn-brand-gradient rounded-xl"
+                  >
+                    Sign In
+                    <LogIn className="w-4 h-4" />
+                  </motion.a>
 
                   <motion.button
                     onClick={handleOpenForm}

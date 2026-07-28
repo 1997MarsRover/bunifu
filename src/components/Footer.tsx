@@ -13,7 +13,6 @@ const quickLinks = [
   { label: 'About', href: '#about' },
   { label: 'Activities', href: '#activities' },
   { label: 'Centers', href: '#centers' },
-  { label: 'Centers', href: '#centers' },
   { label: 'Gallery', href: '#gallery' },
   { label: 'FAQ', href: '#faq' },
 ];
@@ -98,7 +97,7 @@ export default function Footer() {
               whileHover={{ scale: 1.05 }}
               className="inline-block mb-4"
             >
-              <img src="/final.webp" alt="Bunifu Logo" width={886} height={283} loading="lazy" decoding="async" className="h-12" />
+              <img src="/final.webp" alt="Bunifu Youths Kenya logo" width={886} height={283} loading="lazy" decoding="async" className="h-12" />
               <motion.p 
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -139,7 +138,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-bold text-lg mb-6">Quick Links</h4>
+            <h2 className="font-bold text-lg mb-6">Quick Links</h2>
             <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <motion.li 
@@ -167,7 +166,7 @@ export default function Footer() {
 
           {/* Contact */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-bold text-lg mb-6">Contact Us</h4>
+            <h2 className="font-bold text-lg mb-6">Contact Us</h2>
             <ul className="space-y-4">
               <motion.li
                 whileHover={{ x: 5 }}
@@ -227,7 +226,7 @@ export default function Footer() {
 
           {/* Newsletter */}
           <motion.div variants={itemVariants}>
-            <h4 className="font-bold text-lg mb-6">Stay Updated</h4>
+            <h2 className="font-bold text-lg mb-6">Stay Updated</h2>
             <p className="text-gray-400 text-sm mb-4">
               Get the latest news about our programs and events.
             </p>

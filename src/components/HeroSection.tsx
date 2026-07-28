@@ -20,6 +20,7 @@ const slides = [
       { label: "Explore Activities", formType: "activities", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_robotics.webp',
+    backgroundAlt: 'Youth building robots in a Bunifu STEM robotics workshop in Kenya',
   },
   {
     id: 2,
@@ -36,6 +37,7 @@ const slides = [
       { label: "Join Weekend Sessions", formType: "weekend", variant: "red", icon: Package },
     ],
     backgroundImage: '/gallery_robotics_workshop.webp',
+    backgroundAlt: 'Students and mentors in a hands-on robotics workshop at Bunifu Youths',
   },
   {
     id: 3,
@@ -52,6 +54,7 @@ const slides = [
       { label: "Learn More", formType: "activities", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_competition.webp',
+    backgroundAlt: 'Young competitors presenting STEM projects at a Bunifu tech competition',
   },
   {
     id: 4,
@@ -68,6 +71,7 @@ const slides = [
       { label: "School Programs", formType: "programs", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_classroom.webp',
+    backgroundAlt: 'Classroom of students learning coding and STEAM skills with Bunifu',
   },
   {
     id: 5,
@@ -84,6 +88,7 @@ const slides = [
       { label: "View Programs", formType: "programs", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_3ddesign.webp',
+    backgroundAlt: 'Learner working on 3D design as part of Bunifu Youths STEAM programs',
   },
 ];
 
@@ -154,6 +159,10 @@ export default function HeroSection() {
         id="hero"
         className="relative flex items-center min-h-screen overflow-hidden"
       >
+        <h1 className="sr-only">
+          STEM, robotics and AI education for youth in Kenya | Bunifu Youths
+        </h1>
+
         {/* Background Image with Slide Transition */}
         <AnimatePresence mode="wait" custom={slideDirection}>
           <motion.div
@@ -169,7 +178,7 @@ export default function HeroSection() {
           >
             <img
               src={currentSlideData.backgroundImage}
-              alt="Bunifu Youths Kenya STEM programs"
+              alt={currentSlideData.backgroundAlt}
               fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
               decoding="async"
               className="object-cover w-full h-full"
@@ -220,7 +229,7 @@ export default function HeroSection() {
 
                 {/* Main Heading */}
                 <div className="mb-8 overflow-hidden">
-                  <motion.h1
+                  <motion.p
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
@@ -230,7 +239,7 @@ export default function HeroSection() {
                     <span className="text-brand-blue">{currentSlideData.title.highlight1}</span>{' '}
                     {currentSlideData.title.line2}{' '}
                     <span className="text-brand-blue">{currentSlideData.title.highlight2}</span>
-                  </motion.h1>
+                  </motion.p>
                 </div>
 
                 {/* Description */}
