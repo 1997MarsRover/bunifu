@@ -49,7 +49,7 @@ export default function CentersSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
           >
-            Come explore our state-of-the-art facilities and see innovation in action
+            Visit our Nairobi learning hub, meet the team, and see how our coding, robotics, AI, and design sessions work for young learners.
           </motion.p>
         </motion.div>
 
@@ -92,6 +92,9 @@ export default function CentersSection() {
               <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
                 Bunifu Innovation Hub
               </h3>
+              <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/70">
+                Our center hosts weekend sessions, mentorship meetups, learner showcases, and practical STEAM activities for children, teens, parents, teachers, and partner schools.
+              </p>
               
               <div className="space-y-4 mb-8">
                 <motion.div 

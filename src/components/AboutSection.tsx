@@ -13,19 +13,19 @@ const features = [
   {
     icon: Lightbulb,
     title: 'Innovation Labs',
-    description: 'Hands-on learning spaces where creativity meets technology.',
+    description: 'Practical sessions where learners design, test, and improve projects using real tools.',
     color: 'brand-blue',
   },
   {
     icon: Users,
     title: 'Expert Mentorship',
-    description: 'Industry professionals guiding the next generation.',
+    description: 'Supportive mentors help learners understand concepts, build confidence, and stay curious.',
     color: 'brand-green',
   },
   {
     icon: Award,
     title: 'Recognition & Growth',
-    description: 'Celebrating achievements and nurturing talent.',
+    description: 'Showcases and competitions help students communicate their ideas and celebrate progress.',
     color: 'brand-red',
   },
 ];
@@ -195,8 +195,7 @@ export default function AboutSection() {
               animate={isInView ? "visible" : "hidden"}
               className="mb-6 text-xl leading-relaxed text-gray-700"
             >
-              At Bunifu Youths Kenya, we believe in nurturing the next generation of African 
-              creators, problem-solvers, and leaders.
+              Bunifu Youths Kenya is a hands-on STEAM learning community for children and teens who want to explore technology, creativity, and problem-solving.
             </motion.p>
 
             <motion.p 
@@ -207,9 +206,7 @@ export default function AboutSection() {
               className="mb-10 text-lg leading-relaxed text-gray-600"
             >
               Our name, <span className="font-bold text-brand-dark">"Bunifu"</span>, means 
-              "innovative" in Swahili, reflecting our mission to ignite creativity and equip 
-              youth with future-ready skills. We provide a conducive and interactive environment 
-              where kids can channel their energy, curiosity, and creativity.
+              "innovative" in Swahili. We run coding, robotics, AI, 3D design, bootcamp, outreach, and mentorship experiences that help learners move from watching technology to building with it.
             </motion.p>
 
             {/* Features Grid */}

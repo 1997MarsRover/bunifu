@@ -16,13 +16,60 @@ type PhotoDumpImage = {
 type PhotoDetails = Pick<PhotoDumpImage, 'alt' | 'caption' | 'description' | 'aspect'>;
 
 const categoryMeta = {
-  outreach: { label: 'Outreach', labelColor: 'bg-brand-green text-white' },
-  robotics: { label: 'Robotics', labelColor: 'bg-brand-blue text-white' },
-  'startup-africa': { label: 'Startup Africa', labelColor: 'bg-brand-red text-white' },
-  workshop: { label: 'Workshop', labelColor: 'bg-brand-blue text-white' },
-  team: { label: 'Team', labelColor: 'bg-brand-green text-white' },
-  stem: { label: 'STEM', labelColor: 'bg-brand-red text-white' },
-  moments: { label: 'Moments', labelColor: 'bg-brand-blue text-white' },
+  outreach: {
+    label: 'Outreach',
+    labelColor: 'bg-brand-green text-white',
+    caption: 'Outreach in action',
+    description: 'A community learning moment where students connect with technology through hands-on guidance and teamwork.',
+  },
+  robotics: {
+    label: 'Robotics',
+    labelColor: 'bg-brand-blue text-white',
+    caption: 'Robotics learning moment',
+    description: 'Learners explore engineering, movement, sensors, and problem-solving through practical robotics activities.',
+  },
+  'startup-africa': {
+    label: 'Startup Africa',
+    labelColor: 'bg-brand-red text-white',
+    caption: 'Startup Africa showcase',
+    description: 'Young innovators share ideas, projects, and creative solutions in a wider innovation space.',
+  },
+  workshop: {
+    label: 'Workshop',
+    labelColor: 'bg-brand-blue text-white',
+    caption: 'Hands-on workshop',
+    description: 'A practical session where learners build, test, ask questions, and improve their ideas together.',
+  },
+  team: {
+    label: 'Team',
+    labelColor: 'bg-brand-green text-white',
+    caption: 'Bunifu team moment',
+    description: 'The facilitators, mentors, and partners helping learners feel supported through every session.',
+  },
+  stem: {
+    label: 'STEM',
+    labelColor: 'bg-brand-red text-white',
+    caption: 'STEM learning moment',
+    description: 'A learner-centered moment where curiosity becomes practical science, technology, engineering, or design work.',
+  },
+  moments: {
+    label: 'Moments',
+    labelColor: 'bg-brand-blue text-white',
+    caption: 'Learning in motion',
+    description: 'A candid glimpse into the energy, curiosity, and confidence growing through Bunifu programs.',
+  },
+  competitions: {
+    label: 'Competitions',
+    labelColor: 'bg-brand-red text-white',
+    caption: 'Competition moment',
+    description: 'Learners prepare, present, and stretch their confidence through STEM challenges and showcases.',
+  },
+  competions: {
+    label: 'Competitions',
+    labelColor: 'bg-brand-red text-white',
+    caption: 'Competition moment',
+    description: 'Learners prepare, present, and stretch their confidence through STEM challenges and showcases.',
+  },
 } as const;
 
 const seededPhotoDetails: Record<string, PhotoDetails> = {
@@ -108,6 +155,8 @@ function getCategoryMeta(folder: string) {
     categoryMeta[folder as keyof typeof categoryMeta] ?? {
       label: humanizeSlug(folder),
       labelColor: 'bg-brand-dark text-white',
+      caption: 'Bunifu learning moment',
+      description: 'A captured moment from Bunifu Youths programs, showing learners engaging with creative technology and practical STEAM activities.',
     }
   );
 }
@@ -124,16 +173,14 @@ const images: PhotoDumpImage[] = Object.entries(photoModules)
     const key = `${folder}/${slug}`;
     const meta = getCategoryMeta(folder);
     const details = seededPhotoDetails[key];
-    const caption = details?.caption ?? humanizeSlug(slug);
+    const caption = details?.caption ?? meta.caption;
 
     return {
       url,
-      alt: details?.alt ?? `${caption} from Bunifu Youths ${meta.label}`,
+      alt: details?.alt ?? meta.description,
       category: meta.label,
       caption,
-      description:
-        details?.description ??
-        `${caption} from our ${meta.label.toLowerCase()} moments. Rename the file to update this generated caption.`,
+      description: details?.description ?? meta.description,
       aspect: details?.aspect ?? aspectCycle[index % aspectCycle.length],
       labelColor: meta.labelColor,
       sortFolder: folder,

@@ -14,7 +14,7 @@ const slides = [
       line2: "through",
       highlight2: "STEM",
     },
-    description: "We equip young minds with coding, robotics, and 3D design skills to solve real-world problems and become creators of technology, not just consumers.",
+    description: "Bunifu Youths Kenya helps children and teens learn by building. Through coding, robotics, AI, and 3D design, learners turn curiosity into practical projects they can explain, improve, and share.",
     buttons: [
       { label: "Start Your Journey", formType: "journey", variant: "primary", icon: Rocket },
       { label: "Explore Activities", formType: "activities", variant: "secondary", icon: null },
@@ -31,7 +31,7 @@ const slides = [
       line2: "with our",
       highlight2: "STEM Curriculum",
     },
-    description: "Get personalized guidance from industry professionals and hands-on learning materials to kickstart your STEM journey at home or school.",
+    description: "Learners are guided by mentors who break down technical ideas into friendly, hands-on sessions. Each program builds confidence, teamwork, and problem-solving from the first activity.",
     buttons: [
       { label: "Get a Mentor", formType: "mentor", variant: "blue", icon: Users },
       { label: "Join Weekend Sessions", formType: "weekend", variant: "red", icon: Package },
@@ -48,7 +48,7 @@ const slides = [
       line2: "through",
       highlight2: "competitions",
     },
-    description: "Bunifu Youths offers exciting tech competitions that connect young innovators to global STEAM opportunities, showcasing their skills in coding, robotics, and 3D design on bigger stages.",
+    description: "We prepare young innovators to present their work, compete with confidence, and connect with wider STEAM opportunities through coding, robotics, and design challenges.",
     buttons: [
       { label: "Join Competitions", formType: "competition", variant: "primary", icon: Trophy },
       { label: "Learn More", formType: "activities", variant: "secondary", icon: null },
@@ -65,7 +65,7 @@ const slides = [
       line2: "",
       highlight2: "STEAM skills",
     },
-    description: "Bunifu Youths is a trusted hub for parents and teachers to plug learners into hands-on coding, robotics, and 3D design programs that build real-world skills and confidence.",
+    description: "Parents, guardians, and schools can plug learners into structured STEAM programs, school outreach sessions, bootcamps, and mentorship experiences that support real-world learning.",
     buttons: [
       { label: "Enroll Your Child", formType: "enroll", variant: "blue", icon: GraduationCap },
       { label: "School Programs", formType: "programs", variant: "secondary", icon: null },
@@ -82,7 +82,7 @@ const slides = [
       line2: "&",
       highlight2: "3D Design",
     },
-    description: "Bunifu Youths is your go-to STEAM hub for young innovators to learn coding, robotics, and 3D design in a fun, practical way. We provide hands-on programs, mentorship, and real-world projects that help learners build future-ready skills.",
+    description: "From first-time learners to confident builders, Bunifu creates practical spaces where young people explore technology, ask better questions, and build projects connected to everyday life.",
     buttons: [
       { label: "Start Learning", formType: "journey", variant: "primary", icon: Rocket },
       { label: "View Programs", formType: "programs", variant: "secondary", icon: null },

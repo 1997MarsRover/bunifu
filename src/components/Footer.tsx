@@ -13,7 +13,7 @@ const quickLinks = [
   { label: 'About', href: '#about' },
   { label: 'Activities', href: '#activities' },
   { label: 'Centers', href: '#centers' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Photo Dump', href: '#gallery' },
   { label: 'FAQ', href: '#faq' },
 ];
 
@@ -108,7 +108,7 @@ export default function Footer() {
               </motion.p>
             </motion.div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Empowering the next generation of African innovators with creative confidence and future-ready skills.
+              Helping young learners in Kenya build confidence through coding, robotics, AI, 3D design, outreach, mentorship, and competitions.
             </p>
             
             {/* Social Links */}

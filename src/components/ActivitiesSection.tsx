@@ -13,7 +13,7 @@ const activities = [
   {
     id: 1,
     title: 'Animations and Games',
-    description: 'Learn to create interactive animations and build your own video games using creative coding tools.',
+    description: 'Learners use creative coding tools to make animated stories, interactive scenes, and simple games while practicing logic and design.',
     icon: Gamepad2,
     color: 'brand-blue' as const,
     image: '/activity_animations_gaming.webp',
@@ -21,7 +21,7 @@ const activities = [
   {
     id: 2,
     title: 'Web & AI Development',
-    description: 'Build websites and explore artificial intelligence concepts through hands-on projects.',
+    description: 'Students build websites, learn how digital products are structured, and explore AI through guided, age-friendly projects.',
     icon: Code,
     color: 'brand-green' as const,
     image: '/gallery_hands_on_coding.webp',
@@ -29,7 +29,7 @@ const activities = [
   {
     id: 3,
     title: 'Hands-on Robotics',
-    description: 'Design, build, and program robots while learning engineering and problem-solving skills.',
+    description: 'Learners design, build, and program robots while connecting engineering, teamwork, sensors, movement, and problem-solving.',
     icon: Bot,
     color: 'brand-red' as const,
     image: '/activity_robotics.webp',
@@ -37,7 +37,7 @@ const activities = [
   {
     id: 4,
     title: 'Educators Training',
-    description: 'Professional development programs for teachers to integrate STEM into their classrooms.',
+    description: 'Teachers learn practical ways to bring STEM, creative technology, and project-based learning into everyday classrooms.',
     icon: GraduationCap,
     color: 'brand-blue' as const,
     image: '/activity_educators_training.webp',
@@ -45,7 +45,7 @@ const activities = [
   {
     id: 5,
     title: '3D Printing & Designing',
-    description: 'Transform ideas into reality using CAD software and 3D printing technology.',
+    description: 'Students sketch, model, and prototype ideas with CAD tools, learning how digital designs become physical objects.',
     icon: Printer,
     color: 'brand-green' as const,
     image: '/activity_3d_printing.webp',
@@ -53,7 +53,7 @@ const activities = [
   {
     id: 6,
     title: 'Competitions',
-    description: 'Participate in local and international STEM competitions to showcase your skills and win prizes.',
+    description: 'Learners prepare projects, practice presenting their ideas, and take part in STEM challenges that stretch their confidence.',
     icon: Trophy,
     color: 'brand-red' as const,
     image: '/activity_competitions.webp',
@@ -61,7 +61,7 @@ const activities = [
   {
     id: 7,
     title: 'Bootcamps',
-    description: 'Join focused STEM bootcamps where learners build practical skills in coding, robotics, and design.',
+    description: 'Focused holiday and weekend bootcamps help learners dive deeper into coding, robotics, design, and project building.',
     icon: CalendarDays,
     color: 'brand-blue' as const,
     image: '/activity_classroom.webp',
@@ -69,7 +69,7 @@ const activities = [
   {
     id: 8,
     title: 'Community Outreach',
-    description: 'We visit schools and communities to introduce learners to STEM through fun, hands-on sessions.',
+    description: 'We visit schools and communities to introduce learners to technology through friendly demos, group activities, and hands-on sessions.',
     icon: Users,
     color: 'brand-green' as const,
     image: '/activity_community_outreach.jpeg',
@@ -160,7 +160,7 @@ export default function ActivitiesSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed"
           >
-            Engaging STEM programs designed to spark curiosity and build future-ready skills
+            Practical programs for learners, parents, teachers, and schools, built around projects, mentorship, outreach, and real creative confidence.
           </motion.p>
         </motion.div>
 

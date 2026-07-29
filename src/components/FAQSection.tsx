@@ -6,7 +6,7 @@ import { PATTERN_URL } from '../lib/assets';
 const faqs = [
   {
     question: "What age groups do you cater to?",
-    answer: "We work with children aged 6-17 years old, with programs tailored to different age groups and skill levels. Our younger learners (6-10) focus on foundational concepts through play, while older students (11-17) engage in more advanced projects and competitions."
+    answer: "We work with children and teens aged 6-17. Younger learners build foundations through play, visual coding, and guided activities, while older students take on deeper projects in robotics, web development, AI, 3D design, and competitions."
   },
   {
     question: "Do I need any prior experience in STEM?",
@@ -14,11 +14,11 @@ const faqs = [
   },
   {
     question: "What equipment do students need?",
-    answer: "All necessary equipment is provided at our center. Students just need to bring their enthusiasm and curiosity! For some advanced programs, we may recommend a personal laptop, but this is optional."
+    answer: "For center-based sessions, we provide the core learning tools and equipment. Students mainly need curiosity and willingness to participate. For advanced tracks, a personal laptop can help with practice, but it is not required for beginners."
   },
   {
     question: "How can parents/guardians get involved?",
-    answer: "We encourage parental involvement! Parents can volunteer as mentors, attend our showcase events, participate in parent-child workshops, or support our programs through sponsorships and partnerships."
+    answer: "Parents and guardians can enroll learners, attend showcases, support practice at home, volunteer, sponsor learners, or connect us with schools and community spaces that would benefit from outreach sessions."
   },
   {
     question: "Are there any scholarships available?",
@@ -26,7 +26,11 @@ const faqs = [
   },
   {
     question: "What makes Bunifu different from other STEM programs?",
-    answer: "Bunifu combines hands-on learning with African innovation stories and mentorship from industry professionals. We focus not just on technical skills, but also on creativity, problem-solving, and entrepreneurship to help students become well-rounded innovators."
+    answer: "Bunifu combines hands-on learning, mentorship, African innovation stories, outreach, and project-based practice. We do not only teach tools; we help learners build confidence, explain their ideas, solve problems, and see themselves as creators."
+  },
+  {
+    question: "Do you work with schools and community groups?",
+    answer: "Yes. We run school visits, outreach sessions, bootcamps, educator training, and partner programs for institutions that want to introduce learners to practical STEAM experiences."
   }
 ];
 
@@ -100,7 +104,7 @@ export default function FAQSection() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-gray-600 text-lg md:text-xl leading-relaxed"
           >
-            Everything you need to know about our programs and how to get started
+            Clear answers for parents, learners, schools, sponsors, and partners who want to understand how Bunifu works.
           </motion.p>
         </motion.div>
 
