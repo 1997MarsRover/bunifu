@@ -12,6 +12,7 @@ const socialLinks = [
 const quickLinks = [
   { label: 'About', href: '#about' },
   { label: 'Activities', href: '#activities' },
+  { label: 'Bootcamp', href: '#bootcamp' },
   { label: 'Centers', href: '#centers' },
   { label: 'Photo Dump', href: '#gallery' },
   { label: 'FAQ', href: '#faq' },

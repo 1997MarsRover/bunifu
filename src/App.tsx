@@ -2,6 +2,7 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import AboutSection from './components/AboutSection';
 import ActivitiesSection from './components/ActivitiesSection';
+import BootcampSection from './components/BootcampSection';
 import CentersSection from './components/CentersSection';
 import GallerySection from './components/GallerySection';
 import FAQSection from './components/FAQSection';
@@ -14,6 +15,7 @@ function App() {
       <HeroSection />
       <AboutSection />
       <ActivitiesSection />
+      <BootcampSection />
       <CentersSection />
       <GallerySection />
       <FAQSection />

@@ -9,7 +9,8 @@ const CMS_SIGN_IN_URL = 'https://cms.bunifuyouths.org';
 const navLinks = [
   { label: 'About', href: '#about' },
   { label: 'Activities', href: '#activities' },
-  { label: 'Gallery', href: '#gallery' },
+  { label: 'Bootcamp', href: '#bootcamp' },
+  { label: 'Photo Dump', href: '#gallery' },
 ];
 
 export default function Header() {
