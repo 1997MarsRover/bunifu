@@ -4,9 +4,9 @@ import { useRef } from 'react';
 import { PATTERN_URL } from '../lib/assets';
 
 const activityColorClasses = {
-  'brand-blue': { icon: 'text-brand-blue', link: 'text-brand-blue' },
-  'brand-green': { icon: 'text-brand-green', link: 'text-brand-green' },
-  'brand-red': { icon: 'text-brand-red', link: 'text-brand-red' },
+  'brand-blue': { icon: 'text-brand-blue' },
+  'brand-green': { icon: 'text-brand-green' },
+  'brand-red': { icon: 'text-brand-red' },
 } as const;
 
 const activities = [
@@ -17,7 +17,6 @@ const activities = [
     icon: Gamepad2,
     color: 'brand-blue' as const,
     image: '/activity_animations_gaming.webp',
-    href: '#faq',
   },
   {
     id: 2,
@@ -26,7 +25,6 @@ const activities = [
     icon: Code,
     color: 'brand-green' as const,
     image: '/gallery_hands_on_coding.webp',
-    href: '#faq',
   },
   {
     id: 3,
@@ -35,7 +33,6 @@ const activities = [
     icon: Bot,
     color: 'brand-red' as const,
     image: '/activity_robotics.webp',
-    href: '#faq',
   },
   {
     id: 4,
@@ -44,7 +41,6 @@ const activities = [
     icon: GraduationCap,
     color: 'brand-blue' as const,
     image: '/activity_educators_training.webp',
-    href: '#faq',
   },
   {
     id: 5,
@@ -53,7 +49,6 @@ const activities = [
     icon: Printer,
     color: 'brand-green' as const,
     image: '/activity_3d_printing.webp',
-    href: '#faq',
   },
   {
     id: 6,
@@ -62,7 +57,6 @@ const activities = [
     icon: Trophy,
     color: 'brand-red' as const,
     image: '/activity_competitions.webp',
-    href: '#gallery',
   },
   {
     id: 7,
@@ -71,7 +65,6 @@ const activities = [
     icon: CalendarDays,
     color: 'brand-blue' as const,
     image: '/activity_classroom.webp',
-    href: '#bootcamp',
   },
   {
     id: 8,
@@ -80,7 +73,6 @@ const activities = [
     icon: Users,
     color: 'brand-green' as const,
     image: '/activity_community_outreach.jpeg',
-    href: '#gallery',
   },
 ];
 
@@ -236,18 +228,9 @@ export default function ActivitiesSection() {
                   >
                     {activity.title}
                   </motion.h3>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <p className="text-gray-600 leading-relaxed">
                     {activity.description}
                   </p>
-                  <a
-                    href={activity.href}
-                    className={`inline-flex items-center gap-2 ${colors.link} font-semibold text-sm hover:gap-3 transition-all`}
-                  >
-                    Learn More
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </a>
                 </div>
               </motion.div>
             );
