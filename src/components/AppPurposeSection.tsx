@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ShieldCheck, LogIn, FileText } from 'lucide-react';
+import { ShieldCheck, Users, FileText } from 'lucide-react';
 
 export default function AppPurposeSection() {
   const ref = useRef(null);
@@ -29,7 +29,7 @@ export default function AppPurposeSection() {
           transition={{ duration: 0.5 }}
           className="text-brand-green font-bold text-sm tracking-wide uppercase mb-3"
         >
-          Application for Google Sign-In
+          Staff platform
         </motion.p>
 
         <motion.h2
@@ -49,8 +49,8 @@ export default function AppPurposeSection() {
           className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mb-6"
         >
           <strong>bunifu-cms</strong> is the content management system for Bunifu Youths Kenya.
-          Authorized staff use it to publish and update website content, program details, events,
-          and community information shown on this public site.
+          Our team uses it to publish and update website content, program details, events, and
+          community information shown on this public site.
         </motion.p>
 
         <motion.p
@@ -59,10 +59,9 @@ export default function AppPurposeSection() {
           transition={{ duration: 0.55, delay: 0.15 }}
           className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mb-10"
         >
-          Google Sign-In is requested only so approved administrators can authenticate securely.
-          bunifu-cms uses basic Google account details (such as name and email) to verify identity
-          and open the correct workspace. It is not a learner login portal and is not used to access
-          unrelated Google services like Gmail or Drive.
+          Access is limited to approved staff and collaborators. Sign-in uses a Google account
+          only to confirm identity (name and email) and open the correct workspace. Learners,
+          parents, and partners use the public website and do not need CMS access.
         </motion.p>
 
         <motion.div
@@ -73,19 +72,19 @@ export default function AppPurposeSection() {
         >
           {[
             {
-              icon: LogIn,
-              title: 'Staff access only',
-              text: 'Administrators and approved collaborators sign in to manage Bunifu content.',
+              icon: Users,
+              title: 'Built for the team',
+              text: 'Administrators and approved collaborators manage Bunifu content from one place.',
             },
             {
               icon: ShieldCheck,
-              title: 'Why Google data is used',
-              text: 'Google account information authenticates authorized users and protects the CMS.',
+              title: 'Secure access',
+              text: 'Account details are used to authenticate authorized users and protect the platform.',
             },
             {
               icon: FileText,
-              title: 'Transparent privacy',
-              text: 'Our Privacy Policy explains how bunifu-cms accesses, uses, and stores Google user data.',
+              title: 'Privacy',
+              text: 'Our Privacy Policy explains how bunifu-cms handles account information and related data.',
             },
           ].map((item) => {
             const Icon = item.icon;
@@ -111,7 +110,7 @@ export default function AppPurposeSection() {
             href="/bunifu-cms/"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-brand-dark text-white font-bold text-sm hover:bg-brand-green transition-colors"
           >
-            Full bunifu-cms details
+            Learn more
           </a>
           <a
             href="/privacy/"
@@ -125,7 +124,7 @@ export default function AppPurposeSection() {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-brand-blue text-white font-bold text-sm hover:bg-brand-blue/90 transition-colors"
           >
-            Open CMS
+            Sign in
           </a>
         </motion.div>
       </div>
