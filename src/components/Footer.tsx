@@ -16,6 +16,7 @@ const quickLinks = [
   { label: 'Centers', href: '#centers' },
   { label: 'Photo Dump', href: '#gallery' },
   { label: 'FAQ', href: '#faq' },
+  { label: 'bunifu-cms', href: '/bunifu-cms/' },
 ];
 
 export default function Footer() {
@@ -257,9 +258,9 @@ export default function Footer() {
             in Kenya
           </p>
           <div className="flex items-center gap-4 text-gray-500 text-sm">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/privacy/" className="hover:text-white transition-colors">Privacy Policy</a>
             <span>•</span>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/bunifu-cms/" className="hover:text-white transition-colors">bunifu-cms</a>
           </div>
         </motion.div>
       </div>

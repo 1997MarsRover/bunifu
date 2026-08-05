@@ -6,6 +6,7 @@ import BootcampSection from './components/BootcampSection';
 import CentersSection from './components/CentersSection';
 import GallerySection from './components/GallerySection';
 import FAQSection from './components/FAQSection';
+import AppPurposeSection from './components/AppPurposeSection';
 import Footer from './components/Footer';
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <CentersSection />
       <GallerySection />
       <FAQSection />
+      <AppPurposeSection />
       <Footer />
     </div>
   );
