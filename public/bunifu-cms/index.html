@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bunifu-cms | Content management for Bunifu Youths Kenya</title>
+    <meta name="application-name" content="bunifu-cms" />
+    <meta
+      name="description"
+      content="bunifu-cms is the staff content management system for Bunifu Youths Kenya. Authorized team members sign in with Google to manage website content, programs, and community updates."
+    />
+    <link rel="canonical" href="https://bunifuyouths.org/bunifu-cms/" />
+    <link rel="icon" type="image/png" href="/icon1.webp" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bunifuyouths.org/bunifu-cms/" />
+    <meta property="og:title" content="bunifu-cms" />
+    <meta property="og:site_name" content="bunifu-cms" />
+    <meta
+      property="og:description"
+      content="Staff content management system for Bunifu Youths Kenya. Google Sign-In is used only to authenticate authorized administrators."
+    />
+    <style>
+      :root {
+        --green: rgb(36, 99, 44);
+        --blue: rgb(0, 137, 211);
+        --red: rgb(188, 24, 35);
+        --dark: rgb(26, 26, 26);
+        --light: rgb(250, 250, 250);
+        --muted: #5b6470;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
+        color: var(--dark);
+        background:
+          radial-gradient(circle at top left, rgba(0, 137, 211, 0.12), transparent 35%),
+          radial-gradient(circle at top right, rgba(36, 99, 44, 0.14), transparent 30%),
+          linear-gradient(180deg, #f7faf8 0%, #ffffff 45%, #f4f7f5 100%);
+        line-height: 1.65;
+      }
+
+      a {
+        color: var(--blue);
+      }
+
+      header,
+      main,
+      footer {
+        width: min(880px, calc(100% - 2rem));
+        margin-inline: auto;
+      }
+
+      header {
+        padding: 2rem 0 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      header img {
+        height: 42px;
+        width: auto;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        font-size: 0.95rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 600;
+      }
+
+      .nav-links a:hover {
+        color: var(--blue);
+      }
+
+      main {
+        padding: 1rem 0 3rem;
+      }
+
+      .hero {
+        padding: 2.5rem 0 1.5rem;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        margin-bottom: 0.75rem;
+        color: var(--green);
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+      }
+
+      h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(2.4rem, 7vw, 4rem);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+      }
+
+      .lead {
+        font-size: 1.15rem;
+        color: var(--muted);
+        max-width: 42rem;
+        margin: 0 0 1.5rem;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.8rem 1.2rem;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--green), var(--blue));
+        color: white;
+      }
+
+      .btn-secondary {
+        background: white;
+        color: var(--dark);
+        border: 1px solid rgba(26, 26, 26, 0.12);
+      }
+
+      section {
+        background: rgba(255, 255, 255, 0.88);
+        border: 1px solid rgba(26, 26, 26, 0.06);
+        border-radius: 24px;
+        padding: 1.5rem 1.6rem;
+        margin-bottom: 1rem;
+      }
+
+      h2 {
+        margin: 0 0 0.75rem;
+        font-size: 1.35rem;
+      }
+
+      ul {
+        margin: 0.5rem 0 0;
+        padding-left: 1.2rem;
+      }
+
+      li {
+        margin-bottom: 0.45rem;
+        color: var(--muted);
+      }
+
+      p {
+        margin: 0 0 0.85rem;
+        color: var(--muted);
+      }
+
+      strong {
+        color: var(--dark);
+      }
+
+      footer {
+        padding: 1.5rem 0 2.5rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+        border-top: 1px solid rgba(26, 26, 26, 0.08);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem 1.25rem;
+        justify-content: space-between;
+      }
+
+      footer a {
+        text-decoration: none;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a href="/">
+        <img src="/final.webp" alt="Bunifu Youths Kenya logo" width="180" height="58" />
+      </a>
+      <nav class="nav-links" aria-label="App pages">
+        <a href="/">Bunifu Youths</a>
+        <a href="/privacy/">Privacy Policy</a>
+        <a href="https://cms.bunifuyouths.org">Open CMS</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <span class="eyebrow">Google OAuth application</span>
+        <h1>bunifu-cms</h1>
+        <p class="lead">
+          <strong>bunifu-cms</strong> is the official content management system for
+          <strong>Bunifu Youths Kenya</strong>. It helps authorized staff publish and update
+          website content, program information, events, and community updates that appear on
+          <a href="https://bunifuyouths.org/">bunifuyouths.org</a>.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://cms.bunifuyouths.org">Sign in to bunifu-cms</a>
+          <a class="btn btn-secondary" href="/privacy/">Read Privacy Policy</a>
+        </div>
+      </div>
+
+      <section>
+        <h2>Purpose of the application</h2>
+        <p>
+          Bunifu Youths Kenya runs STEM, robotics, AI, and creative technology programs for
+          young learners. <strong>bunifu-cms</strong> is an internal admin tool that lets our
+          team manage the public website and related content without changing code for every update.
+        </p>
+        <p>With bunifu-cms, authorized administrators can:</p>
+        <ul>
+          <li>Sign in securely to the Bunifu content management dashboard</li>
+          <li>Create, edit, and publish website and program content</li>
+          <li>Keep public information about activities, bootcamps, centers, and outreach accurate</li>
+          <li>Coordinate operational updates used by the Bunifu Youths team</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>Why bunifu-cms uses Google Sign-In</h2>
+        <p>
+          <strong>bunifu-cms</strong> uses Google Sign-In so only approved Bunifu Youths staff
+          and collaborators can access the admin dashboard. When you sign in, the app requests
+          basic Google account information needed to authenticate your identity and open your
+          authorized workspace.
+        </p>
+        <p>Google user data is requested only to:</p>
+        <ul>
+          <li>Verify that the person signing in is an authorized administrator</li>
+          <li>Display the signed-in user’s name and email inside the CMS for account context</li>
+          <li>Protect administrative access to Bunifu Youths content and operations</li>
+        </ul>
+        <p>
+          <strong>bunifu-cms</strong> does not use Google Sign-In to access Gmail, Google Drive,
+          Google Calendar, Contacts, or other unrelated Google services unless those scopes are
+          explicitly shown on the consent screen for a specific approved feature.
+        </p>
+      </section>
+
+      <section>
+        <h2>Who this app is for</h2>
+        <p>
+          <strong>bunifu-cms</strong> is for Bunifu Youths Kenya administrators, mentors, and
+          approved collaborators who manage digital content. It is not a public learner login
+          portal. Learners, parents, and partners continue to use
+          <a href="https://bunifuyouths.org/">bunifuyouths.org</a> without signing into the CMS.
+        </p>
+      </section>
+
+      <section>
+        <h2>Privacy and data use</h2>
+        <p>
+          We explain how <strong>bunifu-cms</strong> accesses, uses, stores, and protects Google
+          user data in our Privacy Policy. That policy is publicly available without login and
+          matches the privacy policy URL configured on our Google OAuth consent screen.
+        </p>
+        <p>
+          Read the full policy here:
+          <a href="https://bunifuyouths.org/privacy/">https://bunifuyouths.org/privacy/</a>
+        </p>
+      </section>
+
+      <section>
+        <h2>Contact</h2>
+        <p>
+          Questions about <strong>bunifu-cms</strong>, Google Sign-In, or data use can be sent to
+          <a href="mailto:info@bunifuyouths.co.ke">info@bunifuyouths.co.ke</a>
+          or by phone at
+          <a href="tel:+254712015793">+254 712 015 793</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year"></span> Bunifu Youths Kenya · Application: bunifu-cms</span>
+      <span>
+        <a href="/privacy/">Privacy Policy</a>
+        ·
+        <a href="/">Public website</a>
+      </span>
+    </footer>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
