@@ -1,31 +1,43 @@
 import { Menu, X, MapPin, ArrowRight, LogIn } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import GetInvolvedFormModal from './GetInvolvedFormModal';
 
 const CMS_SIGN_IN_URL = 'https://cms.bunifuyouths.org';
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Activities', href: '#activities' },
-  { label: 'Bootcamp', href: '#bootcamp' },
-  { label: 'Photo Dump', href: '#gallery' },
+  { label: 'About', to: '/#about' },
+  { label: 'How it works', to: '/how-it-works' },
+  { label: 'Shop', to: '/shop' },
+  { label: 'Activities', to: '/#activities' },
+  { label: 'Bootcamp', to: '/#bootcamp' },
+  { label: 'Photo Dump', to: '/#gallery' },
 ];
 
-export default function Header() {
+type HeaderProps = {
+  variant?: 'default' | 'solid';
+};
+
+export default function Header({ variant = 'default' }: HeaderProps) {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isFormOpen, setIsFormOpen] = useState(false);
 
+  const showSolid = variant === 'solid' || !isHome || isScrolled;
+
   useEffect(() => {
+    if (!isHome) return;
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHome]);
 
   const menuVariants = {
     closed: {
@@ -64,54 +76,47 @@ export default function Header() {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,box-shadow] duration-300 ${
-          isScrolled
+          showSolid
             ? 'bg-white/[0.98] shadow-[0_4px_30px_rgba(0,0,0,0.1)]'
             : 'bg-transparent shadow-none'
         }`}
       >
         <div className="px-4 mx-auto max-w-7xl md:px-8">
           <div className="flex items-center justify-between py-4">
-            <motion.a
-              href="#hero"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="relative z-10"
-            >
-              <Logo variant={isScrolled ? 'dark' : 'light'} />
-            </motion.a>
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="relative z-10">
+              <Link to="/#hero">
+                <Logo variant={showSolid ? 'dark' : 'light'} />
+              </Link>
+            </motion.div>
 
             <nav className="items-center hidden gap-1 md:flex">
               {navLinks.map((link, index) => (
-                <motion.a
+                <motion.div
                   key={link.label}
-                  href={link.href}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 + index * 0.1, duration: 0.5 }}
-                  whileHover={{ y: -2 }}
-                  className={`relative px-4 py-2 font-semibold text-sm transition-colors ${
-                    isScrolled
-                      ? 'text-brand-dark hover:text-brand-blue'
-                      : 'text-white hover:text-brand-blue'
-                  }`}
                 >
-                  {link.label}
-                  <motion.span
-                    className="absolute bottom-0 left-4 right-4 h-0.5 bg-gradient-to-r from-brand-blue to-brand-red rounded-full"
-                    initial={{ scaleX: 0 }}
-                    whileHover={{ scaleX: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.a>
+                  <Link
+                    to={link.to}
+                    className={`relative block px-4 py-2 font-semibold text-sm transition-colors ${
+                      showSolid
+                        ? 'text-brand-dark hover:text-brand-blue'
+                        : 'text-white hover:text-brand-blue'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
             </nav>
 
-            <div className="items-center hidden gap-4 md:flex">
+            <div className="items-center hidden gap-3 md:flex">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.5 }}
-                className={`flex items-center gap-2 text-sm ${isScrolled ? 'text-brand-dark' : 'text-white'}`}
+                className={`flex items-center gap-2 text-sm ${showSolid ? 'text-brand-dark' : 'text-white'}`}
               >
                 <MapPin className="w-4 h-4 text-brand-red" />
                 <span className="font-medium">Afralti Waiyaki Way</span>
@@ -161,7 +166,7 @@ export default function Header() {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <X className={`w-6 h-6 ${isScrolled ? 'text-brand-dark' : 'text-white'}`} />
+                    <X className={`w-6 h-6 ${showSolid ? 'text-brand-dark' : 'text-white'}`} />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -171,7 +176,7 @@ export default function Header() {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Menu className={`w-6 h-6 ${isScrolled ? 'text-brand-dark' : 'text-white'}`} />
+                    <Menu className={`w-6 h-6 ${showSolid ? 'text-brand-dark' : 'text-white'}`} />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -190,16 +195,15 @@ export default function Header() {
             >
               <div className="px-4 py-6 space-y-1">
                 {navLinks.map((link) => (
-                  <motion.a
-                    key={link.label}
-                    href={link.href}
-                    variants={menuItemVariants}
-                    onClick={() => setIsMenuOpen(false)}
-                    whileHover={{ x: 5 }}
-                    className="block px-4 py-3 font-semibold transition-colors text-brand-dark hover:text-brand-blue hover:bg-brand-blue/5 rounded-xl"
-                  >
-                    {link.label}
-                  </motion.a>
+                  <motion.div key={link.label} variants={menuItemVariants}>
+                    <Link
+                      to={link.to}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block px-4 py-3 font-semibold transition-colors text-brand-dark hover:text-brand-blue hover:bg-brand-blue/5 rounded-xl"
+                    >
+                      {link.label}
+                    </Link>
+                  </motion.div>
                 ))}
 
                 <motion.div variants={menuItemVariants} className="pt-4 space-y-4">
@@ -238,9 +242,9 @@ export default function Header() {
         onClick={handleOpenForm}
         initial={{ opacity: 0, y: 100, scale: 0.8 }}
         animate={{
-          opacity: isScrolled ? 1 : 0,
-          y: isScrolled ? 0 : 100,
-          scale: isScrolled ? 1 : 0.8,
+          opacity: isHome && isScrolled ? 1 : 0,
+          y: isHome && isScrolled ? 0 : 100,
+          scale: isHome && isScrolled ? 1 : 0.8,
         }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}

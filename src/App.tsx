@@ -1,28 +1,23 @@
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import AboutSection from './components/AboutSection';
-import ActivitiesSection from './components/ActivitiesSection';
-import BootcampSection from './components/BootcampSection';
-import CentersSection from './components/CentersSection';
-import GallerySection from './components/GallerySection';
-import FAQSection from './components/FAQSection';
-import AppPurposeSection from './components/AppPurposeSection';
-import Footer from './components/Footer';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import HowItWorksPage from './pages/HowItWorksPage';
+import ShopPage from './pages/shop/ShopPage';
+import ProductPage from './pages/shop/ProductPage';
 
 function App() {
   return (
-    <div className="scroll-smooth">
-      <Header />
-      <HeroSection />
-      <AboutSection />
-      <ActivitiesSection />
-      <BootcampSection />
-      <CentersSection />
-      <GallerySection />
-      <FAQSection />
-      <AppPurposeSection />
-      <Footer />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/shop/cart" element={<Navigate to="/shop" replace />} />
+        <Route path="/shop/checkout" element={<Navigate to="/shop" replace />} />
+        <Route path="/shop/order-received" element={<Navigate to="/shop" replace />} />
+        <Route path="/shop/:slug" element={<ProductPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
