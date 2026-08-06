@@ -2,6 +2,7 @@ import { ArrowRight, Users, Package, ChevronLeft, ChevronRight, Trophy, Graduati
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import HeroFormModal from './HeroFormModal';
+import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
 
 const slides = [
@@ -17,7 +18,7 @@ const slides = [
     description: "Bunifu Youths Kenya helps children and teens learn by building. Through coding, robotics, AI, and 3D design, learners turn curiosity into practical projects they can explain, improve, and share.",
     buttons: [
       { label: "Start Your Journey", formType: "journey", variant: "primary", icon: Rocket },
-      { label: "Explore Activities", formType: "activities", variant: "secondary", icon: null },
+      { label: "How the program works", href: "/how-it-works", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_robotics.webp',
     backgroundAlt: 'Youth building robots in a Bunifu STEM robotics workshop in Kenya',
@@ -273,19 +274,50 @@ export default function HeroSection() {
                       buttonClasses = "bg-brand-red hover:shadow-lg hover:shadow-brand-red/30";
                     }
 
-                    return (
-                      <motion.button
-                        key={button.label}
-                        onClick={() => handleOpenForm(button.formType)}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        className={`group inline-flex items-center justify-center gap-3 text-white font-bold text-lg px-8 py-4 rounded-full transition-all ${buttonClasses}`}
-                      >
+                    const className = `group inline-flex items-center justify-center gap-3 text-white font-bold text-lg px-8 py-4 rounded-full transition-all ${buttonClasses}`;
+                    const content = (
+                      <>
                         {IconComponent && <IconComponent className="w-5 h-5" />}
                         {button.label}
                         {button.variant === "primary" && (
                           <ArrowRight className="w-5 h-5" />
                         )}
+                      </>
+                    );
+
+                    if ('href' in button && button.href) {
+                      const isInternal = button.href.startsWith('/');
+                      if (isInternal) {
+                        return (
+                          <motion.div key={button.label} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                            <Link to={button.href} className={className}>
+                              {content}
+                            </Link>
+                          </motion.div>
+                        );
+                      }
+                      return (
+                        <motion.a
+                          key={button.label}
+                          href={button.href}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                          className={className}
+                        >
+                          {content}
+                        </motion.a>
+                      );
+                    }
+
+                    return (
+                      <motion.button
+                        key={button.label}
+                        onClick={() => handleOpenForm(button.formType!)}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={className}
+                      >
+                        {content}
                       </motion.button>
                     );
                   })}

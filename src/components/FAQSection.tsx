@@ -1,9 +1,16 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, MessageCircle } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
 
 const faqs = [
+  {
+    question: 'How does the Bunifu program work?',
+    answer:
+      'Our Code Clubs run as ten hands-on sessions (three hours each) for ages 4–18. Learners rotate through coding, robotics, AI and apps, and 3D design, with breaks and show-and-tell each day. See the full step-by-step guide on the site.',
+    link: { label: 'View how it works', to: '/how-it-works' },
+  },
   {
     question: "What age groups do you cater to?",
     answer: "We work with children and teens aged 6-17. Younger learners build foundations through play, visual coding, and guided activities, while older students take on deeper projects in robotics, web development, AI, 3D design, and competitions."
@@ -170,6 +177,14 @@ export default function FAQSection() {
                       >
                         {faq.answer}
                       </motion.p>
+                      {'link' in faq && faq.link && (
+                        <Link
+                          to={faq.link.to}
+                          className="inline-block mt-3 text-sm font-bold text-brand-blue hover:text-brand-green"
+                        >
+                          {faq.link.label} →
+                        </Link>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>

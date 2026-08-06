@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { Instagram, Twitter, Facebook, Mail, Phone, MapPin, Heart, ArrowUp } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
 
 const socialLinks = [
@@ -10,16 +11,22 @@ const socialLinks = [
 ];
 
 const quickLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Activities', href: '#activities' },
-  { label: 'Bootcamp', href: '#bootcamp' },
-  { label: 'Centers', href: '#centers' },
-  { label: 'Photo Dump', href: '#gallery' },
-  { label: 'FAQ', href: '#faq' },
-  { label: 'bunifu-cms', href: '/bunifu-cms/' },
+  { label: 'About', to: '/#about' },
+  { label: 'How it works', to: '/how-it-works' },
+  { label: 'Shop', to: '/shop' },
+  { label: 'Activities', to: '/#activities' },
+  { label: 'Bootcamp', to: '/#bootcamp' },
+  { label: 'Centers', to: '/#centers' },
+  { label: 'Photo Dump', to: '/#gallery' },
+  { label: 'FAQ', to: '/#faq' },
+  { label: 'bunifu-cms', to: '/bunifu-cms/', external: true },
 ];
 
-export default function Footer() {
+type FooterProps = {
+  compact?: boolean;
+};
+
+export default function Footer({ compact = false }: FooterProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -86,7 +93,8 @@ export default function Footer() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20">
+      <div className={`relative max-w-7xl mx-auto px-6 md:px-12 ${compact ? 'py-8' : 'py-16 md:py-20'}`}>
+        {!compact && (
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -149,18 +157,28 @@ export default function Footer() {
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.3 + index * 0.05 }}
                 >
-                  <motion.a
-                    href={link.href}
-                    whileHover={{ x: 5, color: '#0089d3' }}
-                    className="text-gray-400 hover:text-brand-blue transition-colors inline-flex items-center gap-2 text-sm"
-                  >
-                    <motion.span
-                      initial={{ width: 0 }}
-                      whileHover={{ width: 10 }}
-                      className="h-0.5 bg-brand-blue"
-                    />
-                    {link.label}
-                  </motion.a>
+                  {'external' in link && link.external ? (
+                    <motion.a
+                      href={link.to}
+                      whileHover={{ x: 5, color: '#0089d3' }}
+                      className="text-gray-400 hover:text-brand-blue transition-colors inline-flex items-center gap-2 text-sm"
+                    >
+                      <motion.span
+                        initial={{ width: 0 }}
+                        whileHover={{ width: 10 }}
+                        className="h-0.5 bg-brand-blue"
+                      />
+                      {link.label}
+                    </motion.a>
+                  ) : (
+                    <Link
+                      to={link.to}
+                      className="text-gray-400 hover:text-brand-blue transition-colors inline-flex items-center gap-2 text-sm"
+                    >
+                      <span className="h-0.5 w-0 bg-brand-blue group-hover:w-2.5" />
+                      {link.label}
+                    </Link>
+                  )}
                 </motion.li>
               ))}
             </ul>
@@ -244,13 +262,14 @@ export default function Footer() {
             </motion.a>
           </motion.div>
         </motion.div>
+        )}
 
         {/* Bottom Bar */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.8 }}
-          className="mt-16 pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4"
+          className={`${compact ? 'mt-0' : 'mt-16'} pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4`}
         >
           <p className="text-gray-500 text-sm flex items-center gap-2">
             © {currentYear} Bunifu Youths Kenya. Made with 

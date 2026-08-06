@@ -1,6 +1,7 @@
 import { motion, useInView, Variants } from 'framer-motion';
 import { Lightbulb, Users, Award } from 'lucide-react';
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
 
 const featureColorClasses = {
@@ -236,6 +237,20 @@ export default function AboutSection() {
                 );
               })}
             </div>
+
+            <motion.div
+              custom={4}
+              variants={textVariants}
+              initial="hidden"
+              animate={isInView ? 'visible' : 'hidden'}
+            >
+              <Link
+                to="/how-it-works"
+                className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-full bg-brand-dark text-white font-bold text-sm hover:bg-brand-green transition-colors"
+              >
+                How the program works
+              </Link>
+            </motion.div>
 
           </div>
         </div>
