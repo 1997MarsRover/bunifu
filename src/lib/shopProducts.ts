@@ -51,7 +51,7 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     name: 'A1 Robot Kit (3+ Years) — Magnetic Blocks Coding',
     shortDescription: 'Magnetic block coding robot with 8-in-1 projects for young builders.',
     description:
-      'WhalesBot A1 introduces coding through magnetic blocks and playful models—ideal for first-time robotics learners. Same kit family used in hands-on Bunifu sessions for ages 3+. Pricing aligned with the official WhalesBot store.',
+      'WhalesBot A1 introduces coding through magnetic blocks and playful models—ideal for first-time robotics learners. Same kit family used in hands-on Bunifu sessions for ages 3+.',
     priceUsd: 59.99,
     images: ['/shop/whalesbot-a1.webp'],
     filterTags: ['age-3', 'robot-kits'],
