@@ -42,17 +42,9 @@ export default function ShopPage() {
             WhalesBot kits & drones
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Official WhalesBot robotics and drone kits—the same lineup as{' '}
-            <a
-              href="https://store.whalesbot.ai/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-brand-blue hover:text-brand-green"
-            >
-              WhalesBot store
-            </a>
-            . Prices in Kenyan shillings. Tap a product to enquire via WhatsApp, phone, or email—we&apos;ll
-            confirm stock, delivery, and M-Pesa payment.
+            WhalesBot robotics and drone kits for Bunifu learners and families. Prices in Kenyan
+            shillings. Tap a product to enquire via WhatsApp, phone, or email—we&apos;ll confirm stock,
+            delivery, and M-Pesa payment.
           </p>
         </div>
       </section>
