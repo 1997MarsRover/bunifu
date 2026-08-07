@@ -9,7 +9,7 @@ import { PATTERN_URL } from '../lib/assets';
 export default function HowItWorksPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = 'How the program works | Bunifu Youths Kenya';
+    document.title = 'Program guide | Bunifu Youths Kenya';
     const meta = document.querySelector('meta[name="description"]');
     if (meta) {
       meta.setAttribute(
@@ -50,7 +50,7 @@ export default function HowItWorksPage() {
               transition={{ delay: 0.05 }}
               className="text-3xl md:text-5xl font-bold text-brand-dark tracking-tight mb-4"
             >
-              How Bunifu works, step by step
+              Program guide
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 16 }}

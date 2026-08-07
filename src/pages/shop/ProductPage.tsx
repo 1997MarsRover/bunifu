@@ -5,7 +5,6 @@ import { Mail, MessageCircle, Minus, Phone, Plus } from 'lucide-react';
 import {
   getProductBySlug,
   formatProductPrice,
-  productCheckoutKes,
   productCardSubtitle,
 } from '../../lib/shopProducts';
 import {
@@ -35,7 +34,7 @@ export default function ProductPage() {
     return {
       name: product.name,
       slug: product.slug,
-      priceKes: productCheckoutKes(product),
+      priceKes: product.priceKes,
       quantity: qty,
       pageUrl,
     };

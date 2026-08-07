@@ -69,7 +69,7 @@ export const PROGRAM_GUIDE_STEPS: ProgramGuideStep[] = [
     title: 'Lesson plans for each activity',
     summary:
       'Coding, robotics, and 3D design each follow a ten-session plan that builds week by week—from Scratch basics and first robots to obstacle courses, multi-part prints, and a final showcase project.',
-    highlights: ['Session-by-session coding', 'Robotics with Whales Bot', 'Tinkercad print projects'],
+    highlights: ['Session-by-session coding', 'Hands-on robotics', 'Tinkercad print projects'],
     image: '/6.png',
     imageWebp: '/6.webp',
     imageAlt: 'Session-by-session lesson plans for coding, robotics, and 3D design',

@@ -9,7 +9,7 @@ const faqs = [
     question: 'How does the Bunifu program work?',
     answer:
       'Our Code Clubs run as ten hands-on sessions (three hours each) for ages 4–18. Learners rotate through coding, robotics, AI and apps, and 3D design, with breaks and show-and-tell each day. See the full step-by-step guide on the site.',
-    link: { label: 'View how it works', to: '/how-it-works' },
+    link: { label: 'View program guide', to: '/how-it-works' },
   },
   {
     question: "What age groups do you cater to?",

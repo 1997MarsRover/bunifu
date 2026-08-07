@@ -248,7 +248,7 @@ export default function AboutSection() {
                 to="/how-it-works"
                 className="inline-flex items-center justify-center mt-8 px-6 py-3 rounded-full bg-brand-dark text-white font-bold text-sm hover:bg-brand-green transition-colors"
               >
-                How the program works
+                Program guide
               </Link>
             </motion.div>
 
