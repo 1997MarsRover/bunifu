@@ -18,7 +18,7 @@ const slides = [
     description: "Bunifu Youths Kenya helps children and teens learn by building. Through coding, robotics, AI, and 3D design, learners turn curiosity into practical projects they can explain, improve, and share.",
     buttons: [
       { label: "Start Your Journey", formType: "journey", variant: "primary", icon: Rocket },
-      { label: "How the program works", href: "/how-it-works", variant: "secondary", icon: null },
+      { label: "Program guide", href: "/how-it-works", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_robotics.webp',
     backgroundAlt: 'Youth building robots in a Bunifu STEM robotics workshop in Kenya',
@@ -334,7 +334,6 @@ export default function HeroSection() {
             >
               {[
                 { value: '500+', label: 'Kids Empowered', color: 'text-brand-blue' },
-                { value: '50+', label: 'STEM Programs', color: 'text-brand-green' },
                 { value: '20+', label: 'Expert Mentors', color: 'text-brand-red' },
               ].map((stat, index) => (
                 <motion.div

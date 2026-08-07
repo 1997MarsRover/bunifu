@@ -13,7 +13,7 @@ export const shopConfig = {
   whatsappNumber: '254712015793',
   deliveryNote:
     'Delivery within Nairobi may be arranged after order confirmation. Pickup at Afralti is free.',
-  /** Used to convert WhalesBot USD list prices to KES for display and enquiries */
+  /** Used to convert USD list prices to KES for display and enquiries */
   usdToKesRate: 131,
 };
 

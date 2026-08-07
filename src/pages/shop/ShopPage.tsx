@@ -39,12 +39,11 @@ export default function ShopPage() {
             Bunifu shop
           </p>
           <h1 className="text-3xl md:text-5xl font-bold text-brand-dark tracking-tight mb-4">
-            WhalesBot kits & drones
+            STEM Kits and resources
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            WhalesBot robotics and drone kits for Bunifu learners and families. Prices in Kenyan
-            shillings. Tap a product to enquire via WhatsApp, phone, or email—we&apos;ll confirm stock,
-            delivery, and M-Pesa payment.
+            Robotics kits and drones for Bunifu learners and families. Tap a product to enquire via
+            WhatsApp, phone, or email—we&apos;ll confirm stock, delivery, and M-Pesa payment.
           </p>
         </div>
       </section>

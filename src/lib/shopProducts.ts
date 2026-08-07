@@ -16,7 +16,7 @@ export type ShopProduct = {
   name: string;
   shortDescription: string;
   description: string;
-  /** WhalesBot-aligned USD price (kits from store.whalesbot.ai) */
+  /** USD list price used to compute KES */
   priceUsd?: number;
   /** KES list price (computed from USD at usdToKesRate) */
   priceKes: number;
@@ -46,110 +46,110 @@ function kit(
 
 export const SHOP_PRODUCTS: ShopProduct[] = [
   kit({
-    id: 'whalesbot-a1',
-    slug: 'whalesbot-a1-magnetic-blocks',
+    id: 'a1-magnetic-blocks',
+    slug: 'a1-magnetic-blocks',
     name: 'A1 Robot Kit (3+ Years) — Magnetic Blocks Coding',
     shortDescription: 'Magnetic block coding robot with 8-in-1 projects for young builders.',
     description:
-      'WhalesBot A1 introduces coding through magnetic blocks and playful models—ideal for first-time robotics learners. Same kit family used in hands-on Bunifu sessions for ages 3+.',
+      'The A1 kit introduces coding through magnetic blocks and playful models—ideal for first-time robotics learners. Same kit family used in hands-on Bunifu sessions for ages 3+.',
     priceUsd: 59.99,
-    images: ['/shop/whalesbot-a1.webp'],
+    images: ['/shop/a1.webp'],
     filterTags: ['age-3', 'robot-kits'],
     ageLabel: '3+ Years',
     inStock: true,
     featured: true,
   }),
   kit({
-    id: 'whalesbot-a7',
-    slug: 'whalesbot-a7-magnetic-blocks',
+    id: 'a7-magnetic-blocks',
+    slug: 'a7-magnetic-blocks',
     name: 'A7 Robot Kit (3+ Years) — Magnetic Blocks Coding',
     shortDescription: 'Advanced magnetic blocks kit with dual controllers and 36 projects.',
     description:
-      'WhalesBot A7 expands magnetic-block robotics with more builds and controller options—great for curious kids ready for bigger creations after starter sessions.',
+      'The A7 kit expands magnetic-block robotics with more builds and controller options—great for curious kids ready for bigger creations after starter sessions.',
     priceUsd: 299.99,
-    images: ['/shop/whalesbot-a7.webp'],
+    images: ['/shop/a7.webp'],
     filterTags: ['age-3', 'robot-kits'],
     ageLabel: '3+ Years',
     inStock: true,
   }),
   kit({
-    id: 'whalesbot-d1',
-    slug: 'whalesbot-d1-modular-coding',
+    id: 'd1-modular-coding',
+    slug: 'd1-modular-coding',
     name: 'D1 Robot Kit (4+ Years) — APP Modular Coding',
-    shortDescription: 'Modular robot kit with WhalesBot app coding for ages 4+.',
+    shortDescription: 'Modular robot kit with app-based coding for ages 4+.',
     description:
-      'WhalesBot D1 bridges play and programming with modular pieces and app-based coding—matches the beginner-friendly track we use for younger learners moving into structured robotics.',
+      'The D1 kit bridges play and programming with modular pieces and app-based coding—matches the beginner-friendly track we use for younger learners moving into structured robotics.',
     priceUsd: 66.99,
-    images: ['/shop/whalesbot-d1.webp'],
+    images: ['/shop/d1.webp'],
     filterTags: ['age-4', 'robot-kits'],
     ageLabel: '4+ Years',
     inStock: true,
     featured: true,
   }),
   kit({
-    id: 'whalesbot-c3-pro',
-    slug: 'whalesbot-c3-pro',
+    id: 'c3-pro',
+    slug: 'c3-pro',
     name: 'C3 Pro Robot Kit (6+ Years) — Smart Panel & Cards Coding',
     shortDescription: 'Smart panel and card-based coding for structured STEM learning.',
     description:
-      'WhalesBot C3 Pro combines tactile card coding with a smart panel—perfect for learners ages 6+ building confidence before app-based programming.',
+      'The C3 Pro kit combines tactile card coding with a smart panel—perfect for learners ages 6+ building confidence before app-based programming.',
     priceUsd: 169.99,
-    images: ['/shop/whalesbot-c3-pro.webp'],
+    images: ['/shop/c3-pro.webp'],
     filterTags: ['age-6', 'robot-kits'],
     ageLabel: '6+ Years',
     inStock: true,
     featured: true,
   }),
   kit({
-    id: 'whalesbot-pubbo',
-    slug: 'whalesbot-pubbo-ai-robot',
+    id: 'pubbo-ai-robot',
+    slug: 'pubbo-ai-robot',
     name: 'Pubbo AI Robot (6+ Years)',
     shortDescription: 'AI-focused robotics platform for creative, independent learning.',
     description:
-      'WhalesBot Pubbo brings AI and robotics together for ages 6+—designed for kids to discover, build, and code with guided independence.',
+      'Pubbo brings AI and robotics together for ages 6+—designed for kids to discover, build, and code with guided independence.',
     priceUsd: 299.0,
-    images: ['/shop/whalesbot-pubbo.webp'],
+    images: ['/shop/pubbo.webp'],
     filterTags: ['age-6', 'robot-kits'],
     ageLabel: '6+ Years',
     inStock: true,
   }),
   kit({
-    id: 'whalesbot-rocky',
-    slug: 'whalesbot-rocky-modular',
+    id: 'rocky-modular',
+    slug: 'rocky-modular',
     name: 'Rocky Robot Kit (8+ Years) — Modular / Python / Scratch',
     shortDescription: 'Modular coding robot with app, PC, Scratch, and Python pathways.',
     description:
-      'WhalesBot Rocky is a best-selling kit for ages 8+—modular builds plus Scratch and Python-ready workflows. Core kit for Bunifu competition and advanced club tracks.',
+      'Rocky is a best-selling kit for ages 8+—modular builds plus Scratch and Python-ready workflows. Core kit for Bunifu competition and advanced club tracks.',
     priceUsd: 99.99,
-    images: ['/shop/whalesbot-rocky.webp'],
+    images: ['/shop/rocky.webp'],
     filterTags: ['age-8', 'robot-kits'],
     ageLabel: '8+ Years',
     inStock: true,
     featured: true,
   }),
   kit({
-    id: 'whalesbot-e7-pro',
-    slug: 'whalesbot-e7-pro',
+    id: 'e7-pro',
+    slug: 'e7-pro',
     name: 'E7 Pro Robot Kit (8+ Years) — APP Modular / Scratch',
     shortDescription: '12-in-1 modular robot with app and Scratch coding.',
     description:
-      'WhalesBot E7 Pro supports deeper project work with modular structures and app-based coding—ideal for learners graduating from card and block systems.',
+      'The E7 Pro kit supports deeper project work with modular structures and app-based coding—ideal for learners graduating from card and block systems.',
     priceUsd: 249.99,
-    images: ['/shop/whalesbot-e7-pro.webp'],
+    images: ['/shop/e7-pro.webp'],
     filterTags: ['age-8', 'robot-kits'],
     ageLabel: '8+ Years',
     inStock: true,
     featured: true,
   }),
   kit({
-    id: 'whalesbot-eagle-1003',
-    slug: 'whalesbot-eagle-1003-drone',
-    name: 'WhalesBot Eagle 1003 — Programmable Drone',
+    id: 'eagle-1003-drone',
+    slug: 'eagle-1003-drone',
+    name: 'Eagle 1003 — Programmable Drone',
     shortDescription: 'Programmable educational drone for coding and aerial STEM projects.',
     description:
-      'WhalesBot Eagle 1003 connects coding skills to flight—learn programming concepts through programmable drone challenges. EDU drone category from WhalesBot.',
+      'Eagle 1003 connects coding skills to flight—learn programming concepts through programmable drone challenges.',
     priceUsd: 299.0,
-    images: ['/shop/whalesbot-eagle-drone.webp'],
+    images: ['/shop/eagle-drone.webp'],
     filterTags: ['drones', 'age-8'],
     ageLabel: '8+ Years',
     inStock: true,
@@ -170,9 +170,9 @@ export function formatProductPrice(product: ShopProduct): string {
 }
 
 export function productCardSubtitle(product: ShopProduct): string {
-  if (product.ageLabel) return `${product.ageLabel} · Robot kit`;
   if (product.filterTags.includes('drones')) return 'Drone · STEM';
-  return 'WhalesBot kit';
+  if (product.ageLabel) return `${product.ageLabel} · Robot kit`;
+  return 'STEM kit';
 }
 
 export function filterProducts(category: ShopCategoryFilterId): ShopProduct[] {

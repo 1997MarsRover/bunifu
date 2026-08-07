@@ -68,7 +68,7 @@ const categories = [
     ageGroups: 'Elementary, Junior, Senior',
     description: 'Design and build autonomous robots to solve real-world challenges.',
     challenge: 'Innovation (SDG 9) - Green Nairobi',
-    tools: 'Zm Robo, LEGO Spike Prime, EV3, Arduino/Micro:bit, Whalesbot module',
+    tools: 'Zm Robo, LEGO Spike Prime, EV3, Arduino/Micro:bit',
   },
   {
     id: '3d-design',
