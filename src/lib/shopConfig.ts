@@ -8,7 +8,7 @@ export const shopConfig = {
     accountName: 'Bunifu Youths Kenya',
   },
   pickupLocation: 'Afralti, Along Waiyaki Way, Nairobi',
-  supportEmail: 'info@bunifuyouths.co.ke',
+  supportEmail: 'bunifuyouthskenya@gmail.com',
   supportPhone: '+254712015793',
   whatsappNumber: '254712015793',
   deliveryNote:
