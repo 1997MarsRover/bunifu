@@ -234,10 +234,10 @@ export default function Footer({ compact = false }: FooterProps) {
                 <div>
                   <p className="text-white font-medium text-sm">Email</p>
                   <a 
-                    href="mailto:info@bunifuyouths.co.ke"
+                    href="mailto:bunifuyouthskenya@gmail.com"
                     className="text-gray-400 text-sm hover:text-brand-red transition-colors"
                   >
-                    info@bunifuyouths.co.ke
+                    bunifuyouthskenya@gmail.com
                   </a>
                 </div>
               </motion.li>

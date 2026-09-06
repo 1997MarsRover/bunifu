@@ -4,7 +4,7 @@ import { useState } from 'react';
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
   const phoneNumber = '+254 712 015 793';
-  const email = 'info@bunifuyouths.co.ke';
+  const email = 'bunifuyouthskenya@gmail.com';
 
   const copyToClipboard = async () => {
     try {
