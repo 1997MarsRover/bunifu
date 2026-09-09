@@ -5,7 +5,6 @@ import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import ProgramGuideTeaser from '../components/ProgramGuideTeaser';
 import ActivitiesSection from '../components/ActivitiesSection';
-import BootcampSection from '../components/BootcampSection';
 import CentersSection from '../components/CentersSection';
 import GallerySection from '../components/GallerySection';
 import FAQSection from '../components/FAQSection';
@@ -32,7 +31,6 @@ export default function HomePage() {
       <AboutSection />
       <ProgramGuideTeaser />
       <ActivitiesSection />
-      <BootcampSection />
       <CentersSection />
       <GallerySection />
       <FAQSection />

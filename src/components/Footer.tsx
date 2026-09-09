@@ -15,7 +15,6 @@ const quickLinks = [
   { label: 'Program guide', to: '/how-it-works' },
   { label: 'Shop', to: '/shop' },
   { label: 'Activities', to: '/#activities' },
-  { label: 'Bootcamp', to: '/#bootcamp' },
   { label: 'Centers', to: '/#centers' },
   { label: 'Photo Dump', to: '/#gallery' },
   { label: 'FAQ', to: '/#faq' },
