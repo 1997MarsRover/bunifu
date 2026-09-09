@@ -1,430 +1,149 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-import { Instagram, X, ZoomIn } from 'lucide-react';
-import { PATTERN_URL } from '../lib/assets';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight } from 'lucide-react';
+import { galleryCategories, galleryCollections, getFeaturedCollection } from '../data/galleryData';
+import GetInvolvedFormModal from './GetInvolvedFormModal';
 
-type PhotoDumpImage = {
-  url: string;
-  alt: string;
-  category: string;
-  caption: string;
-  description: string;
-  aspect: string;
-  labelColor: string;
-};
-
-type PhotoDetails = Pick<PhotoDumpImage, 'alt' | 'caption' | 'description' | 'aspect'>;
-
-const categoryMeta = {
-  outreach: {
-    label: 'Outreach',
-    labelColor: 'bg-brand-green text-white',
-    caption: 'Outreach in action',
-    description: 'A community learning moment where students connect with technology through hands-on guidance and teamwork.',
-  },
-  robotics: {
-    label: 'Robotics',
-    labelColor: 'bg-brand-blue text-white',
-    caption: 'Robotics learning moment',
-    description: 'Learners explore engineering, movement, sensors, and problem-solving through practical robotics activities.',
-  },
-  'startup-africa': {
-    label: 'Startup Africa',
-    labelColor: 'bg-brand-red text-white',
-    caption: 'Startup Africa showcase',
-    description: 'Young innovators share ideas, projects, and creative solutions in a wider innovation space.',
-  },
-  workshop: {
-    label: 'Workshop',
-    labelColor: 'bg-brand-blue text-white',
-    caption: 'Hands-on workshop',
-    description: 'A practical session where learners build, test, ask questions, and improve their ideas together.',
-  },
-  team: {
-    label: 'Team',
-    labelColor: 'bg-brand-green text-white',
-    caption: 'Bunifu team moment',
-    description: 'The facilitators, mentors, and partners helping learners feel supported through every session.',
-  },
-  stem: {
-    label: 'STEM',
-    labelColor: 'bg-brand-red text-white',
-    caption: 'STEM learning moment',
-    description: 'A learner-centered moment where curiosity becomes practical science, technology, engineering, or design work.',
-  },
-  moments: {
-    label: 'Moments',
-    labelColor: 'bg-brand-blue text-white',
-    caption: 'Learning in motion',
-    description: 'A candid glimpse into the energy, curiosity, and confidence growing through Bunifu programs.',
-  },
-  competitions: {
-    label: 'Competitions',
-    labelColor: 'bg-brand-red text-white',
-    caption: 'Competition moment',
-    description: 'Learners prepare, present, and stretch their confidence through STEM challenges and showcases.',
-  },
-  competions: {
-    label: 'Competitions',
-    labelColor: 'bg-brand-red text-white',
-    caption: 'Competition moment',
-    description: 'Learners prepare, present, and stretch their confidence through STEM challenges and showcases.',
-  },
-} as const;
-
-const seededPhotoDetails: Record<string, PhotoDetails> = {
-  'outreach/first-sparks-of-code': {
-    alt: 'Young learners gathered around a laptop during a community outreach session',
-    caption: 'First sparks of code',
-    description: 'A school outreach moment where learners crowd around a laptop to explore creative technology together.',
-    aspect: 'aspect-[4/5] sm:aspect-[5/4]',
-  },
-  'robotics/robot-day-wins': {
-    alt: 'Students proudly showcasing their robot project outdoors',
-    caption: 'Robot day wins',
-    description: 'Students showing off a robotics build after turning an idea into something they could test and explain.',
-    aspect: 'aspect-[5/4]',
-  },
-  'startup-africa/innovation-on-display': {
-    alt: 'Young innovators at the Startup Africa Event in Kabarak',
-    caption: 'Innovation on display',
-    description: 'A showcase moment from Startup Africa Kabarak, where young innovators shared what they had been building.',
-    aspect: 'aspect-[5/4]',
-  },
-  'outreach/after-session-smiles': {
-    alt: 'Students smiling together after an outreach session',
-    caption: 'After-session smiles',
-    description: 'A joyful group photo after a school visit, capturing the energy students carried out of the session.',
-    aspect: 'aspect-[4/5]',
-  },
-  'robotics/hands-on-eyes-wide': {
-    alt: 'Mentor demonstrating a robot to attentive students',
-    caption: 'Hands on, eyes wide',
-    description: 'A mentor-led robotics demo where students observe, ask questions, and connect code to movement.',
-    aspect: 'aspect-[5/4]',
-  },
-  'outreach/together-we-can': {
-    alt: 'Bunifu mentors and students posing together during school outreach',
-    caption: 'Together we can',
-    description: 'The outreach group gathered at school after a hands-on STEM session with Bunifu facilitators.',
-    aspect: 'aspect-[16/10]',
-  },
-  'workshop/build-test-repeat': {
-    alt: 'Learning and innovation in action at Startup Africa Kabarak',
-    caption: 'Build, test, repeat',
-    description: 'Workshop energy in action as learners move between ideas, teamwork, and practical problem solving.',
-    aspect: 'aspect-[5/4]',
-  },
-  'team/the-crew-behind-it': {
-    alt: 'Bunifu facilitators standing together after an outreach activity',
-    caption: 'The crew behind it',
-    description: 'The facilitators and partners who helped make the outreach sessions feel warm, practical, and memorable.',
-    aspect: 'aspect-[16/10]',
-  },
-  'stem/tiny-builds-big-ideas': {
-    alt: 'Mentor showcasing a robot to excited students in class',
-    caption: 'Tiny builds, big ideas',
-    description: 'A classroom STEM moment where a simple build becomes a doorway into engineering thinking.',
-    aspect: 'aspect-[5/4]',
-  },
-  'moments/proof-that-learning-moves': {
-    alt: 'Celebrating innovation at Startup Africa Kabarak',
-    caption: 'Proof that learning moves',
-    description: 'A candid event moment showing the pace, curiosity, and shared excitement around youth innovation.',
-    aspect: 'aspect-[5/4]',
-  },
-};
-
-const aspectCycle = ['aspect-[5/4]', 'aspect-[4/5]', 'aspect-[16/10]'];
-
-const photoModules = import.meta.glob('../assets/photo-dump/*/*.{avif,jpg,jpeg,png,webp}', {
-  eager: true,
-  query: '?url',
-  import: 'default',
-}) as Record<string, string>;
-
-function humanizeSlug(value: string) {
-  return decodeURIComponent(value)
-    .replace(/\.[^.]+$/, '')
-    .replace(/[_-]+/g, ' ')
-    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+interface GallerySectionProps {
+  standalone?: boolean;
 }
 
-function getCategoryMeta(folder: string) {
-  return (
-    categoryMeta[folder as keyof typeof categoryMeta] ?? {
-      label: humanizeSlug(folder),
-      labelColor: 'bg-brand-dark text-white',
-      caption: 'Bunifu learning moment',
-      description: 'A captured moment from Bunifu Youths programs, showing learners engaging with creative technology and practical STEAM activities.',
-    }
-  );
-}
+const filterList = ['All', ...galleryCategories.map((category) => category.name)];
 
-const categoryOrder = Object.keys(categoryMeta);
-
-const images: PhotoDumpImage[] = Object.entries(photoModules)
-  .map(([path, url], index) => {
-    const match = path.match(/photo-dump\/([^/]+)\/([^/]+)$/);
-    if (!match) return null;
-
-    const [, folder, filename] = match;
-    const slug = filename.replace(/\.[^.]+$/, '');
-    const key = `${folder}/${slug}`;
-    const meta = getCategoryMeta(folder);
-    const details = seededPhotoDetails[key];
-    const caption = details?.caption ?? meta.caption;
-
-    return {
-      url,
-      alt: details?.alt ?? meta.description,
-      category: meta.label,
-      caption,
-      description: details?.description ?? meta.description,
-      aspect: details?.aspect ?? aspectCycle[index % aspectCycle.length],
-      labelColor: meta.labelColor,
-      sortFolder: folder,
-      sortName: filename,
-    };
-  })
-  .filter((image): image is PhotoDumpImage & { sortFolder: string; sortName: string } => image !== null)
-  .sort((a, b) => {
-    const folderA = categoryOrder.indexOf(a.sortFolder);
-    const folderB = categoryOrder.indexOf(b.sortFolder);
-    const orderA = folderA === -1 ? categoryOrder.length : folderA;
-    const orderB = folderB === -1 ? categoryOrder.length : folderB;
-
-    if (orderA !== orderB) return orderA - orderB;
-    return a.sortName.localeCompare(b.sortName);
-  })
-  .map(({ sortFolder: _sortFolder, sortName: _sortName, ...image }) => image);
-
-const categories = ['All', ...Array.from(new Set(images.map((image) => image.category)))];
-
-export default function GallerySection() {
+export default function GallerySection({ standalone = false }: GallerySectionProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const [selectedImage, setSelectedImage] = useState<PhotoDumpImage | null>(null);
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [activeCategory, setActiveCategory] = useState('All');
-  const filteredImages =
-    activeCategory === 'All' ? images : images.filter((image) => image.category === activeCategory);
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const featured = getFeaturedCollection();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.92, y: 36 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        duration: 0.65,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-  };
+  const filteredCollections = galleryCollections.filter((collection) => {
+    if (activeCategory === 'All') return collection.id !== featured.id;
+    const category = galleryCategories.find((item) => item.name === activeCategory);
+    return collection.categoryId === category?.id;
+  });
 
   return (
-    <section id="gallery" ref={ref} className="relative overflow-hidden bg-white py-20 md:py-24">
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={isInView ? { scaleX: 1 } : {}}
-        transition={{ duration: 1 }}
-        className="absolute left-0 right-0 top-0 h-2 origin-center opacity-90"
-        style={{
-          backgroundImage: `url(${PATTERN_URL})`,
-          backgroundSize: '220px',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'center',
-        }}
-      />
+    <section id="gallery" ref={ref} className={`relative overflow-hidden bg-[#f7f5ef] ${standalone ? 'py-14 md:py-20' : 'py-20 md:py-28'}`}>
+      <div className="absolute left-0 top-0 h-1.5 w-full bg-[linear-gradient(90deg,#24632c_0_58%,#f3b61f_58%_82%,#bc1823_82%)]" />
 
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
-        <div className="mb-8 max-w-3xl">
-          <span className="mb-4 inline-block rounded-full bg-brand-blue/10 px-4 py-2 text-sm font-bold text-brand-blue ring-1 ring-brand-blue/15">
-            Our Moments
-          </span>
-          <h2 className="hero-heading mb-5 text-brand-dark">
-            Photo Dump
-          </h2>
-          <p className="max-w-2xl text-lg font-medium leading-relaxed text-gray-700 md:text-xl">
-            Field notes from workshops, outreach visits, robotics sessions, and the small moments that make learning feel alive.
-          </p>
+      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 md:px-12">
+        <div className="grid gap-8 border-b border-brand-dark/20 pb-10 md:grid-cols-12 md:items-end md:pb-14">
+          <motion.div initial={{ opacity: 0, y: 18 }} animate={isInView ? { opacity: 1, y: 0 } : {}} className="md:col-span-8">
+            <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-brand-green">Stories from the field</p>
+            <h2 className="max-w-4xl text-[clamp(2.6rem,6vw,5.8rem)] font-bold leading-[0.98] tracking-[-0.055em] text-brand-dark">
+              See what young people can build.
+            </h2>
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 }}
+            className="max-w-md text-base leading-7 text-brand-dark/65 md:col-span-4 md:pb-1"
+          >
+            A living record of curiosity, collaboration and practical learning across our classrooms and communities.
+          </motion.p>
         </div>
 
-        <p className="mb-3 text-sm font-bold uppercase tracking-wide text-brand-dark">
-          Explore by moment
-        </p>
+        {activeCategory === 'All' && featured && (
+          <motion.article
+            initial={{ opacity: 0, y: 24 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.65, delay: 0.15 }}
+            className="grid border-b border-brand-dark/20 py-8 md:grid-cols-12 md:gap-10 md:py-14"
+          >
+            <Link
+              to={`/gallery/${featured.slug}`}
+              className="group relative min-h-[340px] overflow-hidden bg-neutral-200 sm:min-h-[480px] md:col-span-8 md:min-h-[590px]"
+              aria-label={`Open ${featured.title} photo story`}
+            >
+              <img src={featured.coverImage} alt={featured.title} loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]" />
+              <span className="absolute right-0 top-0 grid h-14 w-14 place-items-center bg-[#f3b61f] text-brand-dark transition-all duration-300 group-hover:h-16 group-hover:w-16">
+                <ArrowUpRight className="h-6 w-6" />
+              </span>
+            </Link>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="mb-6 flex gap-2 overflow-x-auto pb-2"
-        >
-          {categories.map((category) => {
-            const isActive = activeCategory === category;
+            <div className="flex flex-col justify-between pt-7 md:col-span-4 md:py-2">
+              <div>
+                <p className="mb-7 text-xs font-bold uppercase tracking-[0.18em] text-brand-green">Featured photo story</p>
+                <h3 className="mb-5 text-3xl font-bold leading-[1.08] tracking-[-0.035em] text-brand-dark lg:text-5xl">{featured.title}</h3>
+                <p className="max-w-sm text-sm leading-6 text-brand-dark/65 sm:text-base sm:leading-7">{featured.shortDescription}</p>
+              </div>
+              <div className="mt-10 border-t border-brand-dark/20 pt-5">
+                <p className="mb-5 text-sm text-brand-dark/60">{featured.location} <span className="mx-1.5">/</span> {featured.eventDate}</p>
+                <Link to={`/gallery/${featured.slug}`} className="inline-flex items-center gap-3 text-sm font-bold text-brand-dark hover:text-brand-green">
+                  View the photo story <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </motion.article>
+        )}
+
+        <div className="flex items-center gap-7 overflow-x-auto border-b border-brand-dark/20 py-7 scrollbar-none" aria-label="Filter gallery collections">
+          {filterList.map((filter) => {
+            const isActive = activeCategory === filter;
             return (
-              <motion.button
-                key={category}
-                type="button"
-                variants={imageVariants}
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.96 }}
-                onClick={() => setActiveCategory(category)}
-                className={`flex-shrink-0 rounded-full border px-4 py-2 text-sm font-bold transition-colors ${
-                  isActive
-                    ? 'border-brand-dark bg-brand-dark text-white'
-                    : 'border-gray-200 bg-white text-brand-dark hover:border-brand-green hover:text-brand-green'
-                }`}
-              >
-                {category}
-              </motion.button>
+              <button key={filter} type="button" onClick={() => setActiveCategory(filter)} className={`relative flex-shrink-0 pb-1 text-sm font-semibold transition-colors ${isActive ? 'text-brand-dark' : 'text-brand-dark/45 hover:text-brand-dark'}`}>
+                {filter}
+                {isActive && <span className="absolute inset-x-0 -bottom-[1px] h-0.5 bg-brand-green" />}
+              </button>
             );
           })}
-        </motion.div>
+        </div>
 
-        <motion.div
-          key={activeCategory}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 md:gap-4"
-        >
-          {filteredImages.map((image, index) => (
-            <motion.button
-              key={image.url}
-              type="button"
-              variants={imageVariants}
-              whileHover={{ y: -5, scale: 1.015, zIndex: 20 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setSelectedImage(image)}
-              className={`group relative overflow-hidden rounded-2xl bg-white p-1.5 text-left shadow-card outline-none ring-offset-4 transition-shadow hover:shadow-card-hover focus-visible:ring-2 focus-visible:ring-brand-blue ${image.aspect}`}
-              aria-label={`Open photo: ${image.caption}`}
-            >
-              <img
-                src={image.url}
-                alt={image.alt}
-                loading={index < 3 ? 'eager' : 'lazy'}
-                decoding="async"
-                className="h-full w-full rounded-[14px] object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+        <div className="grid gap-x-6 gap-y-12 py-10 sm:grid-cols-2 lg:grid-cols-3 md:py-14">
+          {filteredCollections.map((collection, index) => {
+            const category = galleryCategories.find((item) => item.id === collection.categoryId);
+            return (
+              <motion.article layout key={collection.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: Math.min(index * 0.055, 0.25) }} className="group">
+                <Link to={`/gallery/${collection.slug}`} className="block" aria-label={`Open ${collection.title}`}>
+                  <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200">
+                    <img src={collection.coverImage} alt={collection.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
+                    <span className="absolute bottom-0 right-0 grid h-11 w-11 translate-y-full place-items-center bg-white text-brand-dark transition-transform duration-300 group-hover:translate-y-0">
+                      <ArrowUpRight className="h-5 w-5" />
+                    </span>
+                  </div>
+                  <div className="mt-4 flex items-start justify-between gap-5 border-t border-brand-dark/15 pt-4">
+                    <div>
+                      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-brand-green">{category?.name ?? 'Photo story'}</p>
+                      <h3 className="text-lg font-bold leading-snug tracking-[-0.02em] text-brand-dark group-hover:text-brand-green sm:text-xl">{collection.title}</h3>
+                    </div>
+                    <span className="flex-shrink-0 pt-5 text-xs tabular-nums text-brand-dark/45">{collection.images.length} photos</span>
+                  </div>
+                </Link>
+              </motion.article>
+            );
+          })}
+        </div>
 
-              <div className="absolute inset-1.5 rounded-[14px] bg-gradient-to-t from-brand-dark/70 via-brand-dark/5 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100" />
+        {!standalone && (
+          <div className="flex justify-center border-t border-brand-dark/20 pt-8">
+            <Link to="/gallery" className="inline-flex items-center gap-3 border-b-2 border-brand-dark pb-1 text-sm font-bold text-brand-dark hover:border-brand-green hover:text-brand-green">
+              Explore the full gallery <ArrowUpRight className="h-4 w-4" />
+            </Link>
+          </div>
+        )}
 
-              <div className="absolute left-3 top-3">
-                <span className={`inline-flex rounded-full px-2.5 py-1 text-[10px] font-bold leading-none shadow-lg md:text-xs ${image.labelColor}`}>
-                  {image.category}
-                </span>
-              </div>
-
-              <div className="absolute bottom-3 left-3 right-3 flex items-end justify-between gap-2">
-                <p className="max-w-[9rem] text-sm font-bold leading-tight text-white drop-shadow md:text-base">
-                  {image.caption}
-                </p>
-                <span className="hidden h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-white/20 text-white backdrop-blur-sm transition-transform group-hover:scale-110 sm:flex">
-                  <ZoomIn className="h-4 w-4" />
-                </span>
-              </div>
-
-              <div className="absolute inset-x-1.5 bottom-1.5 rounded-b-[14px] bg-brand-dark/90 p-3 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100 group-focus:opacity-100">
-                <p className="mb-1 text-sm font-bold leading-tight text-white">{image.caption}</p>
-                <p className="line-clamp-3 text-xs leading-relaxed text-white/85">{image.description}</p>
-              </div>
-            </motion.button>
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.8 }}
-          className="mt-10"
-        >
-          <motion.a
-            href="https://instagram.com/Bunifu_youths_Kenya"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            className="inline-flex items-center gap-3 rounded-full border border-gray-100 bg-white px-8 py-4 text-lg font-bold text-brand-dark shadow-card transition-shadow hover:shadow-card-hover"
-          >
-            More Moments
-            <Instagram className="h-5 w-5 text-brand-red" />
-          </motion.a>
-        </motion.div>
+        {standalone && (
+          <div className="mt-8 grid bg-brand-dark text-white md:grid-cols-12">
+            <div className="p-8 sm:p-12 md:col-span-8 md:p-16">
+              <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#f3b61f]">Create the next story</p>
+              <h3 className="max-w-2xl text-3xl font-bold leading-tight tracking-[-0.035em] sm:text-5xl">Bring practical STEAM learning to more young people.</h3>
+            </div>
+            <div className="flex flex-col justify-end gap-4 border-t border-white/20 p-8 sm:p-12 md:col-span-4 md:border-l md:border-t-0">
+              <Link to="/how-it-works" className="inline-flex items-center justify-between border-b border-white/50 pb-3 text-sm font-bold hover:border-[#f3b61f] hover:text-[#f3b61f]">
+                Explore our programs <ArrowUpRight className="h-4 w-4" />
+              </Link>
+              <button type="button" onClick={() => setIsPartnerModalOpen(true)} className="inline-flex items-center justify-between border-b border-white/50 pb-3 text-left text-sm font-bold hover:border-[#f3b61f] hover:text-[#f3b61f]">
+                Partner with Bunifu <ArrowUpRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
-      {selectedImage && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          onClick={() => setSelectedImage(null)}
-          className="fixed inset-0 z-50 flex cursor-pointer items-center justify-center bg-black/90 p-4 md:p-8"
-        >
-          <motion.button
-            type="button"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            whileHover={{ scale: 1.1, rotate: 90 }}
-            onClick={() => setSelectedImage(null)}
-            className="absolute right-6 top-6 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-sm"
-            aria-label="Close photo"
-          >
-            <X className="h-6 w-6" />
-          </motion.button>
-
-          <motion.div
-            initial={{ scale: 0.86, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0.86, opacity: 0 }}
-            transition={{ type: 'spring', damping: 25 }}
-            onClick={(e) => e.stopPropagation()}
-            className="relative max-h-[86vh] w-full max-w-5xl cursor-default"
-          >
-            <img
-              src={selectedImage.url}
-              alt={selectedImage.alt}
-              className="max-h-[86vh] w-full rounded-2xl object-contain shadow-2xl"
-            />
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-              className="absolute bottom-0 left-0 right-0 rounded-b-2xl bg-gradient-to-t from-black/85 to-transparent p-6"
-            >
-              <span className={`mb-2 inline-block rounded-full px-3 py-1 text-xs font-bold ${selectedImage.labelColor}`}>
-                {selectedImage.category}
-              </span>
-              <p className="text-xl font-bold text-white">{selectedImage.caption}</p>
-              <p className="mt-2 max-w-2xl text-sm leading-relaxed text-white/85">{selectedImage.description}</p>
-            </motion.div>
-          </motion.div>
-        </motion.div>
-      )}
-
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={isInView ? { scaleX: 1 } : {}}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="absolute bottom-0 left-0 right-0 h-2 origin-center"
-        style={{
-          backgroundImage: `url(${PATTERN_URL})`,
-          backgroundSize: '300px',
-          backgroundRepeat: 'repeat-x',
-          backgroundPosition: 'center',
-        }}
-      />
+      <GetInvolvedFormModal isOpen={isPartnerModalOpen} onClose={() => setIsPartnerModalOpen(false)} />
     </section>
   );
 }
