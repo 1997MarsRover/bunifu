@@ -12,7 +12,7 @@ const navLinks = [
   { label: 'Program guide', to: '/how-it-works' },
   { label: 'Shop', to: '/shop' },
   { label: 'Activities', to: '/#activities' },
-  { label: 'Photo Dump', to: '/#gallery' },
+  { label: 'Gallery', to: '/#gallery' },
 ];
 
 type HeaderProps = {

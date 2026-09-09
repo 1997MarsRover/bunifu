@@ -12,11 +12,12 @@ const socialLinks = [
 
 const quickLinks = [
   { label: 'About', to: '/#about' },
+  { label: 'Our People', to: '/#our-people' },
   { label: 'Program guide', to: '/how-it-works' },
   { label: 'Shop', to: '/shop' },
   { label: 'Activities', to: '/#activities' },
   { label: 'Centers', to: '/#centers' },
-  { label: 'Photo Dump', to: '/#gallery' },
+  { label: 'Gallery', to: '/#gallery' },
   { label: 'FAQ', to: '/#faq' },
   { label: 'bunifu-cms', to: '/bunifu-cms/', external: true },
 ];
@@ -61,7 +62,7 @@ export default function Footer({ compact = false }: FooterProps) {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
       },
     },
   };

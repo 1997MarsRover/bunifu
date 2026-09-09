@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
+import BoardMemberSection from '../components/BoardMemberSection';
 import ProgramGuideTeaser from '../components/ProgramGuideTeaser';
 import ActivitiesSection from '../components/ActivitiesSection';
 import CentersSection from '../components/CentersSection';
@@ -33,6 +34,7 @@ export default function HomePage() {
       <ActivitiesSection />
       <CentersSection />
       <GallerySection />
+      <BoardMemberSection />
       <FAQSection />
       <AppPurposeSection />
       <Footer />
