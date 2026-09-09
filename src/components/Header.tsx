@@ -12,7 +12,6 @@ const navLinks = [
   { label: 'Program guide', to: '/how-it-works' },
   { label: 'Shop', to: '/shop' },
   { label: 'Activities', to: '/#activities' },
-  { label: 'Bootcamp', to: '/#bootcamp' },
   { label: 'Photo Dump', to: '/#gallery' },
 ];
 
