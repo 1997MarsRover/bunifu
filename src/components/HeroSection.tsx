@@ -1,4 +1,4 @@
-import { ArrowRight, Users, Package, ChevronLeft, ChevronRight, Trophy, GraduationCap, Rocket } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Trophy, GraduationCap, Rocket } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { useRef, useState, useEffect, useCallback } from 'react';
 import HeroFormModal from './HeroFormModal';
@@ -24,23 +24,6 @@ const slides = [
     backgroundAlt: 'Youth building robots in a Bunifu STEM robotics workshop in Kenya',
   },
   {
-    id: 2,
-    badge: "Build Your Future with Bunifu",
-    title: {
-      line1: "Learn from",
-      highlight1: "expert mentors",
-      line2: "with our",
-      highlight2: "STEM Curriculum",
-    },
-    description: "Learners are guided by mentors who break down technical ideas into friendly, hands-on sessions. Each program builds confidence, teamwork, and problem-solving from the first activity.",
-    buttons: [
-      { label: "Get a Mentor", formType: "mentor", variant: "blue", icon: Users },
-      { label: "Join Weekend Sessions", formType: "weekend", variant: "red", icon: Package },
-    ],
-    backgroundImage: '/gallery_robotics_workshop.webp',
-    backgroundAlt: 'Students and mentors in a hands-on robotics workshop at Bunifu Youths',
-  },
-  {
     id: 3,
     badge: "Gateway to Global STEAM Pathways",
     title: {
@@ -59,17 +42,17 @@ const slides = [
   },
   {
     id: 4,
-    badge: "For Parents & Teachers",
+    badge: "For Schools & Parents",
     title: {
       line1: "Empower learners with",
       highlight1: "future-ready",
       line2: "",
       highlight2: "STEAM skills",
     },
-    description: "Parents, guardians, and schools can plug learners into structured STEAM programs, school outreach sessions, bootcamps, and mentorship experiences that support real-world learning.",
+    description: "We help schools improve learner outcomes, digital readiness, and future employability through a scalable coding-club model.",
     buttons: [
-      { label: "Enroll Your Child", formType: "enroll", variant: "blue", icon: GraduationCap },
-      { label: "School Programs", formType: "programs", variant: "secondary", icon: null },
+      { label: "School Programs", formType: "programs", variant: "blue", icon: GraduationCap },
+      { label: "Enroll Your Child", formType: "enroll", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_classroom.webp',
     backgroundAlt: 'Classroom of students learning coding and STEAM skills with Bunifu',
