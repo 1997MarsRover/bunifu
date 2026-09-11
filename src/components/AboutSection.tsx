@@ -1,5 +1,5 @@
 import { motion, useInView, Variants } from 'framer-motion';
-import { Lightbulb, Users, Award } from 'lucide-react';
+import { Lightbulb, Users, Cpu, GraduationCap } from 'lucide-react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
@@ -24,9 +24,9 @@ const features = [
     color: 'brand-green',
   },
   {
-    icon: Award,
-    title: 'Recognition & Growth',
-    description: 'Showcases and competitions help students communicate their ideas and celebrate progress.',
+    icon: Cpu,
+    title: 'Hands-On Learning',
+    description: 'Learners build, program, and experiment directly with robotics, hardware kits, and code—turning ideas into working real-world projects.',
     color: 'brand-red',
   },
 ];
@@ -91,42 +91,19 @@ export default function AboutSection() {
             <div className="relative">
               {/* Main Image */}
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
-                <img
-                  src="/gallery_robot_building.webp"
-                  alt="Young innovator at Bunifu"
-                  loading="lazy"
-                  decoding="async"
-                  width={626}
-                  height={783}
-                  className="object-cover w-full h-full"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/50 via-transparent to-transparent" />
-                
-                {/* Pattern Frame - Top */}
-                <motion.div 
-                  initial={{ scaleX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : {}}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  className="absolute top-0 left-0 right-0 h-2 origin-left"
-                  style={{
-                    backgroundImage: `url(${PATTERN_URL})`,
-                    backgroundSize: '150px',
-                    backgroundRepeat: 'repeat-x',
-                  }}
-                />
-                
-                {/* Pattern Frame - Bottom */}
-                <motion.div 
-                  initial={{ scaleX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : {}}
-                  transition={{ delay: 0.6, duration: 0.8 }}
-                  className="absolute bottom-0 left-0 right-0 h-2 origin-right"
-                  style={{
-                    backgroundImage: `url(${PATTERN_URL})`,
-                    backgroundSize: '150px',
-                    backgroundRepeat: 'repeat-x',
-                  }}
-                />
+                <picture>
+                  <source srcSet="/child.webp" type="image/webp" />
+                  <img
+                    src="/child.jpeg"
+                    alt="Young innovator learning to code at Bunifu Youths Kenya"
+                    loading="eager"
+                    decoding="async"
+                    width={1024}
+                    height={1280}
+                    className="object-cover w-full h-full"
+                  />
+                </picture>
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/40 via-transparent to-transparent" />
               </div>
 
               {/* Floating Kenya Logo */}
@@ -140,19 +117,6 @@ export default function AboutSection() {
                   <img src="/Kenya.webp" alt="Map of Kenya highlighting Bunifu Youths location" loading="lazy" decoding="async" width={256} height={256} className="object-contain w-full h-full p-2" />
                 </div>
               </motion.div>
-
-              {/* Decorative Pattern Element */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0, rotate: -45 }}
-                animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
-                transition={{ delay: 0.4, duration: 0.6, type: "spring" }}
-                className="absolute w-24 h-24 overflow-hidden shadow-xl -top-6 -left-6 rounded-2xl"
-                style={{
-                  backgroundImage: `url(${PATTERN_URL})`,
-                  backgroundSize: '100px',
-                  backgroundPosition: 'center',
-                }}
-              />
 
               {/* Floating Stats */}
               <motion.div
@@ -209,6 +173,27 @@ export default function AboutSection() {
               Our name, <span className="font-bold text-brand-dark">"Bunifu"</span>, means 
               "innovative" in Swahili. We run coding, robotics, AI, 3D design, bootcamp, outreach, and mentorship experiences that help learners move from watching technology to building with it.
             </motion.p>
+
+            {/* School Outcomes Value Proposition */}
+            <motion.div
+              custom={4}
+              variants={textVariants}
+              initial="hidden"
+              animate={isInView ? "visible" : "hidden"}
+              className="mb-10 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-brand-green/10 via-brand-blue/5 to-white border-l-4 border-brand-green shadow-sm flex items-start gap-4"
+            >
+              <div className="w-12 h-12 rounded-xl bg-brand-green/15 text-brand-green flex items-center justify-center flex-shrink-0 mt-0.5">
+                <GraduationCap className="w-6 h-6 text-brand-green" />
+              </div>
+              <div>
+                <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-green mb-1">
+                  School Partnership Model
+                </span>
+                <p className="text-base sm:text-lg font-bold text-brand-dark leading-snug">
+                  We help schools improve learner outcomes, digital readiness, and future employability through a scalable coding-club model.
+                </p>
+              </div>
+            </motion.div>
 
             {/* Features Grid */}
             <div className="grid gap-4 mb-10">
