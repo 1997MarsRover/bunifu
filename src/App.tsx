@@ -6,6 +6,7 @@ import ProductPage from './pages/shop/ProductPage';
 
 import GalleryPage from './pages/GalleryPage';
 import CollectionDetailPage from './pages/CollectionDetailPage';
+import CareersPage from './pages/CareersPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="/careers" element={<CareersPage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/shop/cart" element={<Navigate to="/shop" replace />} />
         <Route path="/shop/checkout" element={<Navigate to="/shop" replace />} />

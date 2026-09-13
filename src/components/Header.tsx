@@ -13,6 +13,7 @@ const navLinks = [
   { label: 'Shop', to: '/shop' },
   { label: 'Activities', to: '/#activities' },
   { label: 'Gallery', to: '/#gallery' },
+  { label: 'Careers', to: '/careers' },
 ];
 
 type HeaderProps = {
