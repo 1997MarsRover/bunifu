@@ -14,6 +14,7 @@ const quickLinks = [
   { label: 'About', to: '/#about' },
   { label: 'Our People', to: '/#our-people' },
   { label: 'Program guide', to: '/how-it-works' },
+  { label: 'Careers', to: '/careers' },
   { label: 'Shop', to: '/shop' },
   { label: 'Activities', to: '/#activities' },
   { label: 'Centers', to: '/#centers' },

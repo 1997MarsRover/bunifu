@@ -10,6 +10,7 @@ import CentersSection from '../components/CentersSection';
 import GallerySection from '../components/GallerySection';
 import FAQSection from '../components/FAQSection';
 import AppPurposeSection from '../components/AppPurposeSection';
+import CareersBanner from '../components/CareersBanner';
 import Footer from '../components/Footer';
 
 export default function HomePage() {
@@ -35,6 +36,7 @@ export default function HomePage() {
       <CentersSection />
       <GallerySection />
       <BoardMemberSection />
+      <CareersBanner />
       <FAQSection />
       <AppPurposeSection />
       <Footer />
