@@ -1,11 +1,12 @@
 import { ArrowRight, ChevronLeft, ChevronRight, Trophy, GraduationCap, Rocket } from 'lucide-react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { useRef, useState, useEffect, useCallback } from 'react';
+import { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import HeroFormModal from './HeroFormModal';
 import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
+import { getDailyHeroImage } from '../lib/dailyHero';
 
-const slides = [
+const baseSlides = [
   {
     id: 1,
     badge: "Empowering Young Innovators in Kenya",
@@ -22,6 +23,7 @@ const slides = [
     ],
     backgroundImage: '/activity_robotics.webp',
     backgroundAlt: 'Youth building robots in a Bunifu STEM robotics workshop in Kenya',
+    dailyTagText: '',
   },
   {
     id: 3,
@@ -83,6 +85,20 @@ export default function HeroSection() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [currentFormType, setCurrentFormType] = useState('journey');
   
+  const dailyHero = useMemo(() => getDailyHeroImage(), []);
+  
+  const slides = useMemo(() => [
+    {
+      ...baseSlides[0],
+      backgroundImage: dailyHero.src,
+      backgroundAlt: dailyHero.alt,
+      dailyTagText: dailyHero.tag,
+    },
+    baseSlides[1],
+    baseSlides[2],
+    baseSlides[3],
+  ], [dailyHero]);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"]
@@ -96,7 +112,7 @@ export default function HeroSection() {
   const handleNext = useCallback(() => {
     setSlideDirection([1]);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-  }, []);
+  }, [slides.length]);
 
   useEffect(() => {
     const timer = setInterval(handleNext, 8000);
@@ -200,16 +216,33 @@ export default function HeroSection() {
                 exit="exit"
                 transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               >
-                {/* Badge */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.1 }}
-                  className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-white border rounded-full bg-white/10 backdrop-blur-md border-white/20"
-                >
-                  <span className="text-lg">🇰🇪</span>
-                  <span className="text-sm font-medium">{currentSlideData.badge}</span>
-                </motion.div>
+                {/* Badges */}
+                <div className="flex flex-wrap items-center gap-2.5 mb-8">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.1 }}
+                    className="inline-flex items-center gap-2 px-4 py-2 text-white border rounded-full bg-white/10 backdrop-blur-md border-white/20"
+                  >
+                    <span className="text-lg">🇰🇪</span>
+                    <span className="text-sm font-medium">{currentSlideData.badge}</span>
+                  </motion.div>
+
+                  {currentSlideData.dailyTagText && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: 0.15 }}
+                      className="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold text-amber-300 border rounded-full bg-amber-500/20 backdrop-blur-md border-amber-400/30 shadow-sm"
+                    >
+                      <span className="relative flex h-2 w-2">
+                        <span className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-amber-400"></span>
+                        <span className="relative inline-flex w-2 h-2 rounded-full bg-amber-400"></span>
+                      </span>
+                      <span>{currentSlideData.dailyTagText}</span>
+                    </motion.div>
+                  )}
+                </div>
 
                 {/* Main Heading */}
                 <div className="mb-8 overflow-hidden">
