@@ -1,3 +1,5 @@
+import { PATTERN_URL } from '../lib/assets';
+
 export default function PartnersSection() {
   const partners = [
     'Samburu Girls Foundation',
@@ -15,12 +17,8 @@ export default function PartnersSection() {
   ];
 
   return (
-    <section id="partners" className="min-h-screen bg-gray-50 relative overflow-hidden py-16">
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.4'%3E%3Cpath d='M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}/>
-      </div>
+    <section id="partners" className="min-h-screen bg-white relative overflow-hidden py-16">
+      <div className="absolute inset-0 opacity-[0.025]" style={{ backgroundImage: `url(${PATTERN_URL})`, backgroundSize: '600px', backgroundRepeat: 'repeat' }} />
 
       <div className="relative z-10 px-8 md:px-16">
         <h2 className="font-caveat text-sky-600 text-6xl md:text-7xl lg:text-8xl mb-16 text-center tracking-wide">

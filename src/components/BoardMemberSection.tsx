@@ -1,6 +1,7 @@
 import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import { getPublishedPeople } from '../data/people';
+import { PATTERN_URL } from '../lib/assets';
 
 export default function BoardMemberSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -19,9 +20,13 @@ export default function BoardMemberSection() {
       id="our-people"
       ref={sectionRef}
       aria-labelledby="our-people-heading"
-      className="bg-[#f7f5ef] py-20 md:py-28"
+      className="relative overflow-hidden bg-white py-20 md:py-28"
     >
-      <div className="mx-auto max-w-7xl px-6 md:px-12">
+      <div
+        className="absolute inset-0 opacity-[0.025]"
+        style={{ backgroundImage: `url(${PATTERN_URL})`, backgroundSize: '600px', backgroundRepeat: 'repeat' }}
+      />
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
         <motion.header
           initial={reveal}
           animate={visible}

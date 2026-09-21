@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MapPin, 
   Calendar, 
-  Sparkles, 
   ChevronDown, 
   ChevronUp, 
   CheckCircle2, 
@@ -11,7 +10,7 @@ import {
   Compass, 
   Mail,
   ShieldCheck,
-  Star,
+  ClipboardCheck,
   ExternalLink
 } from 'lucide-react';
 import Header from '../components/Header';
@@ -42,7 +41,7 @@ export default function CareersPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F9FAFB]">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header variant="solid" />
 
       <main className="flex-1 pt-[4.5rem]">
@@ -62,7 +61,6 @@ export default function CareersPage() {
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-blue/10 text-brand-blue text-xs sm:text-sm font-bold tracking-wide uppercase mb-4"
             >
-              <Sparkles className="w-4 h-4" />
               <span>We Are Hiring in Nairobi</span>
             </motion.div>
 
@@ -246,7 +244,7 @@ export default function CareersPage() {
                           <div className="space-y-6">
                             <div>
                               <h4 className="text-sm font-bold uppercase tracking-wider text-brand-dark mb-3 flex items-center gap-2">
-                                <Star className="w-4 h-4 text-brand-yellow" />
+                                <ClipboardCheck className="w-4 h-4 text-brand-yellow" />
                                 <span>Essential Requirements</span>
                               </h4>
                               <ul className="space-y-2 text-xs sm:text-sm text-gray-600">

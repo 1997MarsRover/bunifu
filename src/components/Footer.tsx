@@ -1,8 +1,9 @@
 import { motion, useInView } from 'framer-motion';
-import { Instagram, Twitter, Facebook, Mail, Phone, MapPin, Heart, ArrowUp } from 'lucide-react';
+import { Instagram, Twitter, Facebook, Mail, Phone, MapPin, ArrowUp } from 'lucide-react';
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
+import Logo from './Logo';
 
 const socialLinks = [
   { icon: Instagram, href: 'https://instagram.com/Bunifu_youths_Kenya', label: 'Instagram', gradient: 'from-purple-500 via-pink-500 to-orange-400' },
@@ -108,15 +109,7 @@ export default function Footer({ compact = false }: FooterProps) {
               whileHover={{ scale: 1.05 }}
               className="inline-block mb-4"
             >
-              <img src="/final.webp" alt="Bunifu Youths Kenya logo" width={886} height={283} loading="lazy" decoding="async" className="h-12" />
-              <motion.p 
-                initial={{ opacity: 0, y: 10 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 }}
-                className="text-white font-semibold mt-1"
-              >
-                Youths Kenya
-              </motion.p>
+              <Logo variant="light" />
             </motion.div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">
               Helping young learners in Kenya build confidence through coding, robotics, AI, 3D design, outreach, mentorship, and competitions.
@@ -272,11 +265,7 @@ export default function Footer({ compact = false }: FooterProps) {
           transition={{ delay: 0.8 }}
           className={`${compact ? 'mt-0' : 'mt-16'} pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4`}
         >
-          <p className="text-gray-500 text-sm flex items-center gap-2">
-            © {currentYear} Bunifu Youths Kenya. Made with 
-            <Heart className="w-4 h-4 text-brand-red fill-brand-red" />
-            in Kenya
-          </p>
+          <p className="text-gray-500 text-sm">© {currentYear} Bunifu Youths Kenya. Built in Kenya.</p>
           <div className="flex items-center gap-4 text-gray-500 text-sm">
             <a href="/privacy/" className="hover:text-white transition-colors">Privacy Policy</a>
             <span>•</span>

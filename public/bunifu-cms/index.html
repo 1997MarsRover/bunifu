@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bunifu-cms | Content management for Bunifu Youths Kenya</title>
+    <title>bunifu-cms | Activities for Bunifu students and schools</title>
     <meta name="application-name" content="bunifu-cms" />
     <meta
       name="description"
-      content="bunifu-cms is the staff content management system for Bunifu Youths Kenya. Authorized team members manage website content, programs, and community updates."
+      content="bunifu-cms helps students and schools access and coordinate their Bunifu activities, sessions, and program updates."
     />
     <link rel="canonical" href="https://bunifuyouths.org/bunifu-cms/" />
     <link rel="icon" type="image/png" href="/icon1.webp" />
@@ -17,7 +17,7 @@
     <meta property="og:site_name" content="bunifu-cms" />
     <meta
       property="og:description"
-      content="Staff content management system for Bunifu Youths Kenya."
+      content="The activity platform for students and schools participating in Bunifu Youths Kenya programs."
     />
     <style>
       :root {
@@ -35,11 +35,21 @@
         margin: 0;
         font-family: "Plus Jakarta Sans", Helvetica, Arial, sans-serif;
         color: var(--dark);
-        background:
-          radial-gradient(circle at top left, rgba(0, 137, 211, 0.12), transparent 35%),
-          radial-gradient(circle at top right, rgba(36, 99, 44, 0.14), transparent 30%),
-          linear-gradient(180deg, #f7faf8 0%, #ffffff 45%, #f4f7f5 100%);
+        background: #ffffff;
         line-height: 1.65;
+        position: relative;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background-image: url("/pattern.webp");
+        background-size: 520px;
+        background-repeat: repeat;
+        opacity: 0.035;
+        pointer-events: none;
       }
 
       a {
@@ -51,6 +61,8 @@
       footer {
         width: min(880px, calc(100% - 2rem));
         margin-inline: auto;
+        position: relative;
+        z-index: 1;
       }
 
       header {
@@ -206,13 +218,12 @@
 
     <main>
       <div class="hero">
-        <span class="eyebrow">Staff platform</span>
+        <span class="eyebrow">Bunifu activity platform</span>
         <h1>bunifu-cms</h1>
         <p class="lead">
-          <strong>bunifu-cms</strong> is the content management system for
-          <strong>Bunifu Youths Kenya</strong>. It helps our team publish and update
-          website content, program information, events, and community updates on
-          <a href="https://bunifuyouths.org/">bunifuyouths.org</a>.
+          <strong>bunifu-cms</strong> is the central activity platform for students and
+          schools taking part in <strong>Bunifu Youths Kenya</strong> programs. It brings
+          activities, session information, and important updates together in one clear place.
         </p>
         <div class="actions">
           <a class="btn btn-primary" href="https://cms.bunifuyouths.org">Sign in to bunifu-cms</a>
@@ -221,42 +232,41 @@
       </div>
 
       <section>
-        <h2>What bunifu-cms does</h2>
+        <h2>Activities in one place</h2>
         <p>
           Bunifu Youths Kenya runs STEM, robotics, AI, and creative technology programs for
-          young learners. <strong>bunifu-cms</strong> is the internal tool our team uses to keep
-          the public website accurate without changing code for every update.
+          young learners. <strong>bunifu-cms</strong> helps participants stay connected with
+          the activities and program information that are relevant to them.
         </p>
-        <p>Authorized administrators can:</p>
+        <p>Through the platform, authorized users can:</p>
         <ul>
-          <li>Sign in to the Bunifu content management dashboard</li>
-          <li>Create, edit, and publish website and program content</li>
-          <li>Keep activities, bootcamps, centers, and outreach information up to date</li>
-          <li>Coordinate operational updates used by the Bunifu Youths team</li>
+          <li>Access their Bunifu activity workspace</li>
+          <li>Follow relevant session and program information</li>
+          <li>Stay informed about activities and important updates</li>
+          <li>Keep school and learner participation organized</li>
         </ul>
       </section>
 
       <section>
-        <h2>Access and account information</h2>
+        <h2>Secure access</h2>
         <p>
-          <strong>bunifu-cms</strong> is limited to approved Bunifu Youths staff and collaborators.
-          Sign-in uses a Google account to confirm identity and open the correct workspace.
-          Basic account details such as name and email may be used for authentication and
-          account context inside the platform.
+          Access is provided to participating students, schools, and other authorized users.
+          Sign-in confirms identity and opens the correct workspace. Basic account details such
+          as name and email may be used for authentication and account context.
         </p>
         <p>
-          Account information is used only to verify authorized access and operate the CMS securely.
-          It is not used to reach unrelated services beyond what is required for sign-in.
+          Account information is used only to verify authorized access and operate the platform
+          securely. It is not used to reach unrelated services beyond what is required for sign-in.
         </p>
       </section>
 
       <section>
-        <h2>Who it is for</h2>
+        <h2>For students and schools</h2>
         <p>
-          <strong>bunifu-cms</strong> is for Bunifu Youths Kenya administrators, mentors, and
-          approved collaborators who manage digital content. It is not a public learner portal.
-          Learners, parents, and partners continue to use
-          <a href="https://bunifuyouths.org/">bunifuyouths.org</a> without signing into the CMS.
+          <strong>bunifu-cms</strong> supports students and schools participating in Bunifu
+          activities. General information about Bunifu programs remains available on
+          <a href="https://bunifuyouths.org/">bunifuyouths.org</a>, while authorized users can
+          sign in to reach their specific activity workspace.
         </p>
       </section>
 

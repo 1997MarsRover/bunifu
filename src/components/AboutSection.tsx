@@ -1,5 +1,5 @@
 import { motion, useInView, Variants } from 'framer-motion';
-import { Lightbulb, Users, Cpu, GraduationCap } from 'lucide-react';
+import { Lightbulb, Users, Cpu } from 'lucide-react';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
@@ -140,7 +140,7 @@ export default function AboutSection() {
               animate={isInView ? "visible" : "hidden"}
               className="inline-flex items-center gap-2 px-4 py-2 mb-6 text-sm font-semibold rounded-full bg-brand-blue/10 text-brand-blue"
             >
-              ✦ About Us
+              About Us
             </motion.span>
 
             <motion.h2 
@@ -160,7 +160,7 @@ export default function AboutSection() {
               animate={isInView ? "visible" : "hidden"}
               className="mb-6 text-xl leading-relaxed text-gray-700"
             >
-              Bunifu Youths Kenya is a hands-on STEAM learning community for children and teens who want to explore technology, creativity, and problem-solving.
+              Bunifu Youths Kenya is a hands-on STEM learning community for children and teens who want to explore technology, creativity, and problem-solving.
             </motion.p>
 
             <motion.p 
@@ -180,19 +180,14 @@ export default function AboutSection() {
               variants={textVariants}
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
-              className="mb-10 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-brand-green/10 via-brand-blue/5 to-white border-l-4 border-brand-green shadow-sm flex items-start gap-4"
+              className="mb-10 border-y border-brand-dark/15 py-6"
             >
-              <div className="w-12 h-12 rounded-xl bg-brand-green/15 text-brand-green flex items-center justify-center flex-shrink-0 mt-0.5">
-                <GraduationCap className="w-6 h-6 text-brand-green" />
-              </div>
-              <div>
-                <span className="inline-block text-xs font-bold uppercase tracking-widest text-brand-green mb-1">
-                  School Partnership Model
-                </span>
-                <p className="text-base sm:text-lg font-bold text-brand-dark leading-snug">
-                  We help schools improve learner outcomes, digital readiness, and future employability through a scalable coding-club model.
-                </p>
-              </div>
+              <p className="mb-3 text-sm font-semibold text-brand-green">
+                School Partnership Model
+              </p>
+              <p className="max-w-xl text-lg font-semibold leading-relaxed text-brand-dark sm:text-xl">
+                We help schools improve learner outcomes, digital readiness, and future employability through a scalable coding-club model.
+              </p>
             </motion.div>
 
             {/* Features Grid */}

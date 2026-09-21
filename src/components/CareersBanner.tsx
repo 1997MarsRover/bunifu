@@ -1,7 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, Briefcase, Users } from 'lucide-react';
+import { ArrowRight, Briefcase, Users } from 'lucide-react';
 import { PATTERN_URL } from '../lib/assets';
 
 export default function CareersBanner() {
@@ -30,7 +30,6 @@ export default function CareersBanner() {
         className="relative max-w-5xl mx-auto px-6 md:px-12 text-center"
       >
         <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 text-xs sm:text-sm font-bold rounded-full bg-brand-blue/10 text-brand-blue uppercase tracking-wider">
-          <Sparkles className="w-3.5 h-3.5" />
           <span>We&apos;re Hiring in Nairobi</span>
         </span>
 

@@ -37,21 +37,25 @@ const faqs = [
   },
   {
     question: "Do you work with schools and community groups?",
-    answer: "Yes. We run school visits, outreach sessions, bootcamps, educator training, and partner programs for institutions that want to introduce learners to practical STEAM experiences."
+    answer: "Yes. We run school visits, outreach sessions, bootcamps, educator training, and partner programs for institutions that want to introduce learners to practical STEM experiences."
   }
 ];
 
 export default function FAQSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqColumns = [
+    faqs.map((faq, index) => ({ faq, index })).filter(({ index }) => index % 2 === 0),
+    faqs.map((faq, index) => ({ faq, index })).filter(({ index }) => index % 2 === 1),
+  ];
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section id="faq" ref={ref} className="relative py-24 md:py-32 bg-brand-light overflow-hidden">
+    <section id="faq" ref={ref} className="relative overflow-hidden bg-white py-16 md:py-20">
       {/* Background Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.02]"
@@ -80,13 +84,13 @@ export default function FAQSection() {
       <div className="absolute top-20 right-20 w-64 h-64 bg-brand-blue/5 rounded-full blur-3xl" />
       <div className="absolute bottom-20 left-20 w-80 h-80 bg-brand-green/5 rounded-full blur-3xl" />
 
-      <div className="relative max-w-4xl mx-auto px-6 md:px-12">
+      <div className="relative mx-auto max-w-6xl px-6 md:px-12">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="mb-10 text-center md:mb-12"
         >
           <motion.span 
             initial={{ opacity: 0, scale: 0.5 }}
@@ -120,76 +124,66 @@ export default function FAQSection() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="space-y-4"
+          className="grid gap-3 md:grid-cols-2 md:items-start md:gap-5"
         >
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 + index * 0.1 }}
-              className="group"
-            >
-              <motion.button
-                onClick={() => toggleFAQ(index)}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
-                className={`w-full text-left p-6 rounded-2xl transition-all ${
-                  openIndex === index 
-                    ? 'bg-white shadow-card-hover' 
-                    : 'bg-white/50 hover:bg-white hover:shadow-card'
-                }`}
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <span className={`font-bold text-lg ${openIndex === index ? 'text-brand-green' : 'text-brand-dark'}`}>
-                    {faq.question}
-                  </span>
-                  <motion.div
-                    animate={{ rotate: openIndex === index ? 180 : 0 }}
-                    transition={{ duration: 0.3 }}
-                    className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                      openIndex === index 
-                        ? 'bg-brand-green text-white' 
-                        : 'bg-brand-green/10 text-brand-green group-hover:bg-brand-green/20'
-                    }`}
+          {faqColumns.map((column, columnIndex) => (
+            <div key={columnIndex} className="space-y-3">
+              {column.map(({ faq, index }) => (
+                <motion.div
+                  key={faq.question}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.35 + index * 0.05 }}
+                  className="group overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm"
+                >
+                  <button
+                    type="button"
+                    onClick={() => toggleFAQ(index)}
+                    className="w-full p-4 text-left transition-colors hover:bg-gray-50/60 sm:p-5"
+                    aria-expanded={openIndex === index}
                   >
-                    {openIndex === index ? (
-                      <Minus className="w-5 h-5" />
-                    ) : (
-                      <Plus className="w-5 h-5" />
-                    )}
-                  </motion.div>
-                </div>
-                
-                <AnimatePresence>
-                  {openIndex === index && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <motion.p 
-                        initial={{ y: -10 }}
-                        animate={{ y: 0 }}
-                        className="text-gray-600 leading-relaxed mt-4 pr-14"
+                    <div className="flex items-center justify-between gap-4">
+                      <span className={`font-bold leading-snug ${openIndex === index ? 'text-brand-green' : 'text-brand-dark'}`}>
+                        {faq.question}
+                      </span>
+                      <span
+                        className={`flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full transition-colors ${
+                          openIndex === index
+                            ? 'bg-brand-green text-white'
+                            : 'bg-brand-green/10 text-brand-green group-hover:bg-brand-green/20'
+                        }`}
+                        aria-hidden="true"
                       >
-                        {faq.answer}
-                      </motion.p>
-                      {'link' in faq && faq.link && (
-                        <Link
-                          to={faq.link.to}
-                          className="inline-block mt-3 text-sm font-bold text-brand-blue hover:text-brand-green"
-                        >
-                          {faq.link.label} →
-                        </Link>
-                      )}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.button>
-            </motion.div>
+                        {openIndex === index ? <Minus className="h-4 w-4" /> : <Plus className="h-4 w-4" />}
+                      </span>
+                    </div>
+                  </button>
+                  <AnimatePresence initial={false}>
+                    {openIndex === index && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="px-4 pb-4 sm:px-5 sm:pb-5">
+                          <p className="pr-8 text-sm leading-6 text-gray-600">{faq.answer}</p>
+                          {'link' in faq && faq.link && (
+                            <Link
+                              to={faq.link.to}
+                              className="mt-3 inline-block text-sm font-bold text-brand-blue hover:text-brand-green"
+                            >
+                              {faq.link.label} →
+                            </Link>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              ))}
+            </div>
           ))}
         </motion.div>
 
@@ -198,7 +192,7 @@ export default function FAQSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 1 }}
-          className="mt-16 text-center"
+          className="mt-10 text-center md:mt-12"
         >
           <p className="text-gray-600 mb-6">
             Still have questions? We'd love to hear from you.

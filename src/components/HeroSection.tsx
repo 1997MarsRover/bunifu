@@ -27,14 +27,14 @@ const baseSlides = [
   },
   {
     id: 3,
-    badge: "Gateway to Global STEAM Pathways",
+    badge: "Gateway to Global STEM Pathways",
     title: {
       line1: "Connect to",
       highlight1: "global opportunities",
       line2: "through",
       highlight2: "competitions",
     },
-    description: "We prepare young innovators to present their work, compete with confidence, and connect with wider STEAM opportunities through coding, robotics, and design challenges.",
+    description: "We prepare young innovators to present their work, compete with confidence, and connect with wider STEM opportunities through coding, robotics, and design challenges.",
     buttons: [
       { label: "Join Competitions", formType: "competition", variant: "primary", icon: Trophy },
       { label: "Learn More", formType: "activities", variant: "secondary", icon: null },
@@ -49,7 +49,7 @@ const baseSlides = [
       line1: "Empower learners with",
       highlight1: "future-ready",
       line2: "",
-      highlight2: "STEAM skills",
+      highlight2: "STEM skills",
     },
     description: "We help schools improve learner outcomes, digital readiness, and future employability through a scalable coding-club model.",
     buttons: [
@@ -57,7 +57,7 @@ const baseSlides = [
       { label: "Enroll Your Child", formType: "enroll", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_classroom.webp',
-    backgroundAlt: 'Classroom of students learning coding and STEAM skills with Bunifu',
+    backgroundAlt: 'Classroom of students learning coding and STEM skills with Bunifu',
   },
   {
     id: 5,
@@ -74,7 +74,7 @@ const baseSlides = [
       { label: "View Programs", formType: "programs", variant: "secondary", icon: null },
     ],
     backgroundImage: '/activity_3ddesign.webp',
-    backgroundAlt: 'Learner working on 3D design as part of Bunifu Youths STEAM programs',
+    backgroundAlt: 'Learner working on 3D design as part of Bunifu Youths STEM programs',
   },
 ];
 
@@ -224,7 +224,6 @@ export default function HeroSection() {
                     transition={{ duration: 0.6, delay: 0.1 }}
                     className="inline-flex items-center gap-2 px-4 py-2 text-white border rounded-full bg-white/10 backdrop-blur-md border-white/20"
                   >
-                    <span className="text-lg">🇰🇪</span>
                     <span className="text-sm font-medium">{currentSlideData.badge}</span>
                   </motion.div>
 
