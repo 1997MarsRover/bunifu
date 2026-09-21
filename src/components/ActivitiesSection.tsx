@@ -119,7 +119,7 @@ export default function ActivitiesSection() {
   };
 
   return (
-    <section id="activities" className="relative py-24 md:py-32 bg-brand-light overflow-hidden">
+    <section id="activities" className="relative overflow-hidden bg-white py-24 md:py-32">
       {/* Background Pattern */}
       <div 
         className="absolute inset-0 opacity-[0.03]"

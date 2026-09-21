@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { BookOpen, CalendarDays, CheckCircle2, Mail, Rocket, Send, Trophy, UserRound } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 
 const FORM_IDS: Record<string, string> = {
@@ -29,12 +29,12 @@ function getFormTitle(formType: string) {
 
 function getFormIcon(formType: string) {
   switch (formType) {
-    case 'journey': return '🚀';
-    case 'mentor': return '👨‍🏫';
-    case 'weekend': return '📅';
-    case 'competition': return '🏆';
-    case 'enroll': return '📚';
-    default: return '✉️';
+    case 'journey': return Rocket;
+    case 'mentor': return UserRound;
+    case 'weekend': return CalendarDays;
+    case 'competition': return Trophy;
+    case 'enroll': return BookOpen;
+    default: return Mail;
   }
 }
 
@@ -43,7 +43,7 @@ function getFormDescription(formType: string) {
     case 'journey': return "Ready to start your STEM journey? Fill out the form below and we'll help you get started.";
     case 'mentor': return "Get personalized guidance from industry professionals. Share your interests and we'll match you with a mentor.";
     case 'weekend': return 'Join our exciting weekend sessions! Fill in your details to reserve a spot.';
-    case 'competition': return 'Register your interest in our upcoming STEAM competitions.';
+    case 'competition': return 'Register your interest in our upcoming STEM competitions.';
     case 'enroll': return 'Provide your details to enroll your child in our programs.';
     default: return "We'd love to hear from you. Send us a message and we'll respond as soon as possible.";
   }
@@ -52,6 +52,7 @@ function getFormDescription(formType: string) {
 export default function HeroFormModalInner({ formType, onClose }: HeroFormModalInnerProps) {
   const formId = FORM_IDS[formType] ?? FORM_IDS.journey;
   const [state, handleSubmit] = useForm(formId);
+  const FormIcon = getFormIcon(formType);
 
   useEffect(() => {
     if (state.succeeded) {
@@ -63,8 +64,8 @@ export default function HeroFormModalInner({ formType, onClose }: HeroFormModalI
   return (
     <div className="p-8 pt-10">
       <div className="flex items-center gap-4 mb-6">
-        <div className="flex items-center justify-center w-16 h-16 text-4xl bg-gradient-to-br from-brand-blue/10 to-brand-red/10 rounded-2xl">
-          <span>{getFormIcon(formType)}</span>
+        <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-brand-blue/10 to-brand-red/10 rounded-2xl text-brand-blue">
+          <FormIcon className="h-8 w-8" />
         </div>
         <div>
           <h3 className="text-2xl font-bold text-brand-dark">{getFormTitle(formType)}</h3>
@@ -78,8 +79,8 @@ export default function HeroFormModalInner({ formType, onClose }: HeroFormModalI
           animate={{ opacity: 1, y: 0 }}
           className="p-6 mb-6 text-center bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl"
         >
-          <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 text-4xl bg-green-100 rounded-full">
-            ✅
+          <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-green-100 rounded-full text-green-700">
+            <CheckCircle2 className="h-8 w-8" />
           </div>
           <h4 className="text-xl font-bold text-green-700">Thank You!</h4>
           <p className="text-green-600">We&apos;ll get back to you soon.</p>

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { XCircle } from 'lucide-react';
+import { ClipboardList, Target, XCircle } from 'lucide-react';
 
 const HeroFormModalInner = lazy(() => import('./HeroFormModalInner'));
 
@@ -31,8 +31,8 @@ export default function HeroFormModal({ isOpen, onClose, formType }: HeroFormMod
               onClick={(e) => e.stopPropagation()}
             >
               <div className="p-8 text-center">
-                <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 text-5xl rounded-full bg-gradient-to-br from-brand-blue/10 to-brand-red/10">
-                  {formType === 'activities' ? '🎯' : '📋'}
+                <div className="flex items-center justify-center w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-brand-blue/10 to-brand-red/10 text-brand-blue">
+                  {formType === 'activities' ? <Target className="h-9 w-9" /> : <ClipboardList className="h-9 w-9" />}
                 </div>
                 <h3 className="mb-2 text-2xl font-bold text-brand-dark">Coming Soon!</h3>
                 <p className="mb-6 text-gray-600">

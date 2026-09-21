@@ -1,7 +1,7 @@
 import { motion, useInView, Variants } from 'framer-motion';
 import {
   Calendar, MapPin, Users, Code, Globe, Cpu, Box,
-  Sparkles, Target, Clock, BookOpen, MessageCircle,
+  Target, Clock, BookOpen, MessageCircle,
   Phone, Mail, ChevronRight,
 } from 'lucide-react';
 import { lazy, Suspense, useRef, useState } from 'react';
@@ -157,7 +157,6 @@ export default function MembershipSection() {
             transition={{ duration: 0.5, type: "spring" }}
             className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-semibold rounded-full bg-brand-green/10 text-brand-green"
           >
-            <Sparkles className="w-4 h-4" />
             Join the Innovation
           </motion.span>
           
@@ -251,11 +250,11 @@ export default function MembershipSection() {
                     <div className="mb-2 text-4xl font-bold text-white">KES 2,000</div>
                     <div className="mb-4 text-sm text-white/70">per student</div>
                     <div className="text-sm font-semibold text-brand-green">Includes:</div>
-                    <ul className="mt-2 space-y-1 text-xs text-white/80">
-                      <li>✓ Challenge materials</li>
-                      <li>✓ Judge evaluation</li>
-                      <li>✓ Certificate</li>
-                      <li>✓ Award ceremony</li>
+                    <ul className="mt-2 list-disc space-y-1 pl-4 text-xs text-white/80">
+                      <li>Challenge materials</li>
+                      <li>Judge evaluation</li>
+                      <li>Certificate</li>
+                      <li>Award ceremony</li>
                     </ul>
                   </div>
                 </div>

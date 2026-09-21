@@ -11,7 +11,7 @@ export default function ProgramGuideTeaser() {
   return (
     <section
       ref={ref}
-      className="relative py-16 md:py-20 bg-brand-light overflow-hidden"
+      className="relative overflow-hidden bg-white py-16 md:py-20"
       aria-labelledby="program-guide-teaser-heading"
     >
       <div
@@ -29,7 +29,7 @@ export default function ProgramGuideTeaser() {
         className="relative max-w-4xl mx-auto px-6 md:px-12 text-center"
       >
         <span className="inline-flex items-center gap-2 px-4 py-2 mb-4 text-sm font-semibold rounded-full bg-brand-green/10 text-brand-green">
-          ✦ For parents & partners
+          For parents & partners
         </span>
         <h2 id="program-guide-teaser-heading" className="text-2xl md:text-4xl font-bold text-brand-dark mb-4">
           How the Bunifu program works

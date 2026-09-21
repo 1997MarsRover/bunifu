@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import LightboxModal from '../components/LightboxModal';
 import { getCollectionBySlug, galleryCategories } from '../data/galleryData';
+import { PATTERN_URL } from '../lib/assets';
 
 export default function CollectionDetailPage() {
   const { collectionSlug } = useParams<{ collectionSlug: string }>();
@@ -45,12 +46,16 @@ export default function CollectionDetailPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f7f5ef]">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header variant="solid" />
 
-      <main className="flex-1 border-t-[6px] border-brand-green pt-24 md:pt-28 pb-20">
+      <main className="relative flex-1 border-t-[6px] border-brand-green pb-20 pt-24 md:pt-28">
+        <div
+          className="absolute inset-0 opacity-[0.025]"
+          style={{ backgroundImage: `url(${PATTERN_URL})`, backgroundSize: '600px', backgroundRepeat: 'repeat' }}
+        />
         {/* Breadcrumb Header */}
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-4">
+        <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-4">
           <nav className="flex items-center gap-2 text-xs md:text-sm font-semibold text-gray-500 mb-6">
             <Link to="/#gallery" className="hover:text-brand-green transition-colors flex items-center gap-1.5">
               <ArrowLeft className="w-4 h-4" /> Gallery

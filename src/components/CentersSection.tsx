@@ -27,13 +27,14 @@ export default function CentersSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, scale: 0.5 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.5, type: "spring" }}
             className="inline-block bg-brand-red/10 text-brand-red font-semibold text-sm px-4 py-2 rounded-full mb-4"
           >
-            📍 Our Location
+            <MapPin className="mr-1 inline-block h-4 w-4" aria-hidden="true" />
+            Our Location
           </motion.span>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -85,7 +86,7 @@ export default function CentersSection() {
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center gap-2 bg-brand-green/20 text-brand-green font-bold text-sm px-4 py-2 rounded-full mb-6"
               >
-                <span>🇰🇪</span>
+                <MapPin className="h-4 w-4" aria-hidden="true" />
                 Nairobi, Kenya
               </motion.div>
 
@@ -93,7 +94,7 @@ export default function CentersSection() {
                 Bunifu Innovation Hub
               </h3>
               <p className="mb-8 max-w-2xl text-lg leading-relaxed text-white/70">
-                Our center hosts weekend sessions, mentorship meetups, learner showcases, and practical STEAM activities for children, teens, parents, teachers, and partner schools.
+                Our center hosts weekend sessions, mentorship meetups, learner showcases, and practical STEM activities for children, teens, parents, teachers, and partner schools.
               </p>
               
               <div className="space-y-4 mb-8">
@@ -134,7 +135,7 @@ export default function CentersSection() {
                   </div>
                   <div>
                     <p className="text-white font-semibold mb-1">Hours</p>
-                    <p className="text-white/70">Mon - Sat: 9:00 AM - 6:00 PM</p>
+                    <p className="text-white/70">Mon – Sat: 9:00 AM – 5:00 PM</p>
                   </div>
                 </motion.div>
               </div>
@@ -153,7 +154,7 @@ export default function CentersSection() {
                 </motion.a>
                 
                 <motion.a
-                  href="https://forms.gle/67rKco3d66WhrQzi8"
+                  href="https://forms.gle/XfsJPfN1t7oV8viU7"
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.2)" }}

@@ -24,7 +24,7 @@ export default function HowItWorksPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-brand-light">
+    <div className="min-h-screen flex flex-col bg-white">
       <Header variant="solid" />
       <main className="flex-1 pt-[4.5rem]">
         <section className="relative overflow-hidden border-b border-brand-green/10 bg-gradient-to-br from-brand-green/10 via-white to-brand-blue/10">

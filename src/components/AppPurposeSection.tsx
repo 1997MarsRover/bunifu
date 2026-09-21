@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { ShieldCheck, Users, FileText } from 'lucide-react';
+import { CalendarDays, School, ShieldCheck } from 'lucide-react';
 
 export default function AppPurposeSection() {
   const ref = useRef(null);
@@ -10,7 +10,7 @@ export default function AppPurposeSection() {
     <section
       id="bunifu-cms"
       ref={ref}
-      className="relative py-20 md:py-24 bg-brand-light overflow-hidden"
+      className="relative overflow-hidden bg-white py-20 md:py-24"
       aria-labelledby="bunifu-cms-heading"
     >
       <div
@@ -29,7 +29,7 @@ export default function AppPurposeSection() {
           transition={{ duration: 0.5 }}
           className="text-brand-green font-bold text-sm tracking-wide uppercase mb-3"
         >
-          Staff platform
+          Bunifu activity platform
         </motion.p>
 
         <motion.h2
@@ -48,9 +48,9 @@ export default function AppPurposeSection() {
           transition={{ duration: 0.55, delay: 0.1 }}
           className="text-lg md:text-xl text-gray-700 leading-relaxed max-w-3xl mb-6"
         >
-          <strong>bunifu-cms</strong> is the content management system for Bunifu Youths Kenya.
-          Our team uses it to publish and update website content, program details, events, and
-          community information shown on this public site.
+          <strong>bunifu-cms</strong> is the central activity platform for students and schools
+          taking part in Bunifu Youths Kenya programs. It brings activities, session information,
+          and important updates together in one clear place.
         </motion.p>
 
         <motion.p
@@ -59,9 +59,9 @@ export default function AppPurposeSection() {
           transition={{ duration: 0.55, delay: 0.15 }}
           className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mb-10"
         >
-          Access is limited to approved staff and collaborators. Sign-in uses a Google account
-          only to confirm identity (name and email) and open the correct workspace. Learners,
-          parents, and partners use the public website and do not need CMS access.
+          Learners and participating schools can use their authorized workspace to follow the
+          Bunifu activities available to them and stay connected with relevant program
+          information. Secure sign-in ensures each user reaches the correct workspace.
         </motion.p>
 
         <motion.div
@@ -72,19 +72,19 @@ export default function AppPurposeSection() {
         >
           {[
             {
-              icon: Users,
-              title: 'Built for the team',
-              text: 'Administrators and approved collaborators manage Bunifu content from one place.',
+              icon: CalendarDays,
+              title: 'Activities in one place',
+              text: 'See relevant activities, session information, and program updates together.',
+            },
+            {
+              icon: School,
+              title: 'For students and schools',
+              text: 'Keep participation in Bunifu programs clear, organized, and easy to follow.',
             },
             {
               icon: ShieldCheck,
               title: 'Secure access',
-              text: 'Account details are used to authenticate authorized users and protect the platform.',
-            },
-            {
-              icon: FileText,
-              title: 'Privacy',
-              text: 'Our Privacy Policy explains how bunifu-cms handles account information and related data.',
+              text: 'Sign in privately to reach the correct Bunifu workspace and activity information.',
             },
           ].map((item) => {
             const Icon = item.icon;

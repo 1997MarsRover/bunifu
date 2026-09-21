@@ -1,8 +1,17 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight } from 'lucide-react';
-import { galleryCategories, galleryCollections, getFeaturedCollection } from '../data/galleryData';
+import {
+  ArrowUpRight,
+  BookOpen,
+  Boxes,
+  CalendarDays,
+  GraduationCap,
+  Trophy,
+  Users,
+} from 'lucide-react';
+import { galleryCategories, galleryCollections } from '../data/galleryData';
+import { PATTERN_URL } from '../lib/assets';
 import GetInvolvedFormModal from './GetInvolvedFormModal';
 
 interface GallerySectionProps {
@@ -11,24 +20,40 @@ interface GallerySectionProps {
 
 const filterList = ['All', ...galleryCategories.map((category) => category.name)];
 
+const categoryIcons = {
+  learning: BookOpen,
+  projects: Boxes,
+  bootcamps: CalendarDays,
+  outreach: Users,
+  competitions: Trophy,
+  educators: GraduationCap,
+} as const;
+
 export default function GallerySection({ standalone = false }: GallerySectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const [activeCategory, setActiveCategory] = useState('All');
   const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
-  const featured = getFeaturedCollection();
 
   const filteredCollections = galleryCollections.filter((collection) => {
-    if (activeCategory === 'All') return collection.id !== featured.id;
+    if (activeCategory === 'All') return true;
     const category = galleryCategories.find((item) => item.name === activeCategory);
     return collection.categoryId === category?.id;
   });
 
   return (
-    <section id="gallery" ref={ref} className={`relative overflow-hidden bg-[#f7f5ef] ${standalone ? 'py-14 md:py-20' : 'py-20 md:py-28'}`}>
+    <section id="gallery" ref={ref} className={`relative overflow-hidden bg-white ${standalone ? 'py-14 md:py-20' : 'py-20 md:py-28'}`}>
+      <div
+        className="absolute inset-0 opacity-[0.025]"
+        style={{
+          backgroundImage: `url(${PATTERN_URL})`,
+          backgroundSize: '600px',
+          backgroundRepeat: 'repeat',
+        }}
+      />
       <div className="absolute left-0 top-0 h-1.5 w-full bg-[linear-gradient(90deg,#24632c_0_58%,#f3b61f_58%_82%,#bc1823_82%)]" />
 
-      <div className="mx-auto max-w-[1400px] px-5 sm:px-8 md:px-12">
+      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 md:px-12">
         <div className="grid gap-8 border-b border-brand-dark/20 pb-10 md:grid-cols-12 md:items-end md:pb-14">
           <motion.div initial={{ opacity: 0, y: 18 }} animate={isInView ? { opacity: 1, y: 0 } : {}} className="md:col-span-8">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-brand-green">Stories from the field</p>
@@ -46,40 +71,6 @@ export default function GallerySection({ standalone = false }: GallerySectionPro
           </motion.p>
         </div>
 
-        {activeCategory === 'All' && featured && (
-          <motion.article
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.65, delay: 0.15 }}
-            className="grid border-b border-brand-dark/20 py-8 md:grid-cols-12 md:gap-10 md:py-14"
-          >
-            <Link
-              to={`/gallery/${featured.slug}`}
-              className="group relative min-h-[340px] overflow-hidden bg-neutral-200 sm:min-h-[480px] md:col-span-8 md:min-h-[590px]"
-              aria-label={`Open ${featured.title} photo story`}
-            >
-              <img src={featured.coverImage} alt={featured.title} loading="eager" decoding="async" className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.025]" />
-              <span className="absolute right-0 top-0 grid h-14 w-14 place-items-center bg-[#f3b61f] text-brand-dark transition-all duration-300 group-hover:h-16 group-hover:w-16">
-                <ArrowUpRight className="h-6 w-6" />
-              </span>
-            </Link>
-
-            <div className="flex flex-col justify-between pt-7 md:col-span-4 md:py-2">
-              <div>
-                <p className="mb-7 text-xs font-bold uppercase tracking-[0.18em] text-brand-green">Featured photo story</p>
-                <h3 className="mb-5 text-3xl font-bold leading-[1.08] tracking-[-0.035em] text-brand-dark lg:text-5xl">{featured.title}</h3>
-                <p className="max-w-sm text-sm leading-6 text-brand-dark/65 sm:text-base sm:leading-7">{featured.shortDescription}</p>
-              </div>
-              <div className="mt-10 border-t border-brand-dark/20 pt-5">
-                <p className="mb-5 text-sm text-brand-dark/60">{featured.location} <span className="mx-1.5">/</span> {featured.eventDate}</p>
-                <Link to={`/gallery/${featured.slug}`} className="inline-flex items-center gap-3 text-sm font-bold text-brand-dark hover:text-brand-green">
-                  View the photo story <ArrowUpRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </motion.article>
-        )}
-
         <div className="flex items-center gap-7 overflow-x-auto border-b border-brand-dark/20 py-7 scrollbar-none" aria-label="Filter gallery collections">
           {filterList.map((filter) => {
             const isActive = activeCategory === filter;
@@ -92,24 +83,37 @@ export default function GallerySection({ standalone = false }: GallerySectionPro
           })}
         </div>
 
-        <div className="grid gap-x-6 gap-y-12 py-10 sm:grid-cols-2 lg:grid-cols-3 md:py-14">
+        <div className="grid gap-6 py-10 sm:grid-cols-2 md:py-14 lg:grid-cols-3 md:gap-8">
           {filteredCollections.map((collection, index) => {
             const category = galleryCategories.find((item) => item.id === collection.categoryId);
+            const Icon = categoryIcons[collection.categoryId as keyof typeof categoryIcons] ?? BookOpen;
             return (
-              <motion.article layout key={collection.id} initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45, delay: Math.min(index * 0.055, 0.25) }} className="group">
-                <Link to={`/gallery/${collection.slug}`} className="block" aria-label={`Open ${collection.title}`}>
-                  <div className="relative aspect-[4/3] overflow-hidden bg-neutral-200">
-                    <img src={collection.coverImage} alt={collection.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
-                    <span className="absolute bottom-0 right-0 grid h-11 w-11 translate-y-full place-items-center bg-white text-brand-dark transition-transform duration-300 group-hover:translate-y-0">
-                      <ArrowUpRight className="h-5 w-5" />
+              <motion.article
+                layout
+                key={collection.id}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: Math.min(index * 0.06, 0.3) }}
+                whileHover={{ y: -6 }}
+                className="group overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-card transition-shadow hover:shadow-card-hover"
+              >
+                <Link to={`/gallery/${collection.slug}`} className="flex h-full flex-col" aria-label={`Open ${collection.title} photo story`}>
+                  <div className="relative h-52 overflow-hidden bg-neutral-200">
+                    <img src={collection.coverImage} alt={collection.title} loading={index < 3 ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                    <span className="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-2xl bg-white text-brand-green shadow-lg" aria-hidden="true">
+                      <Icon className="h-6 w-6" />
                     </span>
                   </div>
-                  <div className="mt-4 flex items-start justify-between gap-5 border-t border-brand-dark/15 pt-4">
-                    <div>
-                      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-brand-green">{category?.name ?? 'Photo story'}</p>
-                      <h3 className="text-lg font-bold leading-snug tracking-[-0.02em] text-brand-dark group-hover:text-brand-green sm:text-xl">{collection.title}</h3>
+                  <div className="flex flex-1 flex-col p-6">
+                    <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-brand-green">{category?.name ?? 'Photo story'}</p>
+                    <h3 className="mb-3 text-xl font-bold leading-snug tracking-[-0.02em] text-brand-dark transition-colors group-hover:text-brand-green">{collection.title}</h3>
+                    <p className="mb-5 flex-1 text-sm leading-6 text-gray-600">{collection.shortDescription}</p>
+                    <div className="flex items-center justify-between border-t border-gray-100 pt-4 text-xs text-brand-dark/55">
+                      <span>{collection.images.length} photos</span>
+                      <span className="inline-flex items-center gap-1.5 font-bold text-brand-dark transition-colors group-hover:text-brand-green">
+                        View story <ArrowUpRight className="h-4 w-4" />
+                      </span>
                     </div>
-                    <span className="flex-shrink-0 pt-5 text-xs tabular-nums text-brand-dark/45">{collection.images.length} photos</span>
                   </div>
                 </Link>
               </motion.article>
@@ -129,7 +133,7 @@ export default function GallerySection({ standalone = false }: GallerySectionPro
           <div className="mt-8 grid bg-brand-dark text-white md:grid-cols-12">
             <div className="p-8 sm:p-12 md:col-span-8 md:p-16">
               <p className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-[#f3b61f]">Create the next story</p>
-              <h3 className="max-w-2xl text-3xl font-bold leading-tight tracking-[-0.035em] sm:text-5xl">Bring practical STEAM learning to more young people.</h3>
+              <h3 className="max-w-2xl text-3xl font-bold leading-tight tracking-[-0.035em] sm:text-5xl">Bring practical STEM learning to more young people.</h3>
             </div>
             <div className="flex flex-col justify-end gap-4 border-t border-white/20 p-8 sm:p-12 md:col-span-4 md:border-l md:border-t-0">
               <Link to="/how-it-works" className="inline-flex items-center justify-between border-b border-white/50 pb-3 text-sm font-bold hover:border-[#f3b61f] hover:text-[#f3b61f]">

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, XCircle } from 'lucide-react';
+import { CheckCircle2, Send, Trophy, XCircle } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 
 interface Category {
@@ -119,8 +119,8 @@ export default function SteamFestRegistrationModal({
                   transition={{ type: 'spring', damping: 15 }}
                   className="flex justify-center mb-6"
                 >
-                  <div className="flex items-center justify-center w-20 h-20 text-4xl rounded-full bg-gradient-to-br from-green-50 to-emerald-50">
-                    ✅
+                  <div className="flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-green-50 to-emerald-50 text-green-700">
+                    <CheckCircle2 className="h-10 w-10" />
                   </div>
                 </motion.div>
                 <h3 className="mb-2 text-2xl font-bold text-brand-dark">Registration Submitted!</h3>
@@ -136,8 +136,8 @@ export default function SteamFestRegistrationModal({
             ) : (
               <div className="p-8 pt-10">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="flex items-center justify-center w-16 h-16 text-4xl bg-gradient-to-br from-brand-green/10 to-brand-blue/10 rounded-2xl">
-                    <span>🎪</span>
+                  <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-br from-brand-green/10 to-brand-blue/10 rounded-2xl text-brand-green">
+                    <Trophy className="h-8 w-8" />
                   </div>
                   <div>
                     <h3 className="text-2xl font-bold text-brand-dark">STEAM Fest 2026</h3>

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Send } from 'lucide-react';
+import { CheckCircle2, Handshake, Send } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 
 interface GetInvolvedFormModalInnerProps {
@@ -20,8 +20,8 @@ export default function GetInvolvedFormModalInner({ onClose }: GetInvolvedFormMo
   return (
     <div className="p-8 pt-10">
       <div className="flex items-center gap-4 mb-6">
-        <div className="w-16 h-16 flex items-center justify-center text-4xl bg-gradient-to-br from-brand-blue/10 to-brand-red/10 rounded-2xl">
-          <span>🤝</span>
+        <div className="w-16 h-16 flex items-center justify-center bg-gradient-to-br from-brand-blue/10 to-brand-red/10 rounded-2xl text-brand-blue">
+          <Handshake className="h-8 w-8" />
         </div>
         <div>
           <h3 className="text-2xl font-bold text-brand-dark">Get Involved with Bunifu</h3>
@@ -37,8 +37,8 @@ export default function GetInvolvedFormModalInner({ onClose }: GetInvolvedFormMo
           animate={{ opacity: 1, y: 0 }}
           className="p-6 mb-6 text-center bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl"
         >
-          <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center text-4xl bg-green-100 rounded-full">
-            ✅
+          <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center bg-green-100 rounded-full text-green-700">
+            <CheckCircle2 className="h-8 w-8" />
           </div>
           <h4 className="text-xl font-bold text-green-700">Thank You!</h4>
           <p className="text-green-600">We&apos;ll get back to you soon.</p>

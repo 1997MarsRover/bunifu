@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useCallback, useEffect, useState } from 'react';
-import { ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PROGRAM_GUIDE_STEPS } from '../lib/programGuide';
 import { GOOGLE_FORM_URL } from '../lib/links';
@@ -116,7 +116,6 @@ export default function ProgramGuideViewer() {
 
             <div className="max-w-2xl mx-auto text-center mt-10 md:mt-12 px-2">
               <div className="inline-flex items-center gap-2 text-brand-green font-semibold text-sm mb-3">
-                <Sparkles className="w-4 h-4" />
                 In plain language
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-brand-dark mb-4 leading-tight">
