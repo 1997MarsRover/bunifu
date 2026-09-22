@@ -19,6 +19,7 @@ const quickLinks = [
   { label: 'Shop', to: '/shop' },
   { label: 'Activities', to: '/#activities' },
   { label: 'Centers', to: '/#centers' },
+  { label: 'Partners', to: '/#partners' },
   { label: 'Gallery', to: '/#gallery' },
   { label: 'FAQ', to: '/#faq' },
   { label: 'bunifu-cms', to: '/bunifu-cms/', external: true },

@@ -7,6 +7,7 @@ import BoardMemberSection from '../components/BoardMemberSection';
 import ProgramGuideTeaser from '../components/ProgramGuideTeaser';
 import ActivitiesSection from '../components/ActivitiesSection';
 import CentersSection from '../components/CentersSection';
+import PartnersSection from '../components/PartnersSection';
 import GallerySection from '../components/GallerySection';
 import FAQSection from '../components/FAQSection';
 import AppPurposeSection from '../components/AppPurposeSection';
@@ -34,6 +35,7 @@ export default function HomePage() {
       <ProgramGuideTeaser />
       <ActivitiesSection />
       <CentersSection />
+      <PartnersSection />
       <GallerySection />
       <BoardMemberSection />
       <CareersBanner />
