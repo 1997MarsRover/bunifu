@@ -9,10 +9,10 @@ const partners = [
   { name: 'Creative Learning World', logo: `${LOGO_DIRECTORY}/creative-learning-world.png` },
   { name: 'Kabarak University', logo: `${LOGO_DIRECTORY}/kabarak-university.png` },
   { name: 'Msingi Imara Christian School', logo: `${LOGO_DIRECTORY}/msingi-imara-school.png` },
-  { name: 'Nairobi Academy', logo: `${LOGO_DIRECTORY}/mt-nairobi-academy.png` },
+  { name: 'The Nairobi Academy', logo: `${LOGO_DIRECTORY}/mt-nairobi-academy.png` },
   { name: 'Pink Tower International School', logo: `${LOGO_DIRECTORY}/pink-tower-international-school.png` },
   { name: 'StartUpAfrica', logo: `${LOGO_DIRECTORY}/startup-africa.png` },
-  { name: 'KIALI', logo: `${LOGO_DIRECTORY}/kiali.png` },
+  { name: 'Kiali School', logo: `${LOGO_DIRECTORY}/kiali.png` },
   { name: 'IPSI Global Robotics Kenya', logo: `${LOGO_DIRECTORY}/ipsi-global-robotics-kenya.png` },
 ];
 
