@@ -41,7 +41,7 @@ export const SHOP_CATEGORIES: { id: ShopCategoryFilterId; label: string }[] = [
 function kit(
   partial: Omit<ShopProduct, 'priceKes'> & { priceUsd: number },
 ): ShopProduct {
-  return { ...partial, priceKes: usdToKes(partial.priceUsd) };
+  return { ...partial, priceKes: usdToKes(partial.priceUsd) + 3_000 };
 }
 
 export const SHOP_PRODUCTS: ShopProduct[] = [
