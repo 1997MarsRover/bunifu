@@ -7,7 +7,9 @@ const serverBundle = new URL('../.ssr-temp/entry-server.js', import.meta.url);
 const templatePath = new URL('index.html', distDir);
 
 const template = await readFile(templatePath, 'utf8');
-const { getSeoMetadata, getStructuredData, prerenderRoutes, render } = await import(serverBundle.href);
+const { getSeoMetadata, getStructuredData, prerenderRoutes, render, sitemapRoutes } = await import(
+  serverBundle.href
+);
 
 if (!template.includes('<div id="root"></div>')) {
   throw new Error('Unable to find the empty root element in the client build.');
@@ -82,6 +84,19 @@ await writeFile(
   new URL('.prerender-routes.json', projectRoot),
   `${JSON.stringify(prerenderRoutes, null, 2)}\n`,
 );
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+  ...sitemapRoutes.map((route) => {
+    const location = route === '/' ? 'https://bunifuyouths.org/' : `https://bunifuyouths.org${route}`;
+    return `  <url><loc>${location}</loc></url>`;
+  }),
+  '</urlset>',
+  '',
+].join('\n');
+await writeFile(new URL('sitemap.xml', distDir), sitemap);
 await rm(new URL('.ssr-temp/', projectRoot), { recursive: true, force: true });
 
-console.log(`Prerendered ${prerenderRoutes.length} public React routes.`);
+console.log(
+  `Prerendered ${prerenderRoutes.length} public React routes and generated ${sitemapRoutes.length} sitemap URLs.`,
+);

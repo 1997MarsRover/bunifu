@@ -18,6 +18,11 @@ export const prerenderRoutes = [
     .map((collection) => `/gallery/${collection.slug}`),
 ];
 
+export const sitemapRoutes = [
+  ...prerenderRoutes.filter((route) => route !== '/careers'),
+  '/bunifu-cms',
+];
+
 export function render(url: string) {
   return renderToString(
     <StaticRouter location={url}>
