@@ -36,6 +36,26 @@ for (const route of prerenderRoutes) {
       `$1\n    <meta name="robots" content="${escapeAttribute(metadata.robots)}" />`,
     );
   }
+  const socialTags = [
+    ['property', 'og:type', metadata.ogType ?? 'website'],
+    ['property', 'og:url', metadata.canonical],
+    ['property', 'og:title', metadata.title],
+    ['property', 'og:description', metadata.description],
+    ['property', 'og:image', metadata.image],
+    ['name', 'twitter:card', 'summary_large_image'],
+    ['name', 'twitter:title', metadata.title],
+    ['name', 'twitter:description', metadata.description],
+    ['name', 'twitter:image', metadata.image],
+  ];
+  for (const [attribute, key, content] of socialTags) {
+    const expression = new RegExp(
+      `<meta ${attribute}="${key.replace(':', '\\:')}" content="[^"]*" \\/>`,
+    );
+    const tag = `<meta ${attribute}="${key}" content="${escapeAttribute(content)}" />`;
+    html = expression.test(html)
+      ? html.replace(expression, tag)
+      : html.replace('</head>', `    ${tag}\n  </head>`);
+  }
   html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
   const relativePath = route === '/' ? 'index.html' : `${route.slice(1)}.html`;
   const outputPath = join(distDir.pathname, relativePath);

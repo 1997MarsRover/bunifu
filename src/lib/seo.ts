@@ -8,6 +8,8 @@ export interface SeoMetadata {
   title: string;
   description: string;
   canonical: string;
+  image: string;
+  ogType?: 'website' | 'product';
   robots?: 'noindex, follow';
 }
 
@@ -18,37 +20,44 @@ const staticMetadata: Record<string, Omit<SeoMetadata, 'canonical'>> = {
     title: 'Bunifu Youths Kenya | STEM, Robotics, AI & Coding',
     description:
       'Hands-on coding, robotics, AI, 3D design, school outreach, mentorship and competitions for children and teens in Kenya.',
+    image: `${SITE_ORIGIN}/activity_robotics.webp`,
   },
   '/how-it-works': {
     title: 'Bunifu Code Clubs for Kids in Kenya: How It Works & Fees',
     description:
       'See how Bunifu Code Clubs structure hands-on sessions in coding, robotics, AI and 3D design, including activities, progress and fees.',
+    image: `${SITE_ORIGIN}/1.webp`,
   },
   '/careers': {
     title: 'Careers & Job Vacancies | Bunifu Youths Kenya',
     description:
       'Explore career opportunities at Bunifu Youths Kenya for STEM education, school partnerships, sales and outreach roles in Nairobi.',
+    image: `${SITE_ORIGIN}/final.webp`,
     robots: 'noindex, follow',
   },
   '/shop': {
     title: 'STEM & Robot Kits for Kids in Kenya | Bunifu Shop',
     description: `Coding robot kits and programmable drones for children in Kenya. Prices from ${formatKes(minimumProductPrice)}, pay by M-Pesa. Ask about delivery.`,
+    image: `${SITE_ORIGIN}/shop/a1.webp`,
   },
   '/gallery': {
     title: 'Gallery & Stories | Bunifu Youths Kenya',
     description:
       'A living record of curiosity, collaboration and practical learning across Bunifu classrooms and communities.',
+    image: `${SITE_ORIGIN}/whalebot.webp`,
   },
   '/privacy': {
     title: 'Privacy Policy | bunifu-cms & Bunifu Youths Kenya',
     description:
       'Privacy Policy for bunifu-cms and Bunifu Youths Kenya, including how Google user data is accessed, used, stored and protected.',
+    image: `${SITE_ORIGIN}/final.webp`,
     robots: 'noindex, follow',
   },
   '/bunifu-cms': {
     title: 'bunifu-cms | Activities for Students and Schools',
     description:
       'Access and coordinate Bunifu activities, sessions and program updates for participating students, schools and authorized users.',
+    image: `${SITE_ORIGIN}/final.webp`,
   },
 };
 
@@ -99,7 +108,13 @@ export function getSeoMetadata(pathname: string): SeoMetadata | undefined {
     if (product && titleBase) {
       const age = product.ageLabel ? ` (${product.ageLabel})` : '';
       const title = `${titleBase}${age} | Bunifu Shop`;
-      return { title, description: product.shortDescription, canonical: canonicalUrl(normalizedPath) };
+      return {
+        title,
+        description: product.shortDescription,
+        canonical: canonicalUrl(normalizedPath),
+        image: canonicalUrl(product.images[0]),
+        ogType: 'product',
+      };
     }
   }
 
@@ -114,6 +129,7 @@ export function getSeoMetadata(pathname: string): SeoMetadata | undefined {
         title,
         description: collection.shortDescription,
         canonical: canonicalUrl(normalizedPath),
+        image: canonicalUrl(collection.coverImage),
       };
     }
   }
