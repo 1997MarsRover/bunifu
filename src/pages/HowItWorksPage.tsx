@@ -9,18 +9,6 @@ import { PATTERN_URL } from '../lib/assets';
 export default function HowItWorksPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = 'Program guide | Bunifu Youths Kenya';
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) {
-      meta.setAttribute(
-        'content',
-        'Step-by-step Bunifu Code Clubs guide: STEM space, four activities, session day, progress, lesson plans, and program fees for parents in Kenya.',
-      );
-    }
-    return () => {
-      document.title =
-        'Bunifu Youths Kenya | STEM, Robotics, AI & Creative Technology for Young Learners';
-    };
   }, []);
 
   return (

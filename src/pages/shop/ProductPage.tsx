@@ -14,6 +14,7 @@ import {
   whatsappProductInquiryLink,
 } from '../../lib/shopConfig';
 import ShopLayout from '../../components/shop/ShopLayout';
+import { getImageDimensions } from '../../lib/imageDimensions';
 
 export default function ProductPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -21,9 +22,6 @@ export default function ProductPage() {
   const [qty, setQty] = useState(1);
 
   useEffect(() => {
-    if (product) {
-      document.title = `${product.name} | Bunifu Shop`;
-    }
     setQty(1);
   }, [product]);
 
@@ -47,6 +45,7 @@ export default function ProductPage() {
   const whatsappHref = inquiry ? whatsappProductInquiryLink(inquiry) : '#';
   const mailtoHref = inquiry ? productInquiryMailto(inquiry) : '#';
   const telHref = supportPhoneTelLink();
+  const imageDimensions = getImageDimensions(product.images[0]);
 
   return (
     <ShopLayout>
@@ -64,6 +63,8 @@ export default function ProductPage() {
             <img
               src={product.images[0]}
               alt={product.name}
+              width={imageDimensions?.width}
+              height={imageDimensions?.height}
               className="w-full aspect-square object-cover"
             />
           </motion.div>

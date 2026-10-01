@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import type { ShopProduct } from '../../lib/shopProducts';
 import { formatProductPrice, productCardSubtitle } from '../../lib/shopProducts';
+import { getImageDimensions } from '../../lib/imageDimensions';
 
 type ShopProductCardProps = {
   product: ShopProduct;
@@ -9,6 +10,8 @@ type ShopProductCardProps = {
 };
 
 export default function ShopProductCard({ product, index = 0 }: ShopProductCardProps) {
+  const imageDimensions = getImageDimensions(product.images[0]);
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 20 }}
@@ -21,6 +24,8 @@ export default function ShopProductCard({ product, index = 0 }: ShopProductCardP
         <img
           src={product.images[0]}
           alt={product.name}
+          width={imageDimensions?.width}
+          height={imageDimensions?.height}
           loading="lazy"
           decoding="async"
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

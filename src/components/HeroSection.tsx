@@ -5,6 +5,7 @@ import HeroFormModal from './HeroFormModal';
 import { Link } from 'react-router-dom';
 import { PATTERN_URL } from '../lib/assets';
 import { getDailyHeroImage } from '../lib/dailyHero';
+import { getImageDimensions } from '../lib/imageDimensions';
 
 const baseSlides = [
   {
@@ -151,6 +152,7 @@ export default function HeroSection() {
   };
 
   const currentSlideData = slides[currentSlide];
+  const currentImageDimensions = getImageDimensions(currentSlideData.backgroundImage);
 
   return (
     <>
@@ -179,6 +181,8 @@ export default function HeroSection() {
             <img
               src={currentSlideData.backgroundImage}
               alt={currentSlideData.backgroundAlt}
+              width={currentImageDimensions?.width}
+              height={currentImageDimensions?.height}
               fetchPriority={currentSlide === 0 ? 'high' : 'auto'}
               decoding="async"
               className="object-cover w-full h-full"

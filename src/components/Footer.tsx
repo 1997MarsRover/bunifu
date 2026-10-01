@@ -268,9 +268,9 @@ export default function Footer({ compact = false }: FooterProps) {
         >
           <p className="text-gray-500 text-sm">© {currentYear} Bunifu Youths Kenya. Built in Kenya.</p>
           <div className="flex items-center gap-4 text-gray-500 text-sm">
-            <a href="/privacy/" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
             <span>•</span>
-            <a href="/bunifu-cms/" className="hover:text-white transition-colors">bunifu-cms</a>
+            <a href="/bunifu-cms" className="hover:text-white transition-colors">bunifu-cms</a>
           </div>
         </motion.div>
       </div>

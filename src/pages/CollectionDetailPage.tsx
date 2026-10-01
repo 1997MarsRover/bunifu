@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import LightboxModal from '../components/LightboxModal';
 import { getCollectionBySlug, galleryCategories } from '../data/galleryData';
 import { PATTERN_URL } from '../lib/assets';
+import { getImageDimensions } from '../lib/imageDimensions';
 
 export default function CollectionDetailPage() {
   const { collectionSlug } = useParams<{ collectionSlug: string }>();
@@ -16,9 +17,6 @@ export default function CollectionDetailPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (collection) {
-      document.title = `${collection.title} | Gallery | Bunifu Youths Kenya`;
-    }
   }, [collection]);
 
   if (!collection) {
@@ -113,7 +111,9 @@ export default function CollectionDetailPage() {
 
           {/* Masonry / Editorial Photo Grid */}
           <div className="columns-1 sm:columns-2 lg:columns-3 gap-3 space-y-3">
-            {collection.images.map((img, index) => (
+            {collection.images.map((img, index) => {
+              const imageDimensions = getImageDimensions(img.imageUrl);
+              return (
               <motion.div
                 key={img.id}
                 initial={{ opacity: 0, y: 24 }}
@@ -126,7 +126,9 @@ export default function CollectionDetailPage() {
                   <img
                     src={img.imageUrl}
                     alt={img.altText}
-                    loading={index < 4 ? 'eager' : 'lazy'}
+                    width={imageDimensions?.width}
+                    height={imageDimensions?.height}
+                    loading="lazy"
                     decoding="async"
                   className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-[1.025]"
                   />
@@ -137,7 +139,8 @@ export default function CollectionDetailPage() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+              );
+            })}
           </div>
 
           {/* Back to Collections Bar */}

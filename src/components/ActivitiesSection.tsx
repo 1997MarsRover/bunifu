@@ -2,6 +2,7 @@ import { motion, useInView } from 'framer-motion';
 import { Gamepad2, Code, Bot, GraduationCap, Printer, Trophy, CalendarDays, Users } from 'lucide-react';
 import { useRef } from 'react';
 import { PATTERN_URL } from '../lib/assets';
+import activityCompetitionsImage from '../assets/photo-dump/robotics/activity_competitions.webp';
 
 const activityColorClasses = {
   'brand-blue': { icon: 'text-brand-blue' },
@@ -56,7 +57,7 @@ const activities = [
     description: 'Learners prepare projects, practice presenting their ideas, and take part in STEM challenges that stretch their confidence.',
     icon: Trophy,
     color: 'brand-red' as const,
-    image: '/activity_competitions.webp',
+    image: activityCompetitionsImage,
   },
   {
     id: 7,

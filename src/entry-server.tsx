@@ -1,0 +1,32 @@
+import { renderToString } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom/server';
+import { AppRoutes } from './App';
+import { galleryCollections } from './data/galleryData';
+import { SHOP_PRODUCTS } from './lib/shopProducts';
+export { getSeoMetadata } from './lib/seo';
+export { getStructuredData } from './lib/structuredData';
+
+export const prerenderRoutes = [
+  '/',
+  '/how-it-works',
+  '/careers',
+  '/shop',
+  ...SHOP_PRODUCTS.map((product) => `/shop/${product.slug}`),
+  '/gallery',
+  ...galleryCollections
+    .filter((collection) => collection.published)
+    .map((collection) => `/gallery/${collection.slug}`),
+];
+
+export const sitemapRoutes = [
+  ...prerenderRoutes.filter((route) => route !== '/careers'),
+  '/bunifu-cms',
+];
+
+export function render(url: string) {
+  return renderToString(
+    <StaticRouter location={url}>
+      <AppRoutes />
+    </StaticRouter>,
+  );
+}
