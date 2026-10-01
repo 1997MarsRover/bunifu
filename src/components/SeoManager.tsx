@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getSeoMetadata } from '../lib/seo';
+import { getStructuredData } from '../lib/structuredData';
 
 function upsertMeta(attribute: 'name' | 'property', key: string, content?: string) {
   const selector = `meta[${attribute}="${key}"]`;
@@ -44,6 +45,15 @@ export default function SeoManager() {
       document.head.appendChild(canonical);
     }
     canonical.href = metadata.canonical;
+
+    document.head.querySelectorAll('script[data-seo-schema]').forEach((element) => element.remove());
+    for (const schema of getStructuredData(location.pathname)) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.dataset.seoSchema = '';
+      script.text = JSON.stringify(schema).replace(/</g, '\\u003c');
+      document.head.appendChild(script);
+    }
   }, [location.pathname]);
 
   return null;

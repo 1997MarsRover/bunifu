@@ -7,7 +7,7 @@ const serverBundle = new URL('../.ssr-temp/entry-server.js', import.meta.url);
 const templatePath = new URL('index.html', distDir);
 
 const template = await readFile(templatePath, 'utf8');
-const { getSeoMetadata, prerenderRoutes, render } = await import(serverBundle.href);
+const { getSeoMetadata, getStructuredData, prerenderRoutes, render } = await import(serverBundle.href);
 
 if (!template.includes('<div id="root"></div>')) {
   throw new Error('Unable to find the empty root element in the client build.');
@@ -55,6 +55,20 @@ for (const route of prerenderRoutes) {
     html = expression.test(html)
       ? html.replace(expression, tag)
       : html.replace('</head>', `    ${tag}\n  </head>`);
+  }
+  html = html.replace(
+    /\s*<script type="application\/ld\+json"(?: data-seo-schema)?>([\s\S]*?)<\/script>/g,
+    '',
+  );
+  const schemas = getStructuredData(route);
+  if (schemas.length > 0) {
+    const schemaTags = schemas
+      .map(
+        (schema) =>
+          `    <script type="application/ld+json" data-seo-schema>${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>`,
+      )
+      .join('\n');
+    html = html.replace('</head>', `${schemaTags}\n  </head>`);
   }
   html = html.replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
   const relativePath = route === '/' ? 'index.html' : `${route.slice(1)}.html`;
