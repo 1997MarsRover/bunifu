@@ -13,6 +13,7 @@ import {
 import { galleryCategories, galleryCollections } from '../data/galleryData';
 import { PATTERN_URL } from '../lib/assets';
 import GetInvolvedFormModal from './GetInvolvedFormModal';
+import { getImageDimensions } from '../lib/imageDimensions';
 
 interface GallerySectionProps {
   standalone?: boolean;
@@ -57,9 +58,15 @@ export default function GallerySection({ standalone = false }: GallerySectionPro
         <div className="grid gap-8 border-b border-brand-dark/20 pb-10 md:grid-cols-12 md:items-end md:pb-14">
           <motion.div initial={{ opacity: 0, y: 18 }} animate={isInView ? { opacity: 1, y: 0 } : {}} className="md:col-span-8">
             <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-brand-green">Stories from the field</p>
-            <h2 className="max-w-4xl text-[clamp(2.6rem,6vw,5.8rem)] font-bold leading-[0.98] tracking-[-0.055em] text-brand-dark">
-              See what young people can build.
-            </h2>
+            {standalone ? (
+              <h1 className="max-w-4xl text-[clamp(2.6rem,6vw,5.8rem)] font-bold leading-[0.98] tracking-[-0.055em] text-brand-dark">
+                See what young people can build.
+              </h1>
+            ) : (
+              <h2 className="max-w-4xl text-[clamp(2.6rem,6vw,5.8rem)] font-bold leading-[0.98] tracking-[-0.055em] text-brand-dark">
+                See what young people can build.
+              </h2>
+            )}
           </motion.div>
           <motion.p
             initial={{ opacity: 0, y: 18 }}
@@ -87,6 +94,7 @@ export default function GallerySection({ standalone = false }: GallerySectionPro
           {filteredCollections.map((collection, index) => {
             const category = galleryCategories.find((item) => item.id === collection.categoryId);
             const Icon = categoryIcons[collection.categoryId as keyof typeof categoryIcons] ?? BookOpen;
+            const imageDimensions = getImageDimensions(collection.coverImage);
             return (
               <motion.article
                 layout
@@ -99,7 +107,15 @@ export default function GallerySection({ standalone = false }: GallerySectionPro
               >
                 <Link to={`/gallery/${collection.slug}`} className="flex h-full flex-col" aria-label={`Open ${collection.title} photo story`}>
                   <div className="relative h-52 overflow-hidden bg-neutral-200">
-                    <img src={collection.coverImage} alt={collection.title} loading={index < 3 ? 'eager' : 'lazy'} decoding="async" className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105" />
+                    <img
+                      src={collection.coverImage}
+                      alt={collection.title}
+                      width={imageDimensions?.width}
+                      height={imageDimensions?.height}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
                     <span className="absolute right-4 top-4 grid h-12 w-12 place-items-center rounded-2xl bg-white text-brand-green shadow-lg" aria-hidden="true">
                       <Icon className="h-6 w-6" />
                     </span>

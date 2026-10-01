@@ -2,6 +2,7 @@ import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import { getPublishedPeople } from '../data/people';
 import { PATTERN_URL } from '../lib/assets';
+import { getImageDimensions } from '../lib/imageDimensions';
 
 export default function BoardMemberSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -89,7 +90,15 @@ export default function BoardMemberSection() {
             {remainingMembers.map((member) => (
               <article key={member.id}>
                 <div className="aspect-[4/5] overflow-hidden bg-neutral-200">
-                  <img src={member.portrait} alt={member.portraitAlt} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-300 motion-reduce:transition-none hover:scale-[1.015]" />
+                  <img
+                    src={member.portrait}
+                    alt={member.portraitAlt}
+                    width={getImageDimensions(member.portrait)?.width}
+                    height={getImageDimensions(member.portrait)?.height}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-300 motion-reduce:transition-none hover:scale-[1.015]"
+                  />
                 </div>
                 <h3 className="mt-5 text-xl font-bold tracking-[-0.02em] text-brand-dark">{member.name}</h3>
                 <p className="mt-2 text-sm text-brand-dark/60">{member.boardRole}</p>

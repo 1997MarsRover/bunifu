@@ -96,7 +96,7 @@ export default function AboutSection() {
                   <img
                     src="/child.jpeg"
                     alt="Young innovator learning to code at Bunifu Youths Kenya"
-                    loading="eager"
+                    loading="lazy"
                     decoding="async"
                     width={1024}
                     height={1280}

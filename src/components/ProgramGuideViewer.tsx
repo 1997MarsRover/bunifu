@@ -5,6 +5,7 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { PROGRAM_GUIDE_STEPS } from '../lib/programGuide';
 import { GOOGLE_FORM_URL } from '../lib/links';
 import { PATTERN_URL } from '../lib/assets';
+import { getImageDimensions } from '../lib/imageDimensions';
 
 function stepImageSrc(step: (typeof PROGRAM_GUIDE_STEPS)[number], webp: boolean) {
   return webp && step.imageWebp ? step.imageWebp : step.image;
@@ -28,6 +29,7 @@ export default function ProgramGuideViewer() {
   }, [parseStep]);
 
   const step = PROGRAM_GUIDE_STEPS[activeIndex];
+  const stepImageDimensions = getImageDimensions(step.image);
 
   const goTo = useCallback(
     (index: number) => {
@@ -86,7 +88,9 @@ export default function ProgramGuideViewer() {
                     <img
                       src={stepImageSrc(step, false)}
                       alt={step.imageAlt}
-                      loading={activeIndex === 0 ? 'eager' : 'lazy'}
+                      width={stepImageDimensions?.width}
+                      height={stepImageDimensions?.height}
+                      loading="lazy"
                       decoding="async"
                       className="w-full h-auto block"
                     />
