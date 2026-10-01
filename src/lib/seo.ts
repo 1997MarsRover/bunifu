@@ -61,6 +61,14 @@ const staticMetadata: Record<string, Omit<SeoMetadata, 'canonical'>> = {
   },
 };
 
+const notFoundMetadata: SeoMetadata = {
+  title: 'Page Not Found | Bunifu Youths Kenya',
+  description: 'The page you are looking for does not exist or has moved.',
+  canonical: `${SITE_ORIGIN}/404`,
+  image: `${SITE_ORIGIN}/final.webp`,
+  robots: 'noindex, follow',
+};
+
 const productTitleBases: Record<string, string> = {
   'a1-magnetic-blocks': 'A1 Coding Robot Kit',
   'a7-magnetic-blocks': 'A7 Coding Robot Kit',
@@ -134,5 +142,5 @@ export function getSeoMetadata(pathname: string): SeoMetadata | undefined {
     }
   }
 
-  return undefined;
+  return notFoundMetadata;
 }

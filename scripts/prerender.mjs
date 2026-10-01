@@ -80,6 +80,52 @@ for (const route of prerenderRoutes) {
   await writeFile(outputPath, html);
 }
 
+{
+  const route = '/404';
+  const metadata = getSeoMetadata(route);
+  const appHtml = render(route);
+  const escapeAttribute = (value) =>
+    value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
+  let html = template
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeAttribute(metadata.title)}</title>`)
+    .replace(
+      /<meta name="description" content="[^"]*" \/>/,
+      `<meta name="description" content="${escapeAttribute(metadata.description)}" />`,
+    )
+    .replace(
+      /<link rel="canonical" href="[^"]*" \/>/,
+      `<link rel="canonical" href="${escapeAttribute(metadata.canonical)}" />`,
+    )
+    .replace(
+      /(<link rel="canonical"[^>]*>)/,
+      `$1\n    <meta name="robots" content="${metadata.robots}" />`,
+    );
+  const socialTags = [
+    ['property', 'og:type', 'website'],
+    ['property', 'og:url', metadata.canonical],
+    ['property', 'og:title', metadata.title],
+    ['property', 'og:description', metadata.description],
+    ['property', 'og:image', metadata.image],
+    ['name', 'twitter:card', 'summary_large_image'],
+    ['name', 'twitter:title', metadata.title],
+    ['name', 'twitter:description', metadata.description],
+    ['name', 'twitter:image', metadata.image],
+  ];
+  for (const [attribute, key, content] of socialTags) {
+    const expression = new RegExp(
+      `<meta ${attribute}="${key.replace(':', '\\:')}" content="[^"]*" \\/>`,
+    );
+    html = html.replace(
+      expression,
+      `<meta ${attribute}="${key}" content="${escapeAttribute(content)}" />`,
+    );
+  }
+  html = html
+    .replace(/\s*<script type="application\/ld\+json"(?: data-seo-schema)?>([\s\S]*?)<\/script>/g, '')
+    .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);
+  await writeFile(new URL('404.html', distDir), html);
+}
+
 await writeFile(
   new URL('.prerender-routes.json', projectRoot),
   `${JSON.stringify(prerenderRoutes, null, 2)}\n`,

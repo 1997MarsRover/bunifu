@@ -107,13 +107,13 @@ export default function AppPurposeSection() {
           className="flex flex-wrap gap-3"
         >
           <a
-            href="/bunifu-cms/"
+            href="/bunifu-cms"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-brand-dark text-white font-bold text-sm hover:bg-brand-green transition-colors"
           >
             Learn more
           </a>
           <a
-            href="/privacy/"
+            href="/privacy"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-white text-brand-dark font-bold text-sm border border-black/10 hover:border-brand-blue hover:text-brand-blue transition-colors"
           >
             Privacy Policy
