@@ -66,7 +66,6 @@ const notFoundMetadata: SeoMetadata = {
   description: 'The page you are looking for does not exist or has moved.',
   canonical: `${SITE_ORIGIN}/404`,
   image: `${SITE_ORIGIN}/final.webp`,
-  robots: 'noindex, follow',
 };
 
 const productTitleBases: Record<string, string> = {

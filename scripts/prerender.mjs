@@ -96,10 +96,7 @@ for (const route of prerenderRoutes) {
       /<link rel="canonical" href="[^"]*" \/>/,
       `<link rel="canonical" href="${escapeAttribute(metadata.canonical)}" />`,
     )
-    .replace(
-      /(<link rel="canonical"[^>]*>)/,
-      `$1\n    <meta name="robots" content="${metadata.robots}" />`,
-    );
+    .replace(/\s*<meta name="robots" content="[^"]*" \/>/, '');
   const socialTags = [
     ['property', 'og:type', 'website'],
     ['property', 'og:url', metadata.canonical],
