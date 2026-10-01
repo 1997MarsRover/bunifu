@@ -108,6 +108,7 @@ export default function AppPurposeSection() {
         >
           <a
             href="/bunifu-cms"
+            aria-label="Learn more about bunifu-cms"
             className="inline-flex items-center justify-center px-6 py-3 rounded-full bg-brand-dark text-white font-bold text-sm hover:bg-brand-green transition-colors"
           >
             Learn more
