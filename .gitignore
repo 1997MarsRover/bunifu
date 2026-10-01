@@ -1,6 +1,8 @@
 node_modules
 dist
 build
+.prerender-routes.json
+.ssr-temp
 .env
 .env.local
 .env.development.local

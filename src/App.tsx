@@ -8,22 +8,28 @@ import GalleryPage from './pages/GalleryPage';
 import CollectionDetailPage from './pages/CollectionDetailPage';
 import CareersPage from './pages/CareersPage';
 
+export function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/how-it-works" element={<HowItWorksPage />} />
+      <Route path="/careers" element={<CareersPage />} />
+      <Route path="/shop" element={<ShopPage />} />
+      <Route path="/shop/cart" element={<Navigate to="/shop" replace />} />
+      <Route path="/shop/checkout" element={<Navigate to="/shop" replace />} />
+      <Route path="/shop/order-received" element={<Navigate to="/shop" replace />} />
+      <Route path="/shop/:slug" element={<ProductPage />} />
+      <Route path="/gallery" element={<GalleryPage />} />
+      <Route path="/gallery/:collectionSlug" element={<CollectionDetailPage />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+  );
+}
+
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/how-it-works" element={<HowItWorksPage />} />
-        <Route path="/careers" element={<CareersPage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/shop/cart" element={<Navigate to="/shop" replace />} />
-        <Route path="/shop/checkout" element={<Navigate to="/shop" replace />} />
-        <Route path="/shop/order-received" element={<Navigate to="/shop" replace />} />
-        <Route path="/shop/:slug" element={<ProductPage />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/gallery/:collectionSlug" element={<CollectionDetailPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   );
 }

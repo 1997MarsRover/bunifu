@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "optimize-images": "node scripts/optimize-images.mjs",
-    "build": "vite build",
+    "build": "vite build && vite build --config vite.ssg.config.ts --ssr src/entry-server.tsx --outDir .ssr-temp && node scripts/prerender.mjs",
+    "verify:visible-text": "node scripts/verify-visible-text.mjs",
     "lint": "eslint .",
     "preview": "npm run build && wrangler dev",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
