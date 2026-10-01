@@ -21,9 +21,6 @@ export default function ProductPage() {
   const [qty, setQty] = useState(1);
 
   useEffect(() => {
-    if (product) {
-      document.title = `${product.name} | Bunifu Shop`;
-    }
     setQty(1);
   }, [product]);
 

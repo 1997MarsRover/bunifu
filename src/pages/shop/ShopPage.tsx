@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { PATTERN_URL } from '../../lib/assets';
 import { SHOP_PRODUCTS, filterProducts, type ShopCategoryFilterId } from '../../lib/shopProducts';
@@ -8,10 +8,6 @@ import ShopCategoryFilter from '../../components/shop/ShopCategoryFilter';
 
 export default function ShopPage() {
   const [category, setCategory] = useState<ShopCategoryFilterId>('all');
-
-  useEffect(() => {
-    document.title = 'Shop | Bunifu Youths Kenya';
-  }, []);
 
   const products = useMemo(() => {
     const list = filterProducts(category);

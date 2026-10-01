@@ -3,6 +3,7 @@ import { StaticRouter } from 'react-router-dom/server';
 import { AppRoutes } from './App';
 import { galleryCollections } from './data/galleryData';
 import { SHOP_PRODUCTS } from './lib/shopProducts';
+export { getSeoMetadata } from './lib/seo';
 
 export const prerenderRoutes = [
   '/',

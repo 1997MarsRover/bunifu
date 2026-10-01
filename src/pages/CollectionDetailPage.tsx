@@ -16,9 +16,6 @@ export default function CollectionDetailPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (collection) {
-      document.title = `${collection.title} | Gallery | Bunifu Youths Kenya`;
-    }
   }, [collection]);
 
   if (!collection) {

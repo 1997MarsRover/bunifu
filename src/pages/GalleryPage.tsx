@@ -6,7 +6,6 @@ import Footer from '../components/Footer';
 export default function GalleryPage() {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = 'Gallery & Stories | Bunifu Youths Kenya';
   }, []);
 
   return (

@@ -7,6 +7,7 @@ import ProductPage from './pages/shop/ProductPage';
 import GalleryPage from './pages/GalleryPage';
 import CollectionDetailPage from './pages/CollectionDetailPage';
 import CareersPage from './pages/CareersPage';
+import SeoManager from './components/SeoManager';
 
 export function AppRoutes() {
   return (
@@ -29,6 +30,7 @@ export function AppRoutes() {
 function App() {
   return (
     <BrowserRouter>
+      <SeoManager />
       <AppRoutes />
     </BrowserRouter>
   );

@@ -23,17 +23,6 @@ export default function CareersPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = 'Careers & Job Vacancies | Bunifu Youths Kenya';
-    const meta = document.querySelector('meta[name="description"]');
-    if (meta) {
-      meta.setAttribute(
-        'content',
-        'Explore open career opportunities at Bunifu Youths Kenya. We are hiring STEM Education Facilitators and School Partnerships & Sales Associates in Nairobi.'
-      );
-    }
-    return () => {
-      document.title = 'Bunifu Youths Kenya | STEM, Robotics, AI & Creative Technology for Young Learners';
-    };
   }, []);
 
   const toggleExpand = (jobId: string) => {
