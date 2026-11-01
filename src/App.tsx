@@ -17,6 +17,7 @@ export function AppRoutes() {
       <Route path="/how-it-works" element={<HowItWorksPage />} />
       <Route path="/careers" element={<CareersPage />} />
       <Route path="/shop" element={<ShopPage />} />
+      <Route path="/shop/laptops" element={<ShopPage />} />
       <Route path="/shop/:slug" element={<ProductPage />} />
       <Route path="/gallery" element={<GalleryPage />} />
       <Route path="/gallery/:collectionSlug" element={<CollectionDetailPage />} />

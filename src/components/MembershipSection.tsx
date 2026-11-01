@@ -288,7 +288,7 @@ export default function MembershipSection() {
                     </div>
                     <div>
                       <p className="font-semibold text-brand-dark">Call Us</p>
-                      <p className="text-gray-600">0712015793 or +254 704 657802</p>
+                      <p className="text-gray-600">0712015793, +254 704 657802, or +254 181 803553</p>
                     </div>
                   </div>
                   

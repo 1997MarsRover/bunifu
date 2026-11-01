@@ -11,7 +11,7 @@ const organizationSchema = {
   description:
     'Bunifu Youths Kenya helps children and teens build practical STEM skills through coding, robotics, AI, 3D design, bootcamps, school outreach, mentorship and competitions.',
   email: 'bunifuyouthskenya@gmail.com',
-  telephone: '+254712015793',
+  telephone: ['+254712015793', '+254181803553'],
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Afralti Waiyaki Way',

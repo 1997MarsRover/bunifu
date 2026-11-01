@@ -11,6 +11,7 @@ export const prerenderRoutes = [
   '/how-it-works',
   '/careers',
   '/shop',
+  '/shop/laptops',
   ...SHOP_PRODUCTS.map((product) => `/shop/${product.slug}`),
   '/gallery',
   ...galleryCollections

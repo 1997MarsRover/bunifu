@@ -123,6 +123,9 @@ export default function CentersSection() {
                     <a href="tel:+254712015793" className="text-white/70 hover:text-brand-blue transition-colors">
                       +254 712 015 793
                     </a>
+                    <a href="tel:+254181803553" className="block text-white/70 hover:text-brand-blue transition-colors">
+                      +254 181 803553
+                    </a>
                   </div>
                 </motion.div>
 

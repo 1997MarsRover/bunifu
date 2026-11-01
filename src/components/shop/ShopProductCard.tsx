@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import type { ShopProduct } from '../../lib/shopProducts';
 import { formatProductPrice, productCardSubtitle } from '../../lib/shopProducts';
 import { getImageDimensions } from '../../lib/imageDimensions';
@@ -9,15 +8,11 @@ type ShopProductCardProps = {
   index?: number;
 };
 
-export default function ShopProductCard({ product, index = 0 }: ShopProductCardProps) {
+export default function ShopProductCard({ product }: ShopProductCardProps) {
   const imageDimensions = getImageDimensions(product.images[0]);
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-40px' }}
-      transition={{ delay: index * 0.05, duration: 0.45 }}
+    <article
       className="group flex flex-col rounded-3xl bg-white border border-gray-100 shadow-card overflow-hidden hover:shadow-card-hover transition-shadow"
     >
       <Link to={`/shop/${product.slug}`} className="block relative aspect-[4/3] bg-brand-light overflow-hidden">
@@ -28,11 +23,16 @@ export default function ShopProductCard({ product, index = 0 }: ShopProductCardP
           height={imageDimensions?.height}
           loading="lazy"
           decoding="async"
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          className={`w-full h-full ${product.specs ? 'object-contain p-5' : 'object-cover'} group-hover:scale-105 group-focus-within:scale-105 transition-transform duration-500 motion-reduce:transition-none`}
         />
         {!product.inStock && (
           <span className="absolute top-3 left-3 px-3 py-1 rounded-full bg-brand-dark/90 text-white text-xs font-bold">
             Out of stock
+          </span>
+        )}
+        {product.condition && (
+          <span className="absolute bottom-3 left-3 right-3 w-fit max-w-[calc(100%-1.5rem)] px-3 py-1 rounded-full bg-white/95 text-brand-dark text-xs font-bold shadow-sm">
+            {product.condition}
           </span>
         )}
       </Link>
@@ -45,7 +45,11 @@ export default function ShopProductCard({ product, index = 0 }: ShopProductCardP
             {product.name}
           </h3>
         </Link>
-        <p className="text-sm text-gray-600 mt-2 line-clamp-2 flex-1">{product.shortDescription}</p>
+        {product.specs ? (
+          <ul className="text-sm text-gray-600 mt-3 space-y-1 flex-1" aria-label="Key specifications">
+            {product.specs.slice(0, 3).map((spec) => <li key={spec}>{spec}</li>)}
+          </ul>
+        ) : <p className="text-sm text-gray-600 mt-2 line-clamp-2 flex-1">{product.shortDescription}</p>}
         <div className="flex flex-col items-start gap-0.5 mt-4 pt-4 border-t border-gray-100">
           <span className="font-bold text-brand-dark">{formatProductPrice(product)}</span>
           <Link
@@ -56,6 +60,6 @@ export default function ShopProductCard({ product, index = 0 }: ShopProductCardP
           </Link>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
 }
