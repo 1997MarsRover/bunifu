@@ -4,6 +4,7 @@ import { useState } from 'react';
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
   const phoneNumber = '+254 712 015 793';
+  const additionalPhoneNumber = '+254 181 803553';
   const email = 'bunifuyouthskenya@gmail.com';
 
   const copyToClipboard = async () => {
@@ -67,6 +68,19 @@ export default function ContactSection() {
                     <Copy className="w-4 h-4 sm:w-5 sm:h-5 text-white/60" />
                   )}
                 </button>
+              </a>
+
+              <a
+                href={`tel:${additionalPhoneNumber.replace(/\s/g, '')}`}
+                className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-white/10 rounded-xl sm:rounded-2xl hover:bg-white/20 transition-colors"
+              >
+                <div className="bg-green-500 p-2.5 sm:p-3 rounded-full">
+                  <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                </div>
+                <div>
+                  <p className="text-white/70 text-xs sm:text-sm">Also call us</p>
+                  <p className="text-white font-semibold text-sm sm:text-base">{additionalPhoneNumber}</p>
+                </div>
               </a>
 
               <a

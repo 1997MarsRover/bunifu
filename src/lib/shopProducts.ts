@@ -1,4 +1,5 @@
 import { usdToKes, formatKes } from './shopConfig';
+import laptopImages from '../data/laptopImages.json';
 
 export type ShopFilterTag =
   | 'age-3'
@@ -6,7 +7,8 @@ export type ShopFilterTag =
   | 'age-6'
   | 'age-8'
   | 'robot-kits'
-  | 'drones';
+  | 'drones'
+  | 'laptops';
 
 export type ShopCategoryFilterId = 'all' | ShopFilterTag;
 
@@ -26,6 +28,9 @@ export type ShopProduct = {
   featured?: boolean;
   /** Shown on product cards, e.g. "3+ Years" */
   ageLabel?: string;
+  brand?: string;
+  specs?: string[];
+  condition?: string;
 };
 
 export const SHOP_CATEGORIES: { id: ShopCategoryFilterId; label: string }[] = [
@@ -36,6 +41,7 @@ export const SHOP_CATEGORIES: { id: ShopCategoryFilterId; label: string }[] = [
   { id: 'age-8', label: '8+ Years' },
   { id: 'robot-kits', label: 'Robot kits' },
   { id: 'drones', label: 'Drones' },
+  { id: 'laptops', label: 'Laptops' },
 ];
 
 function kit(
@@ -155,6 +161,62 @@ export const SHOP_PRODUCTS: ShopProduct[] = [
     inStock: true,
     featured: true,
   }),
+  {
+    id: 'dell-vostro-3400', slug: 'dell-vostro-3400', brand: 'Dell',
+    name: 'Dell Vostro 3400', shortDescription: '11th Gen Intel Core i5 · 8GB RAM · 256GB SSD',
+    description: 'Dell Vostro 3400 with an 11th generation Intel Core i5 processor, 8GB RAM, and 256GB SSD.',
+    specs: ['Intel Core i5 · 11th Gen', '8GB RAM', '256GB SSD'],
+    priceKes: 28_000 + 3_000, images: laptopImages['dell-vostro-3400'],
+    filterTags: ['laptops'], inStock: true,
+  },
+  {
+    id: 'lenovo-x280', slug: 'lenovo-x280', brand: 'Lenovo',
+    name: 'Lenovo X280', shortDescription: '7th Gen Intel Core i5 · 8GB RAM · 256GB SSD',
+    description: 'Lenovo X280 with a 7th generation Intel Core i5 processor, 8GB RAM, and 256GB SSD.',
+    specs: ['Intel Core i5 · 7th Gen', '8GB RAM', '256GB SSD'],
+    priceKes: 21_000 + 3_000, images: laptopImages['lenovo-x280'],
+    filterTags: ['laptops'], inStock: true,
+  },
+  {
+    id: 'hp-840-g5', slug: 'hp-840-g5', brand: 'HP',
+    name: 'HP 840 G5', shortDescription: '8th Gen Intel Core i5 · 8GB RAM · 256GB SSD',
+    description: 'HP 840 G5 with an 8th generation Intel Core i5 processor, 8GB RAM, 256GB SSD, and a backlit keyboard.',
+    specs: ['Intel Core i5 · 8th Gen', '8GB RAM', '256GB SSD', 'Backlit keyboard'],
+    priceKes: 28_000 + 3_000, images: laptopImages['hp-840-g5'],
+    filterTags: ['laptops'], inStock: true,
+  },
+  {
+    id: 'lenovo-x1', slug: 'lenovo-x1', brand: 'Lenovo',
+    name: 'Lenovo X1 x360', shortDescription: '11th Gen Intel Core i7 · 32GB RAM · 512GB SSD',
+    description: 'Lenovo X1 with an 11th generation Intel Core i7 processor, 32GB RAM, 512GB SSD, touchscreen, 360° hinge, and stylus pen.',
+    specs: ['Intel Core i7 · 11th Gen', '32GB RAM', '512GB SSD', 'Touchscreen · x360', 'Stylus pen'],
+    priceKes: 69_999 + 3_000, images: laptopImages['lenovo-x1'],
+    filterTags: ['laptops'], inStock: true,
+  },
+  {
+    id: 'hp-200-g3', slug: 'hp-200-g3', brand: 'HP',
+    name: 'HP 200 G3', shortDescription: '8th Gen Intel Core i5 · 8GB RAM · 256GB SSD + 1TB HDD',
+    description: 'HP 200 G3 with an 8th generation Intel Core i5 processor, 8GB RAM, 256GB SSD, and 1TB HDD. See the photos for the computer form factor.',
+    specs: ['Intel Core i5 · 8th Gen', '8GB RAM', '256GB SSD + 1TB HDD'],
+    priceKes: 42_999 + 3_000, images: laptopImages['hp-200-g3'],
+    filterTags: ['laptops'], inStock: true,
+  },
+  {
+    id: 'nec-x360', slug: 'nec-x360', brand: 'NEC',
+    name: 'NEC x360 Touchscreen', shortDescription: 'Intel Celeron · 4GB RAM · 128GB SSD',
+    description: 'Brand new NEC x360 laptop with an Intel Celeron processor, 4GB RAM, 128GB SSD, and touchscreen.',
+    specs: ['Intel Celeron', '4GB RAM', '128GB SSD', 'Touchscreen · x360'],
+    condition: 'Brand new', priceKes: 14_999 + 3_000,
+    images: laptopImages['nec-x360'], filterTags: ['laptops'], inStock: true,
+  },
+  {
+    id: 'hp-1030-g2', slug: 'hp-1030-g2', brand: 'HP',
+    name: 'HP 1030 G2 x360', shortDescription: '7th Gen Intel Core i5 · 8GB RAM · 128GB SSD',
+    description: 'HP 1030 G2 x360 with a 7th generation Intel Core i5 processor, 8GB RAM, and 128GB SSD. The screen is cracked and touch does not work.',
+    specs: ['Intel Core i5 · 7th Gen', '8GB RAM', '128GB SSD', 'x360 hinge'],
+    condition: 'Cracked screen · no touch', priceKes: 14_999 + 3_000,
+    images: laptopImages['hp-1030-g2'], filterTags: ['laptops'], inStock: true,
+  },
 ];
 
 export function getProductBySlug(slug: string): ShopProduct | undefined {
@@ -170,6 +232,8 @@ export function formatProductPrice(product: ShopProduct): string {
 }
 
 export function productCardSubtitle(product: ShopProduct): string {
+  if (product.id === 'hp-200-g3') return 'HP · Computer';
+  if (product.filterTags.includes('laptops')) return `${product.brand} · Laptop`;
   if (product.filterTags.includes('drones')) return 'Drone · STEM';
   if (product.ageLabel) return `${product.ageLabel} · Robot kit`;
   return 'STEM kit';

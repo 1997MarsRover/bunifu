@@ -217,6 +217,12 @@ export default function Footer({ compact = false }: FooterProps) {
                   >
                     +254 712 015 793
                   </a>
+                  <a
+                    href="tel:+254181803553"
+                    className="block text-gray-400 text-sm hover:text-brand-green transition-colors"
+                  >
+                    +254 181 803553
+                  </a>
                 </div>
               </motion.li>
               <motion.li

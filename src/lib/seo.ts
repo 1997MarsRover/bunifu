@@ -36,9 +36,14 @@ const staticMetadata: Record<string, Omit<SeoMetadata, 'canonical'>> = {
     robots: 'noindex, follow',
   },
   '/shop': {
-    title: 'STEM & Robot Kits for Kids in Kenya | Bunifu Shop',
+    title: 'STEM Kits, Drones & Laptops in Kenya | Bunifu Shop',
     description: `Coding robot kits and programmable drones for children in Kenya. Prices from ${formatKes(minimumProductPrice)}, pay by M-Pesa. Ask about delivery.`,
     image: `${SITE_ORIGIN}/shop/a1.webp`,
+  },
+  '/shop/laptops': {
+    title: 'Laptops & Computers in Kenya | Bunifu Shop',
+    description: 'Browse Dell, HP, Lenovo and NEC computers with clear specifications, photos and prices in Kenyan shillings. Enquire with Bunifu to confirm availability.',
+    image: `${SITE_ORIGIN}/shop/laptops/dell-vostro-3400-1.webp`,
   },
   '/gallery': {
     title: 'Gallery & Stories | Bunifu Youths Kenya',
@@ -112,9 +117,9 @@ export function getSeoMetadata(pathname: string): SeoMetadata | undefined {
     const slug = normalizedPath.slice('/shop/'.length);
     const product = SHOP_PRODUCTS.find((entry) => entry.slug === slug);
     const titleBase = productTitleBases[slug];
-    if (product && titleBase) {
+    if (product) {
       const age = product.ageLabel ? ` (${product.ageLabel})` : '';
-      const title = `${titleBase}${age} | Bunifu Shop`;
+      const title = `${titleBase ?? product.name}${age} | Bunifu Shop`;
       return {
         title,
         description: product.shortDescription,

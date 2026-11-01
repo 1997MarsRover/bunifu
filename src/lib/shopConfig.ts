@@ -10,6 +10,7 @@ export const shopConfig = {
   pickupLocation: 'Afralti, Along Waiyaki Way, Nairobi',
   supportEmail: 'bunifuyouthskenya@gmail.com',
   supportPhone: '+254712015793',
+  additionalSupportPhone: '+254181803553',
   whatsappNumber: '254712015793',
   deliveryNote:
     'Delivery within Nairobi may be arranged after order confirmation. Pickup at Afralti is free.',
