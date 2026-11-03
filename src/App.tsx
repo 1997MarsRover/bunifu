@@ -9,6 +9,7 @@ import CollectionDetailPage from './pages/CollectionDetailPage';
 import CareersPage from './pages/CareersPage';
 import SeoManager from './components/SeoManager';
 import NotFoundPage from './pages/NotFoundPage';
+import ResourcesPage from './pages/ResourcesPage';
 
 export function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ export function AppRoutes() {
       <Route path="/" element={<HomePage />} />
       <Route path="/how-it-works" element={<HowItWorksPage />} />
       <Route path="/careers" element={<CareersPage />} />
+      <Route path="/resources" element={<ResourcesPage />} />
       <Route path="/shop" element={<ShopPage />} />
       <Route path="/shop/laptops" element={<ShopPage />} />
       <Route path="/shop/:slug" element={<ProductPage />} />

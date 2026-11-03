@@ -13,6 +13,7 @@ const navLinks = [
   { label: 'Shop', to: '/shop' },
   { label: 'Activities', to: '/#activities' },
   { label: 'Gallery', to: '/#gallery' },
+  { label: 'Resources', to: '/resources' },
   { label: 'Careers', to: '/careers' },
 ];
 
@@ -89,7 +90,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
               </Link>
             </motion.div>
 
-            <nav className="items-center hidden gap-1 md:flex">
+            <nav aria-label="Primary navigation" className="items-center hidden gap-0 xl:flex">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.label}
@@ -99,6 +100,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
                 >
                   <Link
                     to={link.to}
+                    aria-current={location.pathname === link.to ? 'page' : undefined}
                     className={`relative block px-4 py-2 font-semibold text-sm transition-colors ${
                       showSolid
                         ? 'text-brand-dark hover:text-brand-blue'
@@ -111,7 +113,7 @@ export default function Header({ variant = 'default' }: HeaderProps) {
               ))}
             </nav>
 
-            <div className="items-center hidden gap-3 md:flex">
+            <div className="items-center hidden gap-3 xl:flex">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -155,7 +157,9 @@ export default function Header({ variant = 'default' }: HeaderProps) {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 md:hidden rounded-xl"
+              className="p-2 rounded-xl xl:hidden focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-blue/30"
+              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={isMenuOpen}
             >
               <AnimatePresence mode="wait">
                 {isMenuOpen ? (
@@ -191,13 +195,15 @@ export default function Header({ variant = 'default' }: HeaderProps) {
               initial="closed"
               animate="open"
               exit="closed"
-              className="overflow-hidden bg-white border-t border-gray-100 md:hidden"
+              aria-label="Mobile navigation"
+              className="overflow-hidden bg-white border-t border-gray-100 xl:hidden"
             >
               <div className="px-4 py-6 space-y-1">
                 {navLinks.map((link) => (
                   <motion.div key={link.label} variants={menuItemVariants}>
                     <Link
                       to={link.to}
+                      aria-current={location.pathname === link.to ? 'page' : undefined}
                       onClick={() => setIsMenuOpen(false)}
                       className="block px-4 py-3 font-semibold transition-colors text-brand-dark hover:text-brand-blue hover:bg-brand-blue/5 rounded-xl"
                     >
