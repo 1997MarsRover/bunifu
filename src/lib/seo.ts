@@ -35,6 +35,12 @@ const staticMetadata: Record<string, Omit<SeoMetadata, 'canonical'>> = {
     image: `${SITE_ORIGIN}/final.webp`,
     robots: 'noindex, follow',
   },
+  '/resources': {
+    title: 'Learning Resources | Bunifu Youths Kenya',
+    description:
+      'Explore public guides, videos, documents and useful links from Bunifu Youths Kenya for young learners, families and educators.',
+    image: `${SITE_ORIGIN}/activity_classroom.webp`,
+  },
   '/shop': {
     title: 'STEM Kits, Drones & Laptops in Kenya | Bunifu Shop',
     description: `Coding robot kits and programmable drones for children in Kenya. Prices from ${formatKes(minimumProductPrice)}, pay by M-Pesa. Ask about delivery.`,
